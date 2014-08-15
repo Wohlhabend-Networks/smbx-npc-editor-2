@@ -1,0 +1,8 @@
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor\NPC-config-generator\bin\Release\NPC-config-generator.exe
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor\NPC-config-generator\bin\Release\NPC-config-generator.pdb
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor\NPC-config-generator\obj\x86\Release\NPC-config-generator.exe
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor\NPC-config-generator\obj\x86\Release\NPC-config-generator.pdb
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\NPC-config-generator\bin\Release\NPC-config-generator.exe
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\NPC-config-generator\bin\Release\NPC-config-generator.pdb
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\NPC-config-generator\obj\x86\Release\NPC-config-generator.exe
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\NPC-config-generator\obj\x86\Release\NPC-config-generator.pdb

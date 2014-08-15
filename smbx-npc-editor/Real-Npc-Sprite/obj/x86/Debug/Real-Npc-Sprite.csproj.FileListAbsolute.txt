@@ -1,0 +1,17 @@
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor\Real-Npc-Sprite\bin\Debug\Real-Npc-Sprite.exe
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor\Real-Npc-Sprite\bin\Debug\Real-Npc-Sprite.pdb
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor\Real-Npc-Sprite\bin\Debug\Setting.dll
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor\Real-Npc-Sprite\obj\x86\Debug\Real_Npc_Sprite.Form1.resources
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor\Real-Npc-Sprite\obj\x86\Debug\Real_Npc_Sprite.Properties.Resources.resources
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor\Real-Npc-Sprite\obj\x86\Debug\Real-Npc-Sprite.csproj.GenerateResource.Cache
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor\Real-Npc-Sprite\obj\x86\Debug\Real-Npc-Sprite.exe
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor\Real-Npc-Sprite\obj\x86\Debug\Real-Npc-Sprite.pdb
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor\Real-Npc-Sprite\obj\x86\Debug\Real-Npc-Sprite.csprojResolveAssemblyReference.cache
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\Real-Npc-Sprite\bin\Debug\npc-sprite-generator.exe
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\Real-Npc-Sprite\bin\Debug\npc-sprite-generator.pdb
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\Real-Npc-Sprite\obj\x86\Debug\Real-Npc-Sprite.csprojResolveAssemblyReference.cache
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\Real-Npc-Sprite\obj\x86\Debug\Real_Npc_Sprite.Form1.resources
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\Real-Npc-Sprite\obj\x86\Debug\NPC_sprite_generator.Properties.Resources.resources
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\Real-Npc-Sprite\obj\x86\Debug\Real-Npc-Sprite.csproj.GenerateResource.Cache
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\Real-Npc-Sprite\obj\x86\Debug\npc-sprite-generator.exe
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\Real-Npc-Sprite\obj\x86\Debug\npc-sprite-generator.pdb
