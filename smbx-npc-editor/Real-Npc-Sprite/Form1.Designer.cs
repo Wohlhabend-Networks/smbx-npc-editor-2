@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.save = new System.Windows.Forms.Button();
             this.gfxHeight = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -41,8 +40,9 @@
             this.scaleButton = new System.Windows.Forms.Button();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.changeDirectoryButton = new System.Windows.Forms.ToolStripButton();
-            this.curDirectoryLabel = new System.Windows.Forms.ToolStripLabel();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.curDirectoryLabel = new System.Windows.Forms.ToolStripLabel();
+            this.dontAsk = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.previewBox)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -157,12 +157,16 @@
             // 
             // changeDirectoryButton
             // 
-            this.changeDirectoryButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.changeDirectoryButton.Image = ((System.Drawing.Image)(resources.GetObject("changeDirectoryButton.Image")));
             this.changeDirectoryButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.changeDirectoryButton.Name = "changeDirectoryButton";
-            this.changeDirectoryButton.Size = new System.Drawing.Size(23, 22);
-            this.changeDirectoryButton.Text = "toolStripButton1";
+            this.changeDirectoryButton.Size = new System.Drawing.Size(103, 22);
+            this.changeDirectoryButton.Text = "Change Directory";
+            this.changeDirectoryButton.Click += new System.EventHandler(this.changeDirectoryButton_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
             // 
             // curDirectoryLabel
             // 
@@ -170,16 +174,23 @@
             this.curDirectoryLabel.Size = new System.Drawing.Size(21, 22);
             this.curDirectoryLabel.Text = "{0}";
             // 
-            // toolStripSeparator1
+            // dontAsk
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.dontAsk.AutoSize = true;
+            this.dontAsk.Location = new System.Drawing.Point(19, 262);
+            this.dontAsk.Name = "dontAsk";
+            this.dontAsk.Size = new System.Drawing.Size(114, 17);
+            this.dontAsk.TabIndex = 18;
+            this.dontAsk.Text = "Don\'t Keep Asking";
+            this.dontAsk.UseVisualStyleBackColor = true;
+            this.dontAsk.CheckedChanged += new System.EventHandler(this.dontAsk_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(539, 351);
+            this.Controls.Add(this.dontAsk);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.scaleButton);
             this.Controls.Add(this.useOffset);
@@ -190,6 +201,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.currentNpc);
             this.Controls.Add(this.groupBox1);
+            this.MaximizeBox = false;
             this.Name = "Form1";
             this.ShowIcon = false;
             this.Text = "Sprite Maker";
@@ -219,6 +231,7 @@
         private System.Windows.Forms.ToolStripButton changeDirectoryButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel curDirectoryLabel;
+        private System.Windows.Forms.CheckBox dontAsk;
     }
 }
 

@@ -175,41 +175,13 @@ namespace ini_editor
 
         private void addSectionButton_Click(object sender, EventArgs e)
         {
-            ExtendedTreeNode addSection = new ExtendedTreeNode(String.Format("NewSection{0}", secNumber), 0);
-            iniSectionTreeView.Nodes.Add(addSection);
-            ini.AddSection(addSection.Text);
-            secNumber++;
+            addSection();
         }
 
         private void addKeyButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                ExtendedTreeNode selected = (ExtendedTreeNode)iniSectionTreeView.SelectedNode;
-
-                switch (selected.GetIntegerType())
-                {
-                    case (0):
-                        ExtendedTreeNode addKey = new ExtendedTreeNode(String.Format("NewKey{0}", keyNumber), 1);
-                        selected.Nodes.Add(addKey);
-                        IniFile.IniSection selectedSection = ini.GetSection(selected.Text);
-                        selectedSection.AddKey(String.Format("NewKey{0}", keyNumber));
-                        keyNumber++;
-                        break;
-                    case (1):
-                        MessageBox.Show("Please select a section node", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    case (2):
-                        MessageBox.Show("Please select a section node", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                }
-            }
-            catch
-            {
-                MessageBox.Show("Please select a section node!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            addKey();
         }
-
 
         private void saveKeyButton_Click(object sender, EventArgs e)
         {
@@ -247,12 +219,94 @@ namespace ini_editor
         }
 
         #region User Defined Voids
+        void remove()
+        {
+            if (iniSectionTreeView.Nodes.Count > 0)
+            {
+                if (iniSectionTreeView.SelectedNode != null)
+                {
+
+                    DialogResult dr = MessageBox.Show(String.Format("Are you sure you'd like to delete the item '{0}'?", iniSectionTreeView.SelectedNode.Text),
+                        "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    switch (dr)
+                    {
+                        case (DialogResult.Yes):
+                            ExtendedTreeNode selected = (ExtendedTreeNode)iniSectionTreeView.SelectedNode;
+
+                            switch (selected.GetIntegerType())
+                            {
+                                case (0):
+                                    DialogResult drt = MessageBox.Show("This will delete all keys within this section. This cannot be undone. Proceed?",
+                                        "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                                    switch (drt)
+                                    {
+                                        case (DialogResult.Yes):
+                                            IniFile.IniSection section = ini.GetSection(selected.Text);
+                                            ini.RemoveSection(section);
+                                            selected.Remove();
+                                            changed = true;
+                                            break;
+                                        case (DialogResult.No):
+                                            break;
+                                    }
+                                    break;
+                                case (1):
+                                    IniFile.IniSection sectionn = ini.GetSection(selected.Parent.Text);
+                                    sectionn.RemoveKey(selected.Text);
+                                    selected.Remove();
+                                    changed = true;
+                                    break;
+                                case (2):
+                                    break;
+                            }
+                            break;
+                        case (DialogResult.No):
+                            break;
+                    }
+                }
+            }
+        }
+
+        void addSection()
+        {
+            ExtendedTreeNode addSection = new ExtendedTreeNode(String.Format("NewSection{0}", secNumber), 0);
+            iniSectionTreeView.Nodes.Add(addSection);
+            ini.AddSection(addSection.Text);
+            secNumber++;
+        }
+
+        void addKey()
+        {
+            try
+            {
+                ExtendedTreeNode selected = (ExtendedTreeNode)iniSectionTreeView.SelectedNode;
+
+                switch (selected.GetIntegerType())
+                {
+                    case (0):
+                        ExtendedTreeNode addKey = new ExtendedTreeNode(String.Format("NewKey{0}", keyNumber), 1);
+                        selected.Nodes.Add(addKey);
+                        IniFile.IniSection selectedSection = ini.GetSection(selected.Text);
+                        selectedSection.AddKey(String.Format("NewKey{0}", keyNumber));
+                        keyNumber++;
+                        break;
+                    case (1):
+                        MessageBox.Show("Please select a section node", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    case (2):
+                        MessageBox.Show("Please select a section node", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Please select a section node!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
         void clear()
         {
-            foreach (TreeNode node in iniSectionTreeView.Nodes)
-            {
-                node.Remove();
-            }
+            iniSectionTreeView.Nodes.Clear();
             changed = false;
         }
 
@@ -322,6 +376,21 @@ namespace ini_editor
             this.Cursor = Cursors.Arrow;
         }
         #endregion
+
+        private void menuItem8_Click(object sender, EventArgs e)
+        {
+            remove();
+        }
+
+        private void menuItem6_Click(object sender, EventArgs e)
+        {
+            addSection();
+        }
+
+        private void menuItem7_Click(object sender, EventArgs e)
+        {
+            addKey();
+        }
 
     }
 }

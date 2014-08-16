@@ -41,13 +41,15 @@
             this.saveSectionButton = new System.Windows.Forms.Button();
             this.secValueTextBox = new System.Windows.Forms.TextBox();
             this.editSectionLabel = new System.Windows.Forms.Label();
-            this.addKeyButton = new System.Windows.Forms.Button();
-            this.addSectionButton = new System.Windows.Forms.Button();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
             this.menuItem1 = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.menuItem4 = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
+            this.menuItem5 = new System.Windows.Forms.MenuItem();
+            this.menuItem6 = new System.Windows.Forms.MenuItem();
+            this.menuItem7 = new System.Windows.Forms.MenuItem();
+            this.menuItem8 = new System.Windows.Forms.MenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -68,8 +70,6 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainer1.Panel2.Controls.Add(this.addKeyButton);
-            this.splitContainer1.Panel2.Controls.Add(this.addSectionButton);
             this.splitContainer1.Size = new System.Drawing.Size(813, 486);
             this.splitContainer1.SplitterDistance = 132;
             this.splitContainer1.TabIndex = 0;
@@ -85,9 +85,9 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.saveKeyButton);
             this.groupBox1.Controls.Add(this.keyValueTextBox);
             this.groupBox1.Controls.Add(this.editKeyLabel);
@@ -97,9 +97,9 @@
             this.groupBox1.Controls.Add(this.saveSectionButton);
             this.groupBox1.Controls.Add(this.secValueTextBox);
             this.groupBox1.Controls.Add(this.editSectionLabel);
-            this.groupBox1.Location = new System.Drawing.Point(13, 42);
+            this.groupBox1.Location = new System.Drawing.Point(13, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(652, 432);
+            this.groupBox1.Size = new System.Drawing.Size(652, 462);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Edit Value";
@@ -117,8 +117,8 @@
             // 
             // keyValueTextBox
             // 
-            this.keyValueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.keyValueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.keyValueTextBox.Location = new System.Drawing.Point(12, 104);
             this.keyValueTextBox.Name = "keyValueTextBox";
             this.keyValueTextBox.Size = new System.Drawing.Size(551, 20);
@@ -146,8 +146,8 @@
             // 
             // valueTextBox
             // 
-            this.valueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.valueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.valueTextBox.Location = new System.Drawing.Point(12, 143);
             this.valueTextBox.Name = "valueTextBox";
             this.valueTextBox.Size = new System.Drawing.Size(551, 20);
@@ -175,8 +175,8 @@
             // 
             // secValueTextBox
             // 
-            this.secValueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.secValueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.secValueTextBox.Location = new System.Drawing.Point(12, 65);
             this.secValueTextBox.Name = "secValueTextBox";
             this.secValueTextBox.Size = new System.Drawing.Size(551, 20);
@@ -191,30 +191,11 @@
             this.editSectionLabel.TabIndex = 1;
             this.editSectionLabel.Text = "Edit Section";
             // 
-            // addKeyButton
-            // 
-            this.addKeyButton.Location = new System.Drawing.Point(94, 13);
-            this.addKeyButton.Name = "addKeyButton";
-            this.addKeyButton.Size = new System.Drawing.Size(75, 23);
-            this.addKeyButton.TabIndex = 4;
-            this.addKeyButton.Text = "Add Key";
-            this.addKeyButton.UseVisualStyleBackColor = true;
-            this.addKeyButton.Click += new System.EventHandler(this.addKeyButton_Click);
-            // 
-            // addSectionButton
-            // 
-            this.addSectionButton.Location = new System.Drawing.Point(13, 13);
-            this.addSectionButton.Name = "addSectionButton";
-            this.addSectionButton.Size = new System.Drawing.Size(75, 23);
-            this.addSectionButton.TabIndex = 3;
-            this.addSectionButton.Text = "Add Section";
-            this.addSectionButton.UseVisualStyleBackColor = true;
-            this.addSectionButton.Click += new System.EventHandler(this.addSectionButton_Click);
-            // 
             // mainMenu1
             // 
             this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.menuItem1});
+            this.menuItem1,
+            this.menuItem5});
             // 
             // menuItem1
             // 
@@ -244,6 +225,34 @@
             this.menuItem3.Index = 2;
             this.menuItem3.Text = "&Exit";
             this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
+            // 
+            // menuItem5
+            // 
+            this.menuItem5.Index = 1;
+            this.menuItem5.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem6,
+            this.menuItem7,
+            this.menuItem8});
+            this.menuItem5.Text = "Edit";
+            // 
+            // menuItem6
+            // 
+            this.menuItem6.Index = 0;
+            this.menuItem6.Text = "Add Section";
+            this.menuItem6.Click += new System.EventHandler(this.menuItem6_Click);
+            // 
+            // menuItem7
+            // 
+            this.menuItem7.Index = 1;
+            this.menuItem7.Text = "Add Key";
+            this.menuItem7.Click += new System.EventHandler(this.menuItem7_Click);
+            // 
+            // menuItem8
+            // 
+            this.menuItem8.Index = 2;
+            this.menuItem8.Shortcut = System.Windows.Forms.Shortcut.Del;
+            this.menuItem8.Text = "Delete";
+            this.menuItem8.Click += new System.EventHandler(this.menuItem8_Click);
             // 
             // Form1
             // 
@@ -279,8 +288,6 @@
         private System.Windows.Forms.TextBox secValueTextBox;
         private System.Windows.Forms.Button saveSectionButton;
         private System.Windows.Forms.MenuItem menuItem4;
-        private System.Windows.Forms.Button addKeyButton;
-        private System.Windows.Forms.Button addSectionButton;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button saveKeyButton;
         private System.Windows.Forms.TextBox keyValueTextBox;
@@ -288,6 +295,10 @@
         private System.Windows.Forms.Button saveValueButton;
         private System.Windows.Forms.TextBox valueTextBox;
         private System.Windows.Forms.Label editValueLabel;
+        private System.Windows.Forms.MenuItem menuItem5;
+        private System.Windows.Forms.MenuItem menuItem6;
+        private System.Windows.Forms.MenuItem menuItem7;
+        private System.Windows.Forms.MenuItem menuItem8;
     }
 }
 
