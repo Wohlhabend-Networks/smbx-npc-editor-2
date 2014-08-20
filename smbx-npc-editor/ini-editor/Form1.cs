@@ -61,7 +61,7 @@ namespace ini_editor
                     switch (dr)
                     {
                         case(DialogResult.Yes):
-                            save();
+                            save(false);
                             goto DialogResult;
                         case(DialogResult.No):
                             goto DialogResult;
@@ -142,7 +142,7 @@ namespace ini_editor
 
         private void menuItem4_Click(object sender, EventArgs e)
         {
-            save();
+            save(false);
         }
 
 
@@ -155,7 +155,7 @@ namespace ini_editor
                         switch (dr)
                         {
                             case (DialogResult.Yes):
-                                save();
+                                save(true);
                                 e.Cancel = false;
                                 break;
                             case (DialogResult.No):
@@ -315,7 +315,7 @@ namespace ini_editor
             Application.Exit();
         }
 
-        void save()
+        void save(bool isOnExit)
         {
             if (curFileName != null)
             {
@@ -323,10 +323,11 @@ namespace ini_editor
                 try
                 {
                     ini.Save(curFileName);
-                    MessageBox.Show(String.Format("File {0} saved to {1} successfully!", Path.GetFileName(curFileName), Path.GetFullPath(curFileName)),
-                        "Information",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information);
+                    if(!isOnExit)
+                        MessageBox.Show(String.Format("File {0} saved to {1} successfully!", Path.GetFileName(curFileName), Path.GetFullPath(curFileName)),
+                            "Information",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
                     changed = false;
                 }
                 catch (Exception ex)
@@ -385,11 +386,30 @@ namespace ini_editor
         private void menuItem6_Click(object sender, EventArgs e)
         {
             addSection();
+            changed = true;
         }
 
         private void menuItem7_Click(object sender, EventArgs e)
         {
             addKey();
+        }
+
+        private void iniSectionTreeView_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+        }
+
+        private void menuItem9_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sf = new SaveFileDialog();
+            sf.Title = "Save INI File";
+            if(currentSection != null)
+                sf.FileName = currentSection.Name + ".ini";
+            sf.Filter = "INI Files (*.ini)|*.ini|Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            if (sf.ShowDialog() == DialogResult.OK)
+            {
+                curFileName = sf.FileName;
+                save(false);
+            }
         }
 
     }

@@ -50,6 +50,7 @@
             this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.menuItem7 = new System.Windows.Forms.MenuItem();
             this.menuItem8 = new System.Windows.Forms.MenuItem();
+            this.menuItem9 = new System.Windows.Forms.MenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -81,13 +82,14 @@
             this.iniSectionTreeView.Name = "iniSectionTreeView";
             this.iniSectionTreeView.Size = new System.Drawing.Size(132, 486);
             this.iniSectionTreeView.TabIndex = 0;
+            this.iniSectionTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.iniSectionTreeView_NodeMouseClick);
             this.iniSectionTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.iniSectionTreeView_NodeMouseDoubleClick);
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.saveKeyButton);
             this.groupBox1.Controls.Add(this.keyValueTextBox);
             this.groupBox1.Controls.Add(this.editKeyLabel);
@@ -117,8 +119,8 @@
             // 
             // keyValueTextBox
             // 
-            this.keyValueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.keyValueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.keyValueTextBox.Location = new System.Drawing.Point(12, 104);
             this.keyValueTextBox.Name = "keyValueTextBox";
             this.keyValueTextBox.Size = new System.Drawing.Size(551, 20);
@@ -146,8 +148,8 @@
             // 
             // valueTextBox
             // 
-            this.valueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.valueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.valueTextBox.Location = new System.Drawing.Point(12, 143);
             this.valueTextBox.Name = "valueTextBox";
             this.valueTextBox.Size = new System.Drawing.Size(551, 20);
@@ -175,8 +177,8 @@
             // 
             // secValueTextBox
             // 
-            this.secValueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.secValueTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.secValueTextBox.Location = new System.Drawing.Point(12, 65);
             this.secValueTextBox.Name = "secValueTextBox";
             this.secValueTextBox.Size = new System.Drawing.Size(551, 20);
@@ -203,6 +205,7 @@
             this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem2,
             this.menuItem4,
+            this.menuItem9,
             this.menuItem3});
             this.menuItem1.Text = "&File";
             // 
@@ -222,7 +225,7 @@
             // 
             // menuItem3
             // 
-            this.menuItem3.Index = 2;
+            this.menuItem3.Index = 3;
             this.menuItem3.Text = "&Exit";
             this.menuItem3.Click += new System.EventHandler(this.menuItem3_Click);
             // 
@@ -253,6 +256,13 @@
             this.menuItem8.Shortcut = System.Windows.Forms.Shortcut.Del;
             this.menuItem8.Text = "Delete";
             this.menuItem8.Click += new System.EventHandler(this.menuItem8_Click);
+            // 
+            // menuItem9
+            // 
+            this.menuItem9.Index = 2;
+            this.menuItem9.Shortcut = System.Windows.Forms.Shortcut.CtrlShiftS;
+            this.menuItem9.Text = "Save As";
+            this.menuItem9.Click += new System.EventHandler(this.menuItem9_Click);
             // 
             // Form1
             // 
@@ -299,6 +309,7 @@
         private System.Windows.Forms.MenuItem menuItem6;
         private System.Windows.Forms.MenuItem menuItem7;
         private System.Windows.Forms.MenuItem menuItem8;
+        private System.Windows.Forms.MenuItem menuItem9;
     }
 }
 
