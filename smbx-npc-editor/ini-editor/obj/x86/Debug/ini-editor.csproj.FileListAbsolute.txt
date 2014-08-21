@@ -5,3 +5,4 @@ C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\ini-editor\obj\
 C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\ini-editor\obj\x86\Debug\ini-editor.csproj.GenerateResource.Cache
 C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\ini-editor\obj\x86\Debug\ini-editor.exe
 C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\ini-editor\obj\x86\Debug\ini-editor.pdb
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\ini-editor\obj\x86\Debug\ini-editor.csprojResolveAssemblyReference.cache

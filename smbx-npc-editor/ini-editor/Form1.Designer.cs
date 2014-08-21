@@ -45,12 +45,12 @@
             this.menuItem1 = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.menuItem4 = new System.Windows.Forms.MenuItem();
+            this.menuItem9 = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
             this.menuItem5 = new System.Windows.Forms.MenuItem();
             this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.menuItem7 = new System.Windows.Forms.MenuItem();
             this.menuItem8 = new System.Windows.Forms.MenuItem();
-            this.menuItem9 = new System.Windows.Forms.MenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -81,7 +81,7 @@
             this.iniSectionTreeView.Location = new System.Drawing.Point(0, 0);
             this.iniSectionTreeView.Name = "iniSectionTreeView";
             this.iniSectionTreeView.Size = new System.Drawing.Size(132, 486);
-            this.iniSectionTreeView.TabIndex = 0;
+            this.iniSectionTreeView.TabIndex = 6541;
             this.iniSectionTreeView.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.iniSectionTreeView_NodeMouseClick);
             this.iniSectionTreeView.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.iniSectionTreeView_NodeMouseDoubleClick);
             // 
@@ -112,7 +112,7 @@
             this.saveKeyButton.Location = new System.Drawing.Point(569, 102);
             this.saveKeyButton.Name = "saveKeyButton";
             this.saveKeyButton.Size = new System.Drawing.Size(74, 23);
-            this.saveKeyButton.TabIndex = 8;
+            this.saveKeyButton.TabIndex = 4;
             this.saveKeyButton.Text = "Save";
             this.saveKeyButton.UseVisualStyleBackColor = true;
             this.saveKeyButton.Click += new System.EventHandler(this.saveKeyButton_Click);
@@ -124,7 +124,7 @@
             this.keyValueTextBox.Location = new System.Drawing.Point(12, 104);
             this.keyValueTextBox.Name = "keyValueTextBox";
             this.keyValueTextBox.Size = new System.Drawing.Size(551, 20);
-            this.keyValueTextBox.TabIndex = 6;
+            this.keyValueTextBox.TabIndex = 1;
             // 
             // editKeyLabel
             // 
@@ -153,7 +153,7 @@
             this.valueTextBox.Location = new System.Drawing.Point(12, 143);
             this.valueTextBox.Name = "valueTextBox";
             this.valueTextBox.Size = new System.Drawing.Size(551, 20);
-            this.valueTextBox.TabIndex = 3;
+            this.valueTextBox.TabIndex = 2;
             // 
             // editValueLabel
             // 
@@ -170,7 +170,7 @@
             this.saveSectionButton.Location = new System.Drawing.Point(569, 63);
             this.saveSectionButton.Name = "saveSectionButton";
             this.saveSectionButton.Size = new System.Drawing.Size(74, 23);
-            this.saveSectionButton.TabIndex = 2;
+            this.saveSectionButton.TabIndex = 3;
             this.saveSectionButton.Text = "Save";
             this.saveSectionButton.UseVisualStyleBackColor = true;
             this.saveSectionButton.Click += new System.EventHandler(this.button1_Click);
@@ -223,6 +223,13 @@
             this.menuItem4.Text = "&Save";
             this.menuItem4.Click += new System.EventHandler(this.menuItem4_Click);
             // 
+            // menuItem9
+            // 
+            this.menuItem9.Index = 2;
+            this.menuItem9.Shortcut = System.Windows.Forms.Shortcut.CtrlShiftS;
+            this.menuItem9.Text = "Save As";
+            this.menuItem9.Click += new System.EventHandler(this.menuItem9_Click);
+            // 
             // menuItem3
             // 
             this.menuItem3.Index = 3;
@@ -256,13 +263,6 @@
             this.menuItem8.Shortcut = System.Windows.Forms.Shortcut.Del;
             this.menuItem8.Text = "Delete";
             this.menuItem8.Click += new System.EventHandler(this.menuItem8_Click);
-            // 
-            // menuItem9
-            // 
-            this.menuItem9.Index = 2;
-            this.menuItem9.Shortcut = System.Windows.Forms.Shortcut.CtrlShiftS;
-            this.menuItem9.Text = "Save As";
-            this.menuItem9.Click += new System.EventHandler(this.menuItem9_Click);
             // 
             // Form1
             // 
