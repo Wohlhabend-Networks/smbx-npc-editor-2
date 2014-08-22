@@ -20,6 +20,10 @@ namespace smbx_npc_editor.IO
             }
         }
 
+        /// <summary>
+        /// Loads the npc file into memory.
+        /// </summary>
+        /// <param name="FileName"></param>
         public void Load(string FileName)
         {
             StreamReader sr = new StreamReader(FileName);
@@ -54,6 +58,23 @@ namespace smbx_npc_editor.IO
                     }
                 }
             }
+        }
+
+        public void AddValue(string key, string value)
+        {
+            bool replaced = false;
+            foreach(var lol in npcvalues)
+            {
+                if(String.Equals(lol.Key, key))
+                {
+                    npcvalues.Remove(lol);
+                    npcvalues.Add(new KeyValuePair<string,string>(key, value));
+                    replaced = true;
+                }
+            }
+            if (!replaced)
+                npcvalues.Add(new KeyValuePair<string, string>(key, value));
+            Console.WriteLine("Adding key {0} with value {1}", key, value);
         }
 
         public string GetKeyValue(string key)
