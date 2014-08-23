@@ -28,35 +28,134 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.components = new System.ComponentModel.Container();
+            this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
+            this.menuItem1 = new System.Windows.Forms.MenuItem();
+            this.menuItem2 = new System.Windows.Forms.MenuItem();
+            this.menuItem3 = new System.Windows.Forms.MenuItem();
+            this.showAnimationMenuItem = new System.Windows.Forms.MenuItem();
+            this.menuItem5 = new System.Windows.Forms.MenuItem();
+            this.selectConfigMenuItem = new System.Windows.Forms.MenuItem();
+            this.menuItem7 = new System.Windows.Forms.MenuItem();
+            this.menuItem8 = new System.Windows.Forms.MenuItem();
+            this.tempPreview = new System.Windows.Forms.PictureBox();
+            this.menuItem4 = new System.Windows.Forms.MenuItem();
+            this.menuItem6 = new System.Windows.Forms.MenuItem();
+            ((System.ComponentModel.ISupportInitialize)(this.tempPreview)).BeginInit();
             this.SuspendLayout();
             // 
-            // button1
+            // mainMenu1
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button1.Location = new System.Drawing.Point(0, 0);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(404, 321);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "pick";
-            this.button1.UseVisualStyleBackColor = true;
+            this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem1,
+            this.menuItem3,
+            this.menuItem7});
+            // 
+            // menuItem1
+            // 
+            this.menuItem1.Index = 0;
+            this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem4,
+            this.menuItem6,
+            this.menuItem2});
+            this.menuItem1.Text = "&File";
+            // 
+            // menuItem2
+            // 
+            this.menuItem2.Index = 2;
+            this.menuItem2.Text = "&Exit";
+            // 
+            // menuItem3
+            // 
+            this.menuItem3.Index = 1;
+            this.menuItem3.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.showAnimationMenuItem,
+            this.menuItem5,
+            this.selectConfigMenuItem});
+            this.menuItem3.Text = "&Edit";
+            // 
+            // showAnimationMenuItem
+            // 
+            this.showAnimationMenuItem.Checked = true;
+            this.showAnimationMenuItem.Index = 0;
+            this.showAnimationMenuItem.Text = "Show Animation Pane";
+            this.showAnimationMenuItem.Click += new System.EventHandler(this.showAnimationMenuItem_Click);
+            // 
+            // menuItem5
+            // 
+            this.menuItem5.Index = 1;
+            this.menuItem5.Text = "-";
+            // 
+            // selectConfigMenuItem
+            // 
+            this.selectConfigMenuItem.Index = 2;
+            this.selectConfigMenuItem.Text = "Select Configuration";
+            // 
+            // menuItem7
+            // 
+            this.menuItem7.Index = 2;
+            this.menuItem7.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem8});
+            this.menuItem7.Text = "&Help";
+            // 
+            // menuItem8
+            // 
+            this.menuItem8.Index = 0;
+            this.menuItem8.Text = "&About";
+            // 
+            // tempPreview
+            // 
+            this.tempPreview.Location = new System.Drawing.Point(226, 72);
+            this.tempPreview.Name = "tempPreview";
+            this.tempPreview.Size = new System.Drawing.Size(313, 280);
+            this.tempPreview.TabIndex = 0;
+            this.tempPreview.TabStop = false;
+            // 
+            // menuItem4
+            // 
+            this.menuItem4.Index = 0;
+            this.menuItem4.Shortcut = System.Windows.Forms.Shortcut.CtrlO;
+            this.menuItem4.Text = "&Open";
+            this.menuItem4.Click += new System.EventHandler(this.menuItem4_Click);
+            // 
+            // menuItem6
+            // 
+            this.menuItem6.Index = 1;
+            this.menuItem6.Text = "-";
             // 
             // MainUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(404, 321);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(814, 453);
+            this.Controls.Add(this.tempPreview);
+            this.DoubleBuffered = true;
+            this.MaximizeBox = false;
+            this.Menu = this.mainMenu1;
             this.Name = "MainUI";
-            this.Text = "Form1";
+            this.Text = "SMBX NPC Editor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainUI_FormClosing);
+            this.Load += new System.EventHandler(this.MainUI_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.tempPreview)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.MainMenu mainMenu1;
+        private System.Windows.Forms.MenuItem menuItem1;
+        private System.Windows.Forms.MenuItem menuItem2;
+        private System.Windows.Forms.MenuItem menuItem3;
+        private System.Windows.Forms.MenuItem showAnimationMenuItem;
+        private System.Windows.Forms.MenuItem menuItem5;
+        private System.Windows.Forms.MenuItem selectConfigMenuItem;
+        private System.Windows.Forms.MenuItem menuItem7;
+        private System.Windows.Forms.MenuItem menuItem8;
+        private System.Windows.Forms.MenuItem menuItem4;
+        private System.Windows.Forms.MenuItem menuItem6;
+        public System.Windows.Forms.PictureBox tempPreview;
+
     }
 }
 
