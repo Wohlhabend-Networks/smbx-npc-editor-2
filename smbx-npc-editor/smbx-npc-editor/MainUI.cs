@@ -10,6 +10,7 @@ using smbx_npc_editor.IO;
 using System.IO;
 using Setting;
 using smbx_npc_editor.SpriteHandling;
+using smbxnpceditor;
 
 namespace smbx_npc_editor
 {
@@ -139,21 +140,13 @@ namespace smbx_npc_editor
 
         private void menuItem4_Click(object sender, EventArgs e)
         {
-            OpenFileDialog of = new OpenFileDialog();
-            of.Filter = "SMBX Sprite Images (*.gif)|*.gif|All Items (*.*)|*.*";
-            if(of.ShowDialog() == DialogResult.OK)
-            {
-                string directory = Path.GetDirectoryName(of.FileName);
-                string fileNoExt = Path.GetFileNameWithoutExtension(of.FileName);
-                string mask = directory + @"\" + fileNoExt + "m.gif";
-                Bitmap sprite = (Bitmap)Image.FromFile(of.FileName);
-                Bitmap maskk = (Bitmap)Image.FromFile(mask);
-                AlphaBlendedSprite abs = new AlphaBlendedSprite(sprite, maskk);
-                tempPreview.Image = abs.alphaBlendSprites();
+            
+        }
 
-                NpcAnimator npc = new NpcAnimator(abs.alphaBlendSprites(), currentConfig + @"\lvl_npc.ini", fileNoExt);
-                
-            }
+        private void menuItem9_Click(object sender, EventArgs e)
+        {
+            NewConfig nc = new NewConfig(currentConfig);
+            nc.ShowDialog();
         }
         //
     }

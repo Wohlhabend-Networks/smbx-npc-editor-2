@@ -31,6 +31,8 @@
             this.components = new System.ComponentModel.Container();
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
             this.menuItem1 = new System.Windows.Forms.MenuItem();
+            this.menuItem4 = new System.Windows.Forms.MenuItem();
+            this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
             this.showAnimationMenuItem = new System.Windows.Forms.MenuItem();
@@ -38,10 +40,7 @@
             this.selectConfigMenuItem = new System.Windows.Forms.MenuItem();
             this.menuItem7 = new System.Windows.Forms.MenuItem();
             this.menuItem8 = new System.Windows.Forms.MenuItem();
-            this.tempPreview = new System.Windows.Forms.PictureBox();
-            this.menuItem4 = new System.Windows.Forms.MenuItem();
-            this.menuItem6 = new System.Windows.Forms.MenuItem();
-            ((System.ComponentModel.ISupportInitialize)(this.tempPreview)).BeginInit();
+            this.menuItem9 = new System.Windows.Forms.MenuItem();
             this.SuspendLayout();
             // 
             // mainMenu1
@@ -56,13 +55,26 @@
             this.menuItem1.Index = 0;
             this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem4,
+            this.menuItem9,
             this.menuItem6,
             this.menuItem2});
             this.menuItem1.Text = "&File";
             // 
+            // menuItem4
+            // 
+            this.menuItem4.Index = 0;
+            this.menuItem4.Shortcut = System.Windows.Forms.Shortcut.CtrlO;
+            this.menuItem4.Text = "&Open";
+            this.menuItem4.Click += new System.EventHandler(this.menuItem4_Click);
+            // 
+            // menuItem6
+            // 
+            this.menuItem6.Index = 2;
+            this.menuItem6.Text = "-";
+            // 
             // menuItem2
             // 
-            this.menuItem2.Index = 2;
+            this.menuItem2.Index = 3;
             this.menuItem2.Text = "&Exit";
             // 
             // menuItem3
@@ -103,32 +115,18 @@
             this.menuItem8.Index = 0;
             this.menuItem8.Text = "&About";
             // 
-            // tempPreview
+            // menuItem9
             // 
-            this.tempPreview.Location = new System.Drawing.Point(226, 72);
-            this.tempPreview.Name = "tempPreview";
-            this.tempPreview.Size = new System.Drawing.Size(313, 280);
-            this.tempPreview.TabIndex = 0;
-            this.tempPreview.TabStop = false;
-            // 
-            // menuItem4
-            // 
-            this.menuItem4.Index = 0;
-            this.menuItem4.Shortcut = System.Windows.Forms.Shortcut.CtrlO;
-            this.menuItem4.Text = "&Open";
-            this.menuItem4.Click += new System.EventHandler(this.menuItem4_Click);
-            // 
-            // menuItem6
-            // 
-            this.menuItem6.Index = 1;
-            this.menuItem6.Text = "-";
+            this.menuItem9.Index = 1;
+            this.menuItem9.Shortcut = System.Windows.Forms.Shortcut.CtrlN;
+            this.menuItem9.Text = "&New";
+            this.menuItem9.Click += new System.EventHandler(this.menuItem9_Click);
             // 
             // MainUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(814, 453);
-            this.Controls.Add(this.tempPreview);
+            this.ClientSize = new System.Drawing.Size(826, 421);
             this.DoubleBuffered = true;
             this.MaximizeBox = false;
             this.Menu = this.mainMenu1;
@@ -136,7 +134,6 @@
             this.Text = "SMBX NPC Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainUI_FormClosing);
             this.Load += new System.EventHandler(this.MainUI_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.tempPreview)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -154,7 +151,7 @@
         private System.Windows.Forms.MenuItem menuItem8;
         private System.Windows.Forms.MenuItem menuItem4;
         private System.Windows.Forms.MenuItem menuItem6;
-        public System.Windows.Forms.PictureBox tempPreview;
+        private System.Windows.Forms.MenuItem menuItem9;
 
     }
 }

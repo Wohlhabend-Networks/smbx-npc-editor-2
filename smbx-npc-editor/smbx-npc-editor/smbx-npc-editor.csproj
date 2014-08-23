@@ -49,6 +49,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CueTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="IO\NpcConfigFile.cs" />
     <Compile Include="MainUI.cs">
       <SubType>Form</SubType>
@@ -56,12 +59,29 @@
     <Compile Include="MainUI.Designer.cs">
       <DependentUpon>MainUI.cs</DependentUpon>
     </Compile>
+    <Compile Include="NewConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewConfig.designer.cs">
+      <DependentUpon>NewConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NewNpcConfiguration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewNpcConfiguration.Designer.cs">
+      <DependentUpon>NewNpcConfiguration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NumericComparer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SpriteHandling\AlphaBlendedSprite.cs" />
     <Compile Include="SpriteHandling\NpcAnimator.cs" />
+    <Compile Include="StringLogicalComparer.cs" />
     <EmbeddedResource Include="MainUI.resx">
       <DependentUpon>MainUI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewConfig.resx">
+      <DependentUpon>NewConfig.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
