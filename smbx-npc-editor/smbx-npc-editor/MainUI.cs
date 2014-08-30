@@ -17,7 +17,7 @@ namespace smbx_npc_editor
     public partial class MainUI : Form
     {
         //
-        NpcConfigFile npcfile = new NpcConfigFile();
+        NpcConfigFile npcfile = new NpcConfigFile(true);
         IniFile settingsFile = new IniFile(Environment.CurrentDirectory + @"\Data\settings.ini");
         public IniFile curConfig;
         public string currentConfig;
@@ -34,28 +34,37 @@ namespace smbx_npc_editor
         #region crying
         void compileConfigs()
         {
-            int count = 0;
-            List<string> dirs = new List<string>();
-            foreach(var dir in Directory.GetDirectories(Environment.CurrentDirectory + @"\Data"))
+            if (Directory.Exists(Environment.CurrentDirectory + @"\Data"))
             {
-                count++;
-                dirs.Add(dir);
+                int count = 0;
+                List<string> dirs = new List<string>();
+                foreach (var dir in Directory.GetDirectories(Environment.CurrentDirectory + @"\Data"))
+                {
+                    count++;
+                    dirs.Add(dir);
+                }
+                MenuItem[] items = new MenuItem[count];
+                bool add = true;
+                for (int i = 0; i < items.Length; i++)
+                {
+                    string dirName = Path.GetFileName(dirs[i]);
+                    if (dirName == "tools")
+                        add = false;
+                    if (!File.Exists(dirs[i] + @"\lvl_npc.ini"))
+                        add = false;
+                    items[i] = new MenuItem();
+                    items[i].Name = "configItem" + i;
+                    items[i].Text = dirName;
+                    items[i].RadioCheck = true;
+                    items[i].Click += new EventHandler(ConfigMenuHandler);
+                    if (add)
+                        selectConfigMenuItem.MenuItems.Add(items[i]);
+                    add = true;
+                }
             }
-            MenuItem[] items = new MenuItem[count];
-            bool add = true;
-            for(int i = 0; i < items.Length; i++)
+            else
             {
-                string dirName = Path.GetFileName(dirs[i]);
-                if (dirName == "tools")
-                    add = false;
-                items[i] = new MenuItem();
-                items[i].Name = "configItem" + i;
-                items[i].Text = dirName;
-                items[i].RadioCheck = true;
-                items[i].Click += new EventHandler(ConfigMenuHandler);
-                if(add)
-                    selectConfigMenuItem.MenuItems.Add(items[i]);
-                add = true;
+                Console.WriteLine("Data folder was moved or non existent!");
             }
         }
         void loadSettings()

@@ -8,3 +8,6 @@ C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\smbx-npc-editor
 C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\smbx-npc-editor\obj\x86\Debug\smbx-npc-editor.csprojResolveAssemblyReference.cache
 C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\smbx-npc-editor\bin\Debug\Setting.dll
 C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\smbx-npc-editor\obj\x86\Debug\smbxnpceditor.NewConfig.resources
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\smbx-npc-editor\obj\x86\Debug\smbx_npc_editor.NpcAnimator.resources
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\smbx-npc-editor\obj\x86\Debug\smbx_npc_editor.SpinnerControlValue.resources
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\smbx-npc-editor\obj\x86\Debug\smbx_npc_editor.ComboBoxControlValue.resources

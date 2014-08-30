@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ComboBoxControlValue.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ComboBoxControlValue.Designer.cs">
+      <DependentUpon>ComboBoxControlValue.cs</DependentUpon>
+    </Compile>
     <Compile Include="CueTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -71,17 +77,35 @@
     <Compile Include="NewNpcConfiguration.Designer.cs">
       <DependentUpon>NewNpcConfiguration.cs</DependentUpon>
     </Compile>
+    <Compile Include="NpcAnimator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="NpcAnimator.Designer.cs">
+      <DependentUpon>NpcAnimator.cs</DependentUpon>
+    </Compile>
     <Compile Include="NumericComparer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpinnerControlValue.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="SpinnerControlValue.Designer.cs">
+      <DependentUpon>SpinnerControlValue.cs</DependentUpon>
+    </Compile>
     <Compile Include="SpriteHandling\AlphaBlendedSprite.cs" />
     <Compile Include="SpriteHandling\NpcAnimator.cs" />
     <Compile Include="StringLogicalComparer.cs" />
+    <EmbeddedResource Include="ComboBoxControlValue.resx">
+      <DependentUpon>ComboBoxControlValue.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainUI.resx">
       <DependentUpon>MainUI.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NewConfig.resx">
       <DependentUpon>NewConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NpcAnimator.resx">
+      <DependentUpon>NpcAnimator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -91,7 +115,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SpinnerControlValue.resx">
+      <DependentUpon>SpinnerControlValue.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -104,6 +132,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons\play-32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
