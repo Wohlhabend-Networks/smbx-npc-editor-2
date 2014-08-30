@@ -10,7 +10,7 @@ smbx-npc-editor-2
 - [ ] The editor will actually work without the configs so you could use it with strictly the exe instead of having to use an older version if you don't want to exe.
 
 
-Code Workflow
+## Code Workflow
 
 - [x] Design an INI Editor to ease with the editing of said configurations
 - [x] Design a program to quickly generate the preview sprites for said configurations
