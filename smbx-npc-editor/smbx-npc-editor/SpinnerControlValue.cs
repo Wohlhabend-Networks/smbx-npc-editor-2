@@ -30,6 +30,32 @@ namespace smbx_npc_editor
         }
 
         #region WinForms Stuff
+        private string _valueTag = String.Empty;
+        [Description("The tag of the value, for the SMBX NPC Editor this is used to identify which code it'll be assigned to")]
+        [Category("Appearance")]
+        [DefaultValue("")]
+        [Localizable(true)]
+        public string ValueTag
+        {
+            get { return _valueTag; }
+            set
+            {
+                if (value == null)
+                    value = String.Empty;
+                if(!_valueTag.Equals(value, StringComparison.CurrentCulture))
+                {
+                    _valueTag = value;
+                    UpdateSpinnerTag();
+                }
+            }
+        }
+
+        private void UpdateSpinnerTag()
+        {
+            valueSpinner.Tag = _valueTag;
+            enabledCheckBox.Tag = _valueTag;
+        }
+
         private string _LabelText = String.Empty;
         [Description("The label's text")]
         [Category("Appearance")]
@@ -88,6 +114,71 @@ namespace smbx_npc_editor
                 }
             }
         }
+        private int _minValue = 0;
+        [Description("The minimum value of the NumericUpDown")]
+        [Category("Appearance")]
+        [DefaultValue("")]
+        [Localizable(true)]
+        public int MinimumValue
+        {
+            get { return _minValue; }
+            set
+            {
+                if (value == null)
+                    value = 0;
+                _minValue = value;
+                UpdateValueSpinnerMin();
+            }
+        }
+
+        private int _defValue = 0;
+        [Description("The current value of the spinner.")]
+        [Category("Appearance")]
+        [DefaultValue("")]
+        [Localizable(true)]
+        public int CurrentValue
+        {
+            get { return _defValue; }
+            set
+            {
+                if (value == null)
+                    value = 0;
+                _defValue = value;
+                UpdateValueSpinnerDef();
+            }
+        }
+
+        private int _maxValue = 666666;
+        [Description("The current value of the spinner.")]
+        [Category("Appearance")]
+        [DefaultValue("")]
+        [Localizable(true)]
+        public int MaximumValue
+        {
+            get { return _maxValue; }
+            set
+            {
+                if (value == null)
+                    value = 0;
+                _maxValue = value;
+                UpdateValueSpinnerMax();
+            }
+        }
+
+        private void UpdateValueSpinnerMax()
+        {
+            valueSpinner.Maximum = (decimal)_maxValue;
+        }
+
+        private void UpdateValueSpinnerDef()
+        {
+            valueSpinner.Value = _defValue;
+        }
+
+        private void UpdateValueSpinnerMin()
+        {
+            valueSpinner.Minimum = _minValue;
+        }
 
         private void UpdateControlsOnCheckbox()
         {
@@ -113,5 +204,24 @@ namespace smbx_npc_editor
             label.Text = _LabelText;
         }
         #endregion
+
+        private void enabledCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if(enabledCheckBox.Checked == true)
+            {
+                enabledCheckBox.Checked = true;
+                valueSpinner.Enabled = true;
+            }
+            else
+            {
+                enabledCheckBox.Checked = false;
+                valueSpinner.Enabled = false;
+            }
+        }
+
+        private void SpinnerControlValue_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

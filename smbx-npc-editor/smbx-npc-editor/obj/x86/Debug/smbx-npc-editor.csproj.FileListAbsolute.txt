@@ -11,3 +11,4 @@ C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\smbx-npc-editor
 C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\smbx-npc-editor\obj\x86\Debug\smbx_npc_editor.NpcAnimator.resources
 C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\smbx-npc-editor\obj\x86\Debug\smbx_npc_editor.SpinnerControlValue.resources
 C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\smbx-npc-editor\obj\x86\Debug\smbx_npc_editor.ComboBoxControlValue.resources
+C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\smbx-npc-editor\obj\x86\Debug\smbx_npc_editor.CheckBoxValue.resources

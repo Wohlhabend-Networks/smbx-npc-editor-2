@@ -30,6 +30,33 @@ namespace smbx_npc_editor
             InitializeComponent();
             compileConfigs();
             loadSettings();
+            //We'll start with the value spinners.
+            gfxHeightControl.valueSpinner.ValueChanged += valueSpinner_ValueChanged;
+            gfxHeightControl.enabledCheckBox.CheckedChanged += (sender, e) => enabledCheckBox_CheckedChanged(sender, e, gfxHeightControl);
+            gfxWidthControl.valueSpinner.ValueChanged += valueSpinner_ValueChanged;
+            gfxWidthControl.enabledCheckBox.CheckedChanged += (sender, e) => enabledCheckBox_CheckedChanged(sender, e, gfxWidthControl);
+            //Then the ComboBoxes
+
+            //Finally, the checkboxes.
+        }
+
+        void enabledCheckBox_CheckedChanged(object sender, object e, SpinnerControlValue sv)
+        {
+            CheckBox check = (CheckBox)sender;
+            if(check.Checked)
+            {
+                npcfile.AddValue(sv.valueSpinner.Tag.ToString(), sv.valueSpinner.Value.ToString());
+            }
+            else
+            {
+                npcfile.RemoveValue(sv.valueSpinner.Tag.ToString());
+            }
+        }
+
+        void valueSpinner_ValueChanged(object sender, EventArgs e)
+        {
+            NumericUpDown updown = (NumericUpDown)sender;
+            npcfile.AddValue(updown.Tag.ToString(), updown.Value.ToString());
         }
         #region crying
         void compileConfigs()

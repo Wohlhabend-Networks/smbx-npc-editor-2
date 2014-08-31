@@ -78,6 +78,12 @@ namespace smbx_npc_editor.IO
             return npcvalues;
         }
 
+        /// <summary>
+        /// Add or replace (yes it does both :D) a key and its value
+        /// </summary>
+        /// <param name="key">The name of the key you want to add</param>
+        /// <param name="value">The value of said key</param>
+
         public void AddValue(string key, string value)
         {
             bool replaced = false;
@@ -95,6 +101,22 @@ namespace smbx_npc_editor.IO
                 npcvalues.Add(new KeyValuePair<string, string>(key, value));
             if (_output)
                 Console.WriteLine("Adding key {0} with value {1}", key, value);
+        }
+
+        /// <summary>
+        /// Removes a key
+        /// </summary>
+        /// <param name="key">The key you want to remove</param>
+        public void RemoveValue(string key)
+        {
+            foreach(var lol in npcvalues)
+            {
+                if (String.Equals(lol.Key, key))
+                    npcvalues.Remove(lol);
+                break;
+            }
+            if (_output)
+                Console.WriteLine("Removing key {0}", key);
         }
 
         public void Save(string filename, bool writeGenerate)

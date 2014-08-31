@@ -30,13 +30,12 @@
         {
             this.label = new System.Windows.Forms.Label();
             this.enabledCheckBox = new System.Windows.Forms.CheckBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.ComboValue = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // label
             // 
-            this.label.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label.Location = new System.Drawing.Point(12, 5);
+            this.label.Location = new System.Drawing.Point(1, 1);
             this.label.Name = "label";
             this.label.Size = new System.Drawing.Size(79, 27);
             this.label.TabIndex = 21;
@@ -45,32 +44,34 @@
             // 
             // enabledCheckBox
             // 
-            this.enabledCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.enabledCheckBox.AutoSize = true;
-            this.enabledCheckBox.Location = new System.Drawing.Point(257, 12);
+            this.enabledCheckBox.Location = new System.Drawing.Point(206, 11);
             this.enabledCheckBox.Name = "enabledCheckBox";
             this.enabledCheckBox.Size = new System.Drawing.Size(15, 14);
             this.enabledCheckBox.TabIndex = 19;
             this.enabledCheckBox.UseVisualStyleBackColor = true;
+            this.enabledCheckBox.CheckedChanged += new System.EventHandler(this.enabledCheckBox_CheckedChanged);
             // 
-            // comboBox1
+            // ComboValue
             // 
-            this.comboBox1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(97, 9);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(154, 21);
-            this.comboBox1.TabIndex = 22;
+            this.ComboValue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ComboValue.Enabled = false;
+            this.ComboValue.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.ComboValue.FormattingEnabled = true;
+            this.ComboValue.Location = new System.Drawing.Point(86, 6);
+            this.ComboValue.Name = "ComboValue";
+            this.ComboValue.Size = new System.Drawing.Size(109, 21);
+            this.ComboValue.TabIndex = 22;
             // 
             // ComboBoxControlValue
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.ComboValue);
             this.Controls.Add(this.label);
             this.Controls.Add(this.enabledCheckBox);
             this.Name = "ComboBoxControlValue";
-            this.Size = new System.Drawing.Size(284, 37);
+            this.Size = new System.Drawing.Size(228, 37);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -80,6 +81,6 @@
 
         public System.Windows.Forms.Label label;
         public System.Windows.Forms.CheckBox enabledCheckBox;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox ComboValue;
     }
 }

@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CheckBoxValue.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CheckBoxValue.Designer.cs">
+      <DependentUpon>CheckBoxValue.cs</DependentUpon>
+    </Compile>
     <Compile Include="ComboBoxControlValue.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -95,6 +101,9 @@
     <Compile Include="SpriteHandling\AlphaBlendedSprite.cs" />
     <Compile Include="SpriteHandling\NpcAnimator.cs" />
     <Compile Include="StringLogicalComparer.cs" />
+    <EmbeddedResource Include="CheckBoxValue.resx">
+      <DependentUpon>CheckBoxValue.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ComboBoxControlValue.resx">
       <DependentUpon>ComboBoxControlValue.cs</DependentUpon>
     </EmbeddedResource>
