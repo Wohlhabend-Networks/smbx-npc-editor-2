@@ -28,8 +28,8 @@ namespace smbx_npc_editor
         {
             Font = SystemFonts.MessageBoxFont;
             InitializeComponent();
-            compileConfigs();
             loadSettings();
+            compileConfigs();
             //We'll start with the value spinners.
             gfxHeightControl.valueSpinner.ValueChanged += valueSpinner_ValueChanged;
             gfxHeightControl.enabledCheckBox.CheckedChanged += (sender, e) => enabledCheckBox_CheckedChanged(sender, e, gfxHeightControl);
@@ -63,6 +63,10 @@ namespace smbx_npc_editor
         {
             if (Directory.Exists(Environment.CurrentDirectory + @"\Data"))
             {
+                if(currentConfig == "null")
+                {
+                    noConfig();
+                }
                 int count = 0;
                 List<string> dirs = new List<string>();
                 foreach (var dir in Directory.GetDirectories(Environment.CurrentDirectory + @"\Data"))
@@ -91,13 +95,76 @@ namespace smbx_npc_editor
             }
             else
             {
-                Console.WriteLine("Data folder was moved or non existent!");
+                noConfig();
             }
+        }
+        void noConfig()
+        {
+            Console.WriteLine("Data folder was moved or non existent!");
+            MenuItem nullConfig = new MenuItem("No configuration available");
+            nullConfig.Enabled = false;
+            selectConfigMenuItem.MenuItems.Add(nullConfig);
         }
         void loadSettings()
         {
-            currentConfig = settingsFile.ReadValue("Settings", "lastConfig");
-            showAnimationPane = bool.Parse(settingsFile.ReadValue("Settings", "showAnimation"));
+            if (File.Exists(Environment.CurrentDirectory + @"\Data\settings.ini"))
+            {
+                try
+                {
+                    currentConfig = settingsFile.ReadValue("Settings", "lastConfig");
+                    if (currentConfig == "null")
+                    {
+                        //do stuff for a null configuration
+                    }
+                    showAnimationPane = bool.Parse(settingsFile.ReadValue("Settings", "showAnimation"));
+                }
+                catch
+                {
+                    //The settings file is probably bad or malformed, so let's try to recreate it.
+                    writeInitialIni();
+                    loadSettings();
+                }
+            }
+            else
+            {
+                DialogResult dr = MessageBox.Show("We can't seem to find a Data directory alongside the NPC Editor executable. Would you like to run this application as a \"Portable\" app?", "No Data Directory Detected", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                switch(dr)
+                {
+                    case(DialogResult.Yes):
+                        Utility.ModifyRegistry.ModifyRegistry
+                        break;
+                    case(DialogResult.No):
+                        writeInitialIni();
+                        loadSettings();
+                        break;
+                    case(DialogResult.Cancel):
+                        Environment.Exit(0);
+                        break;
+                }
+                writeInitialIni();
+                loadSettings();
+            }
+        }
+        void writeInitialIni()
+        {
+            try
+            {
+                if (!Directory.Exists(Environment.CurrentDirectory + @"\Data"))
+                    Directory.CreateDirectory(Environment.CurrentDirectory + @"\Data");
+                StreamWriter sw = new StreamWriter(Environment.CurrentDirectory + @"\Data\settings.ini");
+                sw.WriteLine("[Settings]");
+                sw.WriteLine("showAnimation=true");
+                sw.WriteLine("lastConfig=null");
+                sw.WriteLine("lastConfigItem=null");
+                sw.Flush();
+                
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Looks like we can't get write permission to write the default configurations and settings files!\nTry running this program as administrator before proceeding.\nException output: \nPlease press OK so the program can crash" + ex.Message, 
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(1);
+            }
         }
         void saveSettings()
         {
@@ -181,8 +248,14 @@ namespace smbx_npc_editor
 
         private void menuItem9_Click(object sender, EventArgs e)
         {
-            NewConfig nc = new NewConfig(currentConfig);
-            nc.ShowDialog();
+            if (currentConfig != "null")
+            {
+                NewConfig nc = new NewConfig(currentConfig);
+                nc.ShowDialog();
+            }
+            else
+            {    //reset items, when this is actually implemented of course
+            }
         }
         //
     }

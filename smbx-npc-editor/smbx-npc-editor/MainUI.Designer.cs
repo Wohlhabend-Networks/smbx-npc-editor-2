@@ -156,7 +156,7 @@
             this.graphicGb.Controls.Add(this.frameSpeedControl);
             this.graphicGb.Location = new System.Drawing.Point(12, 45);
             this.graphicGb.Name = "graphicGb";
-            this.graphicGb.Size = new System.Drawing.Size(239, 346);
+            this.graphicGb.Size = new System.Drawing.Size(239, 347);
             this.graphicGb.TabIndex = 2;
             this.graphicGb.TabStop = false;
             this.graphicGb.Text = "Graphics";
@@ -282,7 +282,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(980, 403);
+            this.ClientSize = new System.Drawing.Size(980, 404);
             this.Controls.Add(this.graphicGb);
             this.Controls.Add(this.npcNameLabel);
             this.DoubleBuffered = true;
