@@ -24,7 +24,39 @@ namespace smbx_npc_editor
                 return 0;
         }
 
+        public void Reset()
+        {
+            enabledCheckBox.Checked = false;
+            checkValue.Checked = false;
+        }
+
         #region WinForms Values
+        private string _valueTag = String.Empty;
+        [Description("The tag of the value, for the SMBX NPC Editor this is used to identify which code it'll be assigned to")]
+        [Category("Appearance")]
+        [DefaultValue("")]
+        [Localizable(true)]
+        public string ValueTag
+        {
+            get { return _valueTag; }
+            set
+            {
+                if (value == null)
+                    value = String.Empty;
+                if (!_valueTag.Equals(value, StringComparison.CurrentCulture))
+                {
+                    _valueTag = value;
+                    UpdateCheckBoxTag();
+                }
+            }
+        }
+
+        private void UpdateCheckBoxTag()
+        {
+            checkValue.Tag = _valueTag;
+            enabledCheckBox.Tag = _valueTag;
+        }
+
         private string _LabelText = String.Empty;
         [Description("The label's text")]
         [Category("Appearance")]

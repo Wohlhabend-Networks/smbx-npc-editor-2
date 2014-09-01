@@ -45,7 +45,7 @@
             // enabledCheckBox
             // 
             this.enabledCheckBox.AutoSize = true;
-            this.enabledCheckBox.Location = new System.Drawing.Point(206, 11);
+            this.enabledCheckBox.Location = new System.Drawing.Point(204, 11);
             this.enabledCheckBox.Name = "enabledCheckBox";
             this.enabledCheckBox.Size = new System.Drawing.Size(15, 14);
             this.enabledCheckBox.TabIndex = 19;
@@ -72,6 +72,7 @@
             this.Controls.Add(this.enabledCheckBox);
             this.Name = "ComboBoxControlValue";
             this.Size = new System.Drawing.Size(228, 37);
+            this.Load += new System.EventHandler(this.ComboBoxControlValue_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -81,6 +82,6 @@
 
         public System.Windows.Forms.Label label;
         public System.Windows.Forms.CheckBox enabledCheckBox;
-        private System.Windows.Forms.ComboBox ComboValue;
+        public System.Windows.Forms.ComboBox ComboValue;
     }
 }

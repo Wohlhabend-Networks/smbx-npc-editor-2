@@ -17,29 +17,54 @@ namespace smbx_npc_editor
     public partial class MainUI : Form
     {
         //
-        NpcConfigFile npcfile = new NpcConfigFile(true);
         IniFile settingsFile = new IniFile(Environment.CurrentDirectory + @"\Data\settings.ini");
         public IniFile curConfig;
         public string currentConfig;
         bool showAnimationPane;
+        bool runPortable = false;
         //
-
+        NpcConfigFile npcfile = new NpcConfigFile(true);
+        string curNpcId = "blank";
+        //
         public MainUI()
         {
             Font = SystemFonts.MessageBoxFont;
             InitializeComponent();
             loadSettings();
             compileConfigs();
-            //We'll start with the value spinners.
-            gfxHeightControl.valueSpinner.ValueChanged += valueSpinner_ValueChanged;
-            gfxHeightControl.enabledCheckBox.CheckedChanged += (sender, e) => enabledCheckBox_CheckedChanged(sender, e, gfxHeightControl);
-            gfxWidthControl.valueSpinner.ValueChanged += valueSpinner_ValueChanged;
-            gfxWidthControl.enabledCheckBox.CheckedChanged += (sender, e) => enabledCheckBox_CheckedChanged(sender, e, gfxWidthControl);
-            //Then the ComboBoxes
-
-            //Finally, the checkboxes.
+            GetUserControls(this.Controls);
         }
 
+        private void GetUserControls(Control.ControlCollection controls)
+        {
+            foreach (Control c in controls)
+            {
+                if (c is UserControl)
+                {
+                    if (c is SpinnerControlValue)
+                    {
+                        SpinnerControlValue svc = (SpinnerControlValue)c;
+                        svc.valueSpinner.ValueChanged += valueSpinner_ValueChanged;
+                        svc.enabledCheckBox.CheckedChanged += (sender, e) => enabledCheckBox_CheckedChanged(sender, e, svc);
+                    }
+                    else if (c is ComboBoxControlValue)
+                    {
+                        ComboBoxControlValue cbcv = (ComboBoxControlValue)c;
+                        cbcv.ComboValue.SelectedIndexChanged += comboValue_SelectedIndexChanged;
+                        cbcv.enabledCheckBox.CheckedChanged += (sender, e) => combo_enabledCheckBox_CheckedChanged(sender, e, cbcv);
+                    }
+                    else if (c is CheckBoxValue)
+                    {
+                        CheckBoxValue cbv = (CheckBoxValue)c;
+                        cbv.checkValue.CheckedChanged += checkValue_CheckedChanged;
+                        cbv.enabledCheckBox.CheckedChanged += (sender, e) => cb_enabledCheckBox_CheckedChanged(sender, e, cbv);
+                    }
+                }
+                if (c.Controls.Count > 0)
+                    GetUserControls(c.Controls);
+            }
+        }
+        #region Control Events
         void enabledCheckBox_CheckedChanged(object sender, object e, SpinnerControlValue sv)
         {
             CheckBox check = (CheckBox)sender;
@@ -58,7 +83,92 @@ namespace smbx_npc_editor
             NumericUpDown updown = (NumericUpDown)sender;
             npcfile.AddValue(updown.Tag.ToString(), updown.Value.ToString());
         }
+        //
+        void cb_enabledCheckBox_CheckedChanged(object sender, object e, CheckBoxValue cb)
+        {
+            CheckBox check = (CheckBox)sender;
+            if(check.Checked)
+            {
+                switch(cb.checkValue.Checked)
+                {
+                    case(true):
+                        npcfile.AddValue(cb.checkValue.Tag.ToString(), "1");
+                        break;
+                    case(false):
+                        npcfile.AddValue(cb.checkValue.Tag.ToString(), "0");
+                        break;
+                }
+            }
+            else
+            {
+                npcfile.RemoveValue(cb.checkValue.Tag.ToString());
+            }
+        }
+        void checkValue_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox check = (CheckBox)sender;
+            switch(check.Checked)
+            {
+                case(true):
+                    npcfile.AddValue(check.Tag.ToString(), "1");
+                    break;
+                case(false):
+                    npcfile.AddValue(check.Tag.ToString(), "0");
+                    break;
+            }
+        }
+        //
+        void combo_enabledCheckBox_CheckedChanged(object sender, EventArgs e, ComboBoxControlValue cbcv)
+        {
+            CheckBox check = (CheckBox)sender;
+            switch(check.Checked)
+            {
+                case(true):
+                    if(cbcv.GetSelectedIndex().ToString() != "-1")
+                        npcfile.AddValue(cbcv.ComboValue.Tag.ToString(), cbcv.GetSelectedIndex().ToString());
+                    break;
+                case(false):
+                    npcfile.RemoveValue(cbcv.ComboValue.Tag.ToString());
+                    break;
+            }
+        }
+        void comboValue_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox combo = (ComboBox)sender;
+            if(combo.SelectedIndex.ToString() != "-1")
+                npcfile.AddValue(combo.Tag.ToString(), combo.SelectedIndex.ToString());
+        }
+        #endregion
         #region crying
+        void ResetItems(Control.ControlCollection controls)
+        {
+            foreach(Control c in controls)
+            {
+                if(c is UserControl)
+                {
+                    if(c is SpinnerControlValue)
+                    {
+                        SpinnerControlValue svc = (SpinnerControlValue)c;
+                        svc.Reset();
+                    }
+                    if(c is ComboBoxControlValue)
+                    {
+                        ComboBoxControlValue cbcv = (ComboBoxControlValue)c;
+                        cbcv.Reset();
+                    }
+                    if(c is CheckBoxValue)
+                    {
+                        CheckBoxValue cbv = (CheckBoxValue)c;
+                        cbv.Reset();
+                    }
+                }
+                if (c.Controls.Count > 0)
+                    ResetItems(c.Controls);
+            }
+            ///TODO: Reset the animator and NPC Name stuff. Along with the title and any other loose variables.
+            npcfile.Clear();
+        }
+
         void compileConfigs()
         {
             if (Directory.Exists(Environment.CurrentDirectory + @"\Data"))
@@ -107,44 +217,91 @@ namespace smbx_npc_editor
         }
         void loadSettings()
         {
-            if (File.Exists(Environment.CurrentDirectory + @"\Data\settings.ini"))
+            if(File.Exists(Environment.CurrentDirectory + @"\Data\settings.ini"))
             {
                 try
                 {
                     currentConfig = settingsFile.ReadValue("Settings", "lastConfig");
-                    if (currentConfig == "null")
+                    if(currentConfig == "null")
                     {
-                        //do stuff for a null configuration
+                        //do null stuff
                     }
                     showAnimationPane = bool.Parse(settingsFile.ReadValue("Settings", "showAnimation"));
                 }
-                catch
+                catch(Exception ex)
                 {
-                    //The settings file is probably bad or malformed, so let's try to recreate it.
-                    writeInitialIni();
-                    loadSettings();
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
-                DialogResult dr = MessageBox.Show("We can't seem to find a Data directory alongside the NPC Editor executable. Would you like to run this application as a \"Portable\" app?", "No Data Directory Detected", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                switch(dr)
+                Utility.ModifyRegistry.ModifyRegistry mr = new Utility.ModifyRegistry.ModifyRegistry();
+                try
                 {
-                    case(DialogResult.Yes):
-                        Utility.ModifyRegistry.ModifyRegistry
-                        break;
-                    case(DialogResult.No):
-                        writeInitialIni();
-                        loadSettings();
-                        break;
-                    case(DialogResult.Cancel):
-                        Environment.Exit(0);
-                        break;
+                    string runPortableStr = mr.Read("runPortable");
+                    Console.WriteLine("RegKey 'runPortable' is equal to {0}", runPortableStr.ToString());
+                    if (runPortableStr == null)
+                        throw new InvalidDataException();
+                    else if (runPortableStr == "true")
+                    {
+                        runPortable = true;
+                        runPortableEvents();
+                    }
+                    else if (runPortableStr == "false")
+                    { runPortable = false; writeInitialIni(); loadSettings(); }
+                    else
+                        throw new InvalidDataException();
                 }
-                writeInitialIni();
-                loadSettings();
+                catch
+                {
+                    DialogResult dr = MessageBox.Show("We can't seem to find a Data directory alongside the NPC Editor executable. Would you like to run this application as a \"Portable\" app?", "No Data Directory Detected", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                    switch (dr)
+                    {
+                        case (DialogResult.Yes):
+                            mr.Write("runPortable", "true");
+                            break;
+                        case (DialogResult.No):
+                            mr.Write("runPortable", "false");
+                            writeInitialIni();
+                            loadSettings();
+                            break;
+                        case (DialogResult.Cancel):
+                            Environment.Exit(0);
+                            break;
+                    }
+                }
             }
         }
+        void runPortableEvents()
+        {
+            MenuItem runPortableMenu = new MenuItem("Run portable (stored in registry)", runPortableMenu_Clicked);
+            if (runPortable)
+            {
+                runPortableMenu.Checked = true;
+                MenuItem sep = new MenuItem("-");
+                editMenu.MenuItems.Add(sep);
+                editMenu.MenuItems.Add(runPortableMenu);
+            }
+        }
+
+        private void runPortableMenu_Clicked(object sender, EventArgs e)
+        {
+            Utility.ModifyRegistry.ModifyRegistry mr = new Utility.ModifyRegistry.ModifyRegistry();
+            MenuItem portMenu = (MenuItem)sender;
+            if(portMenu.Checked == true)
+            {
+                portMenu.Checked = false;
+                mr.Write("runPortable", "false");
+                Console.WriteLine("Writing key 'runPortable' to registry with value 'false'");
+            }
+            else
+            {
+                portMenu.Checked = true;
+                mr.Write("runPortable", true);
+                Console.WriteLine("Writing key 'runPortable' to registry with value 'true'");
+            }
+        }
+
         void writeInitialIni()
         {
             try
@@ -220,7 +377,7 @@ namespace smbx_npc_editor
                         menu.Checked = false;
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex) { Console.WriteLine("Not a problem but, {0}", ex.Message); }
             currentConfig = settingsFile.ReadValue("Settings", "lastConfig");
             curConfig = new IniFile(currentConfig + @"\lvl_npc.ini");
         }
@@ -240,23 +397,35 @@ namespace smbx_npc_editor
                 //update UI when the time comes
             }
         }
-
-        private void menuItem4_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void menuItem9_Click(object sender, EventArgs e)
         {
             if (currentConfig != "null")
             {
                 NewConfig nc = new NewConfig(currentConfig);
-                nc.ShowDialog();
+                DialogResult dr = nc.ShowDialog();
+                switch(dr)
+                {
+                    case(DialogResult.OK):
+                        ResetItems(this.Controls);
+                        curNpcId = nc.npcId;
+                        Console.WriteLine("Selected NPC ID was {0}", curNpcId);
+                        break;
+                    case(DialogResult.Cancel):
+                        break;
+                }
             }
             else
             {    //reset items, when this is actually implemented of course
+                ResetItems(this.Controls);
             }
         }
+
+        private void menuItem2_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
+        }
+        //
+
         //
     }
 }

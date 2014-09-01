@@ -29,6 +29,7 @@ namespace smbx_npc_editor.IO
             {
                 npcvalues.Clear();
             }
+            //Console.WriteLine("Initiating new NpcConfigFile");
         }
 
         /// <summary>

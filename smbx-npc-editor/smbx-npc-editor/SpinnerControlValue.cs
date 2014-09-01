@@ -28,6 +28,11 @@ namespace smbx_npc_editor
             else
                 return false;
         }
+        public void Reset()
+        {
+            enabledCheckBox.Checked = false;
+            valueSpinner.Value = valueSpinner.Minimum;
+        }
 
         #region WinForms Stuff
         private string _valueTag = String.Empty;

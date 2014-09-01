@@ -90,7 +90,7 @@
 
         public System.Windows.Forms.Label label;
         public System.Windows.Forms.CheckBox enabledCheckBox;
-        private System.Windows.Forms.CheckBox checkValue;
         private System.Windows.Forms.ToolTip toolTipHandler;
+        public System.Windows.Forms.CheckBox checkValue;
     }
 }

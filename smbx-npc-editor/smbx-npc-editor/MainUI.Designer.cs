@@ -35,7 +35,7 @@
             this.menuItem9 = new System.Windows.Forms.MenuItem();
             this.menuItem6 = new System.Windows.Forms.MenuItem();
             this.menuItem2 = new System.Windows.Forms.MenuItem();
-            this.menuItem3 = new System.Windows.Forms.MenuItem();
+            this.editMenu = new System.Windows.Forms.MenuItem();
             this.showAnimationMenuItem = new System.Windows.Forms.MenuItem();
             this.menuItem5 = new System.Windows.Forms.MenuItem();
             this.selectConfigMenuItem = new System.Windows.Forms.MenuItem();
@@ -58,7 +58,7 @@
             // 
             this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.menuItem1,
-            this.menuItem3,
+            this.editMenu,
             this.menuItem7});
             // 
             // menuItem1
@@ -76,7 +76,6 @@
             this.menuItem4.Index = 0;
             this.menuItem4.Shortcut = System.Windows.Forms.Shortcut.CtrlO;
             this.menuItem4.Text = "&Open";
-            this.menuItem4.Click += new System.EventHandler(this.menuItem4_Click);
             // 
             // menuItem9
             // 
@@ -94,15 +93,16 @@
             // 
             this.menuItem2.Index = 3;
             this.menuItem2.Text = "&Exit";
+            this.menuItem2.Click += new System.EventHandler(this.menuItem2_Click);
             // 
-            // menuItem3
+            // editMenu
             // 
-            this.menuItem3.Index = 1;
-            this.menuItem3.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.editMenu.Index = 1;
+            this.editMenu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.showAnimationMenuItem,
             this.menuItem5,
             this.selectConfigMenuItem});
-            this.menuItem3.Text = "&Edit";
+            this.editMenu.Text = "&Edit";
             // 
             // showAnimationMenuItem
             // 
@@ -156,7 +156,7 @@
             this.graphicGb.Controls.Add(this.frameSpeedControl);
             this.graphicGb.Location = new System.Drawing.Point(12, 45);
             this.graphicGb.Name = "graphicGb";
-            this.graphicGb.Size = new System.Drawing.Size(239, 347);
+            this.graphicGb.Size = new System.Drawing.Size(239, 352);
             this.graphicGb.TabIndex = 2;
             this.graphicGb.TabStop = false;
             this.graphicGb.Text = "Graphics";
@@ -169,7 +169,9 @@
             this.foregroundControl.Name = "foregroundControl";
             this.foregroundControl.Size = new System.Drawing.Size(228, 37);
             this.foregroundControl.TabIndex = 10;
+            this.foregroundControl.Tag = "foreground";
             this.foregroundControl.ValueChecked = false;
+            this.foregroundControl.ValueTag = "foreground";
             // 
             // frameStyleControl
             // 
@@ -183,6 +185,8 @@
             this.frameStyleControl.Name = "frameStyleControl";
             this.frameStyleControl.Size = new System.Drawing.Size(228, 37);
             this.frameStyleControl.TabIndex = 9;
+            this.frameStyleControl.Tag = "framestyle";
+            this.frameStyleControl.ValueTag = "framestyle";
             // 
             // gfxHeightControl
             // 
@@ -267,7 +271,7 @@
             // 
             this.frameSpeedControl.BackColor = System.Drawing.Color.Transparent;
             this.frameSpeedControl.CheckBoxEnabled = false;
-            this.frameSpeedControl.CurrentValue = 0;
+            this.frameSpeedControl.CurrentValue = 8;
             this.frameSpeedControl.LabelText = "Framespeed:";
             this.frameSpeedControl.Location = new System.Drawing.Point(6, 224);
             this.frameSpeedControl.MaximumValue = 16;
@@ -282,13 +286,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(980, 404);
+            this.ClientSize = new System.Drawing.Size(980, 409);
             this.Controls.Add(this.graphicGb);
             this.Controls.Add(this.npcNameLabel);
             this.DoubleBuffered = true;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.Menu = this.mainMenu1;
-            this.MinimumSize = new System.Drawing.Size(996, 426);
+            this.MinimumSize = new System.Drawing.Size(996, 469);
             this.Name = "MainUI";
             this.Text = "SMBX NPC Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainUI_FormClosing);
@@ -304,7 +309,7 @@
         private System.Windows.Forms.MainMenu mainMenu1;
         private System.Windows.Forms.MenuItem menuItem1;
         private System.Windows.Forms.MenuItem menuItem2;
-        private System.Windows.Forms.MenuItem menuItem3;
+        private System.Windows.Forms.MenuItem editMenu;
         private System.Windows.Forms.MenuItem showAnimationMenuItem;
         private System.Windows.Forms.MenuItem menuItem5;
         private System.Windows.Forms.MenuItem selectConfigMenuItem;

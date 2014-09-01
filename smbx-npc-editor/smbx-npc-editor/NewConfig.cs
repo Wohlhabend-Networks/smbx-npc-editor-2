@@ -18,6 +18,7 @@ namespace smbxnpceditor
         {
             curConfig = currentConfig;
             InitializeComponent();
+            Font = SystemFonts.MessageBoxFont;
         }
         public string npcId = "npc-1";
         IniFile wohlConfig;
@@ -26,19 +27,25 @@ namespace smbxnpceditor
 
         private void existingConfigRb_CheckedChanged(object sender, EventArgs e)
         {
+            int newHeight;
+            int width;
             switch (existingConfigRb.Checked)
             {
                 case(true):
                     listViewGroupBox.Visible = true;
-                    this.Size = new System.Drawing.Size(844, 573);
+                    newHeight = this.Size.Height + 447;
+                    width = this.Size.Width;
+                    this.Size = new System.Drawing.Size(width, newHeight);
                     existingConfigRb.Text = string.Format("From Existing Configuration - Selected {0}", npcId);
-                    searchTextBox.Enabled = true;
+                    searchTb.Enabled = true;
                     break;
                 case(false):
                     listViewGroupBox.Visible = false;
-                    this.Size = new System.Drawing.Size(844, 125);
+                    newHeight = this.Size.Height - 447;
+                    width = this.Size.Width;
+                    this.Size = new System.Drawing.Size(width, newHeight);
                     existingConfigRb.Text = "From Existing Configuration";
-                    searchTextBox.Enabled = false;
+                    searchTb.Enabled = false;
                     npcId = "blank";
                     this.Update();
                     this.UpdateBounds();

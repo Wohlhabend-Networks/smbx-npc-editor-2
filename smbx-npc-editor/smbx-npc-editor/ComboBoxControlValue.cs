@@ -54,7 +54,39 @@ namespace smbx_npc_editor
             else
                 return false;
         }
+        public void Reset()
+        {
+            enabledCheckBox.Checked = false;
+            ComboValue.SelectedIndex = -1;
+        }
+
         #region WinForms Stuff
+        private string _valueTag = String.Empty;
+        [Description("The tag of the value, for the SMBX NPC Editor this is used to identify which code it'll be assigned to")]
+        [Category("Appearance")]
+        [DefaultValue("")]
+        [Localizable(true)]
+        public string ValueTag
+        {
+            get { return _valueTag; }
+            set
+            {
+                if (value == null)
+                    value = String.Empty;
+                if (!_valueTag.Equals(value, StringComparison.CurrentCulture))
+                {
+                    _valueTag = value;
+                    UpdateComboBoxTag();
+                }
+            }
+        }
+
+        private void UpdateComboBoxTag()
+        {
+            ComboValue.Tag = _valueTag;
+            enabledCheckBox.Tag = _valueTag;
+        }
+
         private string _LabelText = String.Empty;
         [Description("The label's text")]
         [Category("Appearance")]
@@ -105,5 +137,10 @@ namespace smbx_npc_editor
             label.Text = _LabelText;
         }
         #endregion
+
+        private void ComboBoxControlValue_Load(object sender, EventArgs e)
+        {
+            //ComboValue.SelectedIndex = 0;
+        }
     }
 }
