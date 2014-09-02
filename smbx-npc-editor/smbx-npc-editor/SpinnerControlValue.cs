@@ -11,6 +11,8 @@ namespace smbx_npc_editor
 {
     public partial class SpinnerControlValue : UserControl
     {
+        bool _isReset = false;
+
         public SpinnerControlValue()
         {
             InitializeComponent();
@@ -33,7 +35,14 @@ namespace smbx_npc_editor
             enabledCheckBox.Checked = false;
             valueSpinner.Value = valueSpinner.Minimum;
         }
-
+        public bool isReset
+        {
+            get { return _isReset; }
+            set
+            {
+                _isReset = value;
+            }
+        }
         #region WinForms Stuff
         private string _valueTag = String.Empty;
         [Description("The tag of the value, for the SMBX NPC Editor this is used to identify which code it'll be assigned to")]

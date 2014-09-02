@@ -22,13 +22,20 @@ namespace smbx_npc_editor
         public string currentConfig;
         bool showAnimationPane;
         bool runPortable = false;
+        bool hasChanges = false;
+        //
+        int animatorWidth;
         //
         NpcConfigFile npcfile = new NpcConfigFile(true);
         string curNpcId = "blank";
         //
         public MainUI()
         {
-            Font = SystemFonts.MessageBoxFont;
+            //Font = SystemFonts.MessageBoxFont;
+            //Font.Size = 8;
+            FontFamily ff = new FontFamily(SystemFonts.MessageBoxFont.Name);
+            Font usingg = new Font(SystemFonts.MessageBoxFont, SystemFonts.MessageBoxFont.Style);
+            //Font = new Font(ff, 8, usingg.Style);
             InitializeComponent();
             loadSettings();
             compileConfigs();
@@ -44,7 +51,7 @@ namespace smbx_npc_editor
                     if (c is SpinnerControlValue)
                     {
                         SpinnerControlValue svc = (SpinnerControlValue)c;
-                        svc.valueSpinner.ValueChanged += valueSpinner_ValueChanged;
+                        svc.valueSpinner.ValueChanged += (sender, e) => valueSpinner_ValueChanged(sender, e, svc);
                         svc.enabledCheckBox.CheckedChanged += (sender, e) => enabledCheckBox_CheckedChanged(sender, e, svc);
                     }
                     else if (c is ComboBoxControlValue)
@@ -56,7 +63,7 @@ namespace smbx_npc_editor
                     else if (c is CheckBoxValue)
                     {
                         CheckBoxValue cbv = (CheckBoxValue)c;
-                        cbv.checkValue.CheckedChanged += checkValue_CheckedChanged;
+                        cbv.checkValue.CheckedChanged += (sender, e) => checkValue_CheckedChanged(sender, e, cbv);
                         cbv.enabledCheckBox.CheckedChanged += (sender, e) => cb_enabledCheckBox_CheckedChanged(sender, e, cbv);
                     }
                 }
@@ -65,23 +72,37 @@ namespace smbx_npc_editor
             }
         }
         #region Control Events
+        private void nameControl_TextChanged(object sender, EventArgs e)
+        {
+            if (nameControl.Text == String.Empty)
+                npcfile.RemoveValue("name");
+            else
+                npcfile.AddValue("name", String.Format("\"{0}\"", nameControl.Text));
+        }
+
         void enabledCheckBox_CheckedChanged(object sender, object e, SpinnerControlValue sv)
         {
             CheckBox check = (CheckBox)sender;
             if(check.Checked)
             {
                 npcfile.AddValue(sv.valueSpinner.Tag.ToString(), sv.valueSpinner.Value.ToString());
+                hasChanges = true;
             }
             else
             {
                 npcfile.RemoveValue(sv.valueSpinner.Tag.ToString());
+                hasChanges = true;
             }
         }
 
-        void valueSpinner_ValueChanged(object sender, EventArgs e)
+        void valueSpinner_ValueChanged(object sender, EventArgs e, SpinnerControlValue svc)
         {
-            NumericUpDown updown = (NumericUpDown)sender;
-            npcfile.AddValue(updown.Tag.ToString(), updown.Value.ToString());
+            if (!svc.isReset)
+            {
+                NumericUpDown updown = (NumericUpDown)sender;
+                npcfile.AddValue(updown.Tag.ToString(), updown.Value.ToString());
+                hasChanges = true;
+            }
         }
         //
         void cb_enabledCheckBox_CheckedChanged(object sender, object e, CheckBoxValue cb)
@@ -93,28 +114,36 @@ namespace smbx_npc_editor
                 {
                     case(true):
                         npcfile.AddValue(cb.checkValue.Tag.ToString(), "1");
+                        hasChanges = true;
                         break;
                     case(false):
                         npcfile.AddValue(cb.checkValue.Tag.ToString(), "0");
+                        hasChanges = true;
                         break;
                 }
             }
             else
             {
                 npcfile.RemoveValue(cb.checkValue.Tag.ToString());
+                hasChanges = true;
             }
         }
-        void checkValue_CheckedChanged(object sender, EventArgs e)
+        void checkValue_CheckedChanged(object sender, EventArgs e, CheckBoxValue cb)
         {
             CheckBox check = (CheckBox)sender;
-            switch(check.Checked)
+            if (!cb.isReset)
             {
-                case(true):
-                    npcfile.AddValue(check.Tag.ToString(), "1");
-                    break;
-                case(false):
-                    npcfile.AddValue(check.Tag.ToString(), "0");
-                    break;
+                switch (check.Checked)
+                {
+                    case (true):
+                        npcfile.AddValue(check.Tag.ToString(), "1");
+                        hasChanges = true;
+                        break;
+                    case (false):
+                        npcfile.AddValue(check.Tag.ToString(), "0");
+                        hasChanges = true;
+                        break;
+                }
             }
         }
         //
@@ -124,11 +153,15 @@ namespace smbx_npc_editor
             switch(check.Checked)
             {
                 case(true):
-                    if(cbcv.GetSelectedIndex().ToString() != "-1")
+                    if (cbcv.GetSelectedIndex().ToString() != "-1")
+                    {
                         npcfile.AddValue(cbcv.ComboValue.Tag.ToString(), cbcv.GetSelectedIndex().ToString());
+                        hasChanges = true;
+                    }
                     break;
                 case(false):
                     npcfile.RemoveValue(cbcv.ComboValue.Tag.ToString());
+                    hasChanges = true;
                     break;
             }
         }
@@ -136,7 +169,8 @@ namespace smbx_npc_editor
         {
             ComboBox combo = (ComboBox)sender;
             if(combo.SelectedIndex.ToString() != "-1")
-                npcfile.AddValue(combo.Tag.ToString(), combo.SelectedIndex.ToString());
+            {npcfile.AddValue(combo.Tag.ToString(), combo.SelectedIndex.ToString());
+            hasChanges = true;}
         }
         #endregion
         #region crying
@@ -149,7 +183,10 @@ namespace smbx_npc_editor
                     if(c is SpinnerControlValue)
                     {
                         SpinnerControlValue svc = (SpinnerControlValue)c;
+                        svc.isReset = true;
                         svc.Reset();
+                        if (svc.ValueTag == "framespeed")
+                            svc.CurrentValue = 8;
                     }
                     if(c is ComboBoxControlValue)
                     {
@@ -159,7 +196,13 @@ namespace smbx_npc_editor
                     if(c is CheckBoxValue)
                     {
                         CheckBoxValue cbv = (CheckBoxValue)c;
+                        cbv.isReset = true;
                         cbv.Reset();
+                    }
+                    if(c is Lerch.Samples.CueTextBox)
+                    {
+                        Lerch.Samples.CueTextBox ctb = (Lerch.Samples.CueTextBox)c;
+                        ctb.Text = "";
                     }
                 }
                 if (c.Controls.Count > 0)
@@ -167,6 +210,32 @@ namespace smbx_npc_editor
             }
             ///TODO: Reset the animator and NPC Name stuff. Along with the title and any other loose variables.
             npcfile.Clear();
+            //
+            undoResetFlag(this.Controls);
+            //
+            hasChanges = false;
+        }
+
+        void undoResetFlag(Control.ControlCollection controls)
+        {
+            foreach(Control c in controls)
+            {
+                if(c is UserControl)
+                {
+                    if(c is SpinnerControlValue)
+                    {
+                        SpinnerControlValue svc = (SpinnerControlValue)c;
+                        svc.isReset = false;
+                    }
+                    else if(c is CheckBoxValue)
+                    {
+                        CheckBoxValue cbv = (CheckBoxValue)c;
+                        cbv.isReset = false;
+                    }
+                }
+                if (c.Controls.Count > 0)
+                    undoResetFlag(c.Controls);
+            }
         }
 
         void compileConfigs()
@@ -358,15 +427,44 @@ namespace smbx_npc_editor
 
         private void MainUI_FormClosing(object sender, FormClosingEventArgs e)
         {
-            saveSettings();
+            if(hasChanges)
+            {
+                DialogResult dr = MessageBox.Show("You have unsaved changes, would you like to save these before closing?", "Information", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation);
+                switch(dr)
+                {
+                    case(DialogResult.Yes):
+                        //blah blah blah save crap
+                        saveSettings();
+                        break;
+                    case(DialogResult.No):
+                        saveSettings();
+                        Environment.Exit(0);
+                        break;
+                    case(DialogResult.Cancel):
+                        e.Cancel = true;
+                        break;
+                }
+            }
+            else
+            {
+                saveSettings();
+                Environment.Exit(0);
+            }
         }
 
         private void MainUI_Load(object sender, EventArgs e)
         {
+            animatorWidth = npcAnimator.Width;
             if (showAnimationPane)
+            {
                 showAnimationMenuItem.Checked = true;
+                updateAnimatorVisibility(true);
+            }
             else
+            { 
                 showAnimationMenuItem.Checked = false;
+                updateAnimatorVisibility(true);
+            }
             try
             {
                 foreach (MenuItem menu in selectConfigMenuItem.MenuItems)
@@ -384,19 +482,39 @@ namespace smbx_npc_editor
 
         private void showAnimationMenuItem_Click(object sender, EventArgs e)
         {
+            updateAnimatorVisibility(false);
+        }
+
+        void updateAnimatorVisibility(bool initial)
+        {
             if (showAnimationMenuItem.Checked == true)
             {
                 showAnimationMenuItem.Checked = false;
                 showAnimationPane = false;
                 //update UI when the time comes
+                int curHeight = this.Height;
+                if (!initial)
+                    this.Size = new System.Drawing.Size(this.Width - animatorWidth - 10, curHeight);
+                else
+                    this.Size = new System.Drawing.Size(this.Width - animatorWidth -10, curHeight);
+                npcAnimator.Visible = false;
+                this.UpdateBounds();
             }
             else
             {
                 showAnimationMenuItem.Checked = true;
                 showAnimationPane = true;
+                int curHeight = this.Height;
+                if (!initial)
+                    this.Size = new System.Drawing.Size(this.Width + animatorWidth + 10, curHeight);
+                else
+                    this.Size = new System.Drawing.Size(this.Width + animatorWidth+10, curHeight);
+                npcAnimator.Visible = true;
+                this.UpdateBounds();
                 //update UI when the time comes
             }
         }
+
         private void menuItem9_Click(object sender, EventArgs e)
         {
             if (currentConfig != "null")
@@ -422,7 +540,7 @@ namespace smbx_npc_editor
 
         private void menuItem2_Click(object sender, EventArgs e)
         {
-            Environment.Exit(0);
+            Application.Exit();
         }
         //
 

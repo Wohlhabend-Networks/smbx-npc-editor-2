@@ -12,6 +12,8 @@ namespace smbx_npc_editor
 {
     public partial class ComboBoxControlValue : UserControl
     {
+        bool _isReset = false;
+
         public ComboBoxControlValue()
         {
             InitializeComponent();
@@ -23,6 +25,12 @@ namespace smbx_npc_editor
                 ComboValue.Enabled = true;
             else
                 ComboValue.Enabled = false;
+        }
+
+        public bool isReset
+        {
+            get { return _isReset; }
+            set { _isReset = value; }
         }
 
         public int GetSelectedIndex()

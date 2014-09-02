@@ -11,6 +11,8 @@ namespace smbx_npc_editor
 {
     public partial class CheckBoxValue : UserControl
     {
+        bool _isReset = false;
+
         public CheckBoxValue()
         {
             InitializeComponent();
@@ -22,6 +24,12 @@ namespace smbx_npc_editor
                 return 1;
             else
                 return 0;
+        }
+
+        public bool isReset
+        {
+            get { return _isReset; }
+            set { _isReset = value; }
         }
 
         public void Reset()
