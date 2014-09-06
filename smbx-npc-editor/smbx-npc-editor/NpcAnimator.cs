@@ -6,13 +6,16 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using smbx_npc_editor.SpriteHandling;
+using System.IO;
 
 namespace smbx_npc_editor
 {
     public partial class NpcAnimator : UserControl
     {
         List<Bitmap> frames = new List<Bitmap>();
-        int currentFrame; //index of frame
+        int currentFrame = 0; //index of frame
+        int totalFrames = 0;
         int frameCurrent; //used for the nextFrame() function
         int frameSpeed; //value in ms, for timer
         int frameStyle; //from cfg
@@ -36,12 +39,87 @@ namespace smbx_npc_editor
         //Animation
         int frameFirst; //index of firstframe
         int frameLast; //indx of last (-1 = last frame that's stored into array)
-
+        //
+        MainUI _parentWindow;
 
         public NpcAnimator()
         {
-            Font = SystemFonts.MessageBoxFont;
+            //Font = SystemFonts.MessageBoxFont;
             InitializeComponent();
+            
+        }
+
+        public void setParentWindow(MainUI parentWindow)
+        {
+            _parentWindow = parentWindow;
+        }
+
+        public void setSprite(string fileName)
+        {
+            compileBitmapList(fileName);
+        }
+
+        public void compileBitmapList(string pathToBitmap)
+        {
+            if (_parentWindow.npcfile.GetKeyValue("gfxwidth") != null && _parentWindow.npcfile.GetKeyValue("gfxheight") != null)
+            {
+                frameWidth = int.Parse(_parentWindow.npcfile.GetKeyValue("gfxwidth"));
+                frameHeight = int.Parse(_parentWindow.npcfile.GetKeyValue("gfxheight"));
+            }
+
+            string pathToMask = Path.Combine(Path.GetDirectoryName(pathToBitmap), Path.GetFileNameWithoutExtension(pathToBitmap) + "m.gif");
+            if (File.Exists(pathToBitmap) && File.Exists(pathToMask))
+            {
+                AlphaBlendedSprite abs = new AlphaBlendedSprite(new Bitmap(pathToBitmap), new Bitmap(pathToMask));
+                Bitmap alphaBlended = abs.alphaBlendSprites();
+                this.spritePreview.Image = alphaBlended;
+                for (int i = frameHeight; i < alphaBlended.Height; i = i + frameHeight)
+                {
+                    Rectangle cropRect = new Rectangle(0, i, frameWidth, frameHeight);
+                    Bitmap crop = new Bitmap(cropRect.Width, cropRect.Height);
+                    using(Graphics g = Graphics.FromImage(crop))
+                    {
+                        g.DrawImage(alphaBlended, new Rectangle(0, 0, crop.Width, crop.Height), cropRect, GraphicsUnit.Pixel);
+                        frames.Add(crop);
+                    }
+                    totalFrames++;
+                }
+            }
+            else
+                throw new FileNotFoundException("Can't find the mask at: " + pathToMask);
+        }
+
+        public string GetMaskPath(string filePath)
+        {
+            return Path.Combine(Path.GetDirectoryName(filePath), Path.GetFileNameWithoutExtension(filePath) + "m.gif");
+        }
+
+        public string GetSpritePath(string filePath)
+        {
+            return Path.Combine(Path.GetDirectoryName(filePath), Path.GetFileNameWithoutExtension(filePath) + ".gif");
+        }
+
+        private void browseButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void faceRightButton_Click(object sender, EventArgs e)
+        {
+            if (currentFrame >= totalFrames)
+                currentFrame = 0;
+            this.spritePreview.Image = frames[currentFrame];
+            currentFrame++;
+        }
+
+        private void faceLeftButton_Click(object sender, EventArgs e)
+        {
+            if (currentFrame == -1)
+                currentFrame = 0;
+            this.spritePreview.Image = frames[currentFrame];
+            currentFrame--;
+            if (currentFrame == -1)
+                currentFrame = 0;
         }
     }
 }

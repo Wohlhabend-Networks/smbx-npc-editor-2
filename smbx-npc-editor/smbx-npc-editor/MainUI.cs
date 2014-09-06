@@ -20,7 +20,7 @@ namespace smbx_npc_editor
         IniFile settingsFile = new IniFile(Environment.CurrentDirectory + @"\Data\settings.ini");
         public IniFile curConfig;
         public string currentConfig;
-        bool showAnimationPane;
+        bool showAnimationPane = true;
         bool runPortable = false;
         bool hasChanges = false;
         bool hasDoneASaveAs = false;
@@ -33,14 +33,14 @@ namespace smbx_npc_editor
         //
         public MainUI()
         {
-            //Font = SystemFonts.MessageBoxFont;
-            //Font.Size = 8;
             FontFamily ff = new FontFamily(SystemFonts.MessageBoxFont.Name);
             Font usingg = new Font(SystemFonts.MessageBoxFont, SystemFonts.MessageBoxFont.Style);
             //Font = new Font(ff, 8, usingg.Style);
+            this.Controls.Add(npcAnimator);
             InitializeComponent();
             loadSettings();
             compileConfigs();
+            npcAnimator.setParentWindow(this);
             GetUserControls(this.Controls);
         }
 
@@ -99,7 +99,7 @@ namespace smbx_npc_editor
 
         void valueSpinner_ValueChanged(object sender, EventArgs e, SpinnerControlValue svc)
         {
-            if (!svc.isReset)
+            if (!svc.isReset && svc.enabledCheckBox.Checked)
             {
                 NumericUpDown updown = (NumericUpDown)sender;
                 npcfile.AddValue(updown.Tag.ToString(), updown.Value.ToString());
@@ -133,7 +133,7 @@ namespace smbx_npc_editor
         void checkValue_CheckedChanged(object sender, EventArgs e, CheckBoxValue cb)
         {
             CheckBox check = (CheckBox)sender;
-            if (!cb.isReset)
+            if (!cb.isReset && cb.enabledCheckBox.Checked)
             {
                 switch (check.Checked)
                 {
@@ -176,7 +176,7 @@ namespace smbx_npc_editor
         }
         #endregion
         #region crying
-        void ResetItems(Control.ControlCollection controls)
+        void ResetItems(Control.ControlCollection controls, bool resetFile)
         {
             foreach(Control c in controls)
             {
@@ -201,21 +201,21 @@ namespace smbx_npc_editor
                         cbv.isReset = true;
                         cbv.Reset();
                     }
-                    if(c is Lerch.Samples.CueTextBox)
-                    {
-                        Lerch.Samples.CueTextBox ctb = (Lerch.Samples.CueTextBox)c;
-                        ctb.Text = "";
-                    }
                 }
                 if (c.Controls.Count > 0)
-                    ResetItems(c.Controls);
+                    ResetItems(c.Controls, resetFile);
             }
-            ///TODO: Reset the animator and NPC Name stuff. Along with the title and any other loose variables.
-            npcfile.Clear();
-            //
-            undoResetFlag(this.Controls);
-            //
-            hasChanges = false;
+            nameControl.Text = "";
+            if (resetFile)
+            {
+                ///TODO: Reset the animator and NPC Name stuff. Along with the title and any other loose variables.
+                npcfile.Clear();
+                //
+                undoResetFlag(this.Controls);
+                //
+                hasChanges = false;
+                curFile = null;
+            }
         }
 
         void undoResetFlag(Control.ControlCollection controls)
@@ -398,7 +398,7 @@ namespace smbx_npc_editor
         {
             //write settings file
             if (showAnimationPane)
-                settingsFile.WriteValue("Settings", "showAnimation", showAnimationPane.ToString());
+                settingsFile.WriteValue("Settings", "showAnimation", "true");
             else
                 settingsFile.WriteValue("Settings", "showAnimation", "false");
             settingsFile.WriteValue("Settings", "lastConfig", currentConfig);
@@ -435,8 +435,13 @@ namespace smbx_npc_editor
                 switch(dr)
                 {
                     case(DialogResult.Yes):
-                        //blah blah blah save crap
-                        ///TODO
+                        if (curFile != null)
+                            if (File.Exists(curFile))
+                                saveOnly();
+                            else
+                                saveAs();
+                        else
+                            saveAs();
                         saveSettings();
                         break;
                     case(DialogResult.No):
@@ -461,12 +466,12 @@ namespace smbx_npc_editor
             if (showAnimationPane)
             {
                 showAnimationMenuItem.Checked = true;
-                //updateAnimatorVisibility(true);
             }
             else
             { 
                 showAnimationMenuItem.Checked = false;
-                //updateAnimatorVisibility(true);
+                npcAnimator.Visible = false;
+                this.UpdateBounds();
             }
             try
             {
@@ -496,10 +501,7 @@ namespace smbx_npc_editor
                 showAnimationPane = false;
                 //update UI when the time comes
                 int curHeight = this.Height;
-                if (!initial)
-                    this.Size = new System.Drawing.Size(this.Width - animatorWidth - 10, curHeight);
-                else
-                    this.Size = new System.Drawing.Size(this.Width - animatorWidth -10, curHeight);
+                
                 npcAnimator.Visible = false;
                 this.UpdateBounds();
             }
@@ -508,10 +510,6 @@ namespace smbx_npc_editor
                 showAnimationMenuItem.Checked = true;
                 showAnimationPane = true;
                 int curHeight = this.Height;
-                if (!initial)
-                    this.Size = new System.Drawing.Size(this.Width + animatorWidth + 10, curHeight);
-                else
-                    this.Size = new System.Drawing.Size(this.Width + animatorWidth+10, curHeight);
                 npcAnimator.Visible = true;
                 this.UpdateBounds();
                 //update UI when the time comes
@@ -527,7 +525,7 @@ namespace smbx_npc_editor
                 switch(dr)
                 {
                     case(DialogResult.OK):
-                        ResetItems(this.Controls);
+                        ResetItems(this.Controls, true);
                         curNpcId = nc.npcId;
                         Console.WriteLine("Selected NPC ID was {0}", curNpcId);
                         break;
@@ -537,13 +535,37 @@ namespace smbx_npc_editor
             }
             else
             {    //reset items, when this is actually implemented of course
-                ResetItems(this.Controls);
+                ResetItems(this.Controls, true);
             }
         }
 
         private void menuItem2_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        void loadDefaultsFromIni(Control.ControlCollection controls, List<string> dontTouchThis)
+        {
+            foreach(Control c in controls)
+            {
+                if(c is UserControl)
+                {
+                    if(c is SpinnerControlValue)
+                    {
+                        SpinnerControlValue svc = (SpinnerControlValue)c;
+                        foreach(var item in dontTouchThis)
+                        {
+                            if(svc.ValueTag != item)
+                            {
+                                //fill in default value
+                            }
+                        }
+                    }
+                    //
+                }
+                //
+            }
+            //
         }
 
         public void loadInValues(Control.ControlCollection controls)
@@ -561,6 +583,11 @@ namespace smbx_npc_editor
                             svc.CurrentValue = int.Parse(npcfile.GetKeyValue(svc.ValueTag));
                             svc.enabledCheckBox.Checked = true;
                         }
+                        else
+                        {
+                            svc.CurrentValue = svc.MinimumValue;
+                            svc.enabledCheckBox.Checked = false;
+                        }
                     }
                     else if (c is ComboBoxControlValue)
                     {
@@ -569,6 +596,11 @@ namespace smbx_npc_editor
                         {
                             cbcv.SetSelectedIndex(int.Parse(npcfile.GetKeyValue(cbcv.ValueTag)));
                             cbcv.enabledCheckBox.Checked = true;
+                        }
+                        else
+                        {
+                            cbcv.SetSelectedIndex(-1);
+                            cbcv.enabledCheckBox.Checked = false;
                         }
                     }
                     else if (c is CheckBoxValue)
@@ -587,6 +619,11 @@ namespace smbx_npc_editor
                                     cbv.enabledCheckBox.Checked = true;
                                     break;
                             }
+                        }
+                        else
+                        {
+                            cbv.ValueChecked = false;
+                            cbv.enabledCheckBox.Checked = false;
                         }
                     }
                 }
@@ -634,11 +671,16 @@ namespace smbx_npc_editor
             switch(dr)
             {
                 case(DialogResult.OK):
+                    ResetItems(this.Controls, true);
                     npcfile.Clear();
                     npcfile.Load(of.FileName);
                     curFile = of.FileName;
                     loadInValues(this.Controls);
                     hasDoneASaveAs = true;
+                    if(File.Exists(npcAnimator.GetSpritePath(of.FileName)))
+                    {
+                        npcAnimator.setSprite(npcAnimator.GetSpritePath(of.FileName));
+                    }
                     break;
                 case(DialogResult.Cancel):
                     break;
@@ -647,8 +689,11 @@ namespace smbx_npc_editor
 
         private void menuItem11_Click(object sender, EventArgs e)
         {
-            if (hasDoneASaveAs)
-                saveOnly();
+            if (curFile != null)
+                if (File.Exists(curFile))
+                    saveOnly();
+                else
+                    saveAs();
             else
                 saveAs();
         }
@@ -657,7 +702,12 @@ namespace smbx_npc_editor
         {
             SaveFileDialog sf = new SaveFileDialog();
             sf.Filter = "SMBX NPC Text Files (npc-*.txt)|npc-*.txt|Plain Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            if (curNpcId != "blank")
+                sf.FileName = String.Format("{0}.txt", curNpcId);
+            else
+                sf.FileName = "npc-.txt";
             DialogResult dr = sf.ShowDialog();
+            
             switch (dr)
             {
                 case (DialogResult.OK):
@@ -671,10 +721,36 @@ namespace smbx_npc_editor
         }
         void saveOnly()
         {
-            npcfile.Save(curFile, true);
+            try
+            {
+                npcfile.Save(curFile, true);
+                String message = String.Format("File saved to {0} successfully!", curFile);
+                MessageBox.Show(message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch(Exception ex)
+            {
+                String errorMessage = string.Format("An error ocurred while trying to save to {0}:\n{1}", curFile, ex.Message);
+                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
-        //
+        string GetNpcId(string fullPath)
+        {
+            try
+            {
+                return Path.GetFileNameWithoutExtension(fullPath);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(String.Format("An error occurred while trying to get the NPC's ID:\n{0}\nThe 'fullPath' passed is: {1}", ex.Message, fullPath),
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return null;
+            }
+        }
 
+        private void menuItem12_Click(object sender, EventArgs e)
+        {
+            saveAs();
+        }
         //
     }
 }

@@ -121,6 +121,7 @@ namespace smbx_npc_editor.IO
                     }
                 }
             }
+            sr.Close();
         }
 
         public List<KeyValuePair<string, string>> List()

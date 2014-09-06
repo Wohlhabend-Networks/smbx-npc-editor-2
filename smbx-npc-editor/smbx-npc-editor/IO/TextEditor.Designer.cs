@@ -57,7 +57,7 @@
             this.ClientSize = new System.Drawing.Size(495, 442);
             this.Controls.Add(this.richTextEditor);
             this.Name = "TextEditor";
-            this.Text = "TextEditor";
+            this.Text = "Text Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TextEditor_FormClosing);
             this.Load += new System.EventHandler(this.TextEditor_Load);
             this.ResumeLayout(false);

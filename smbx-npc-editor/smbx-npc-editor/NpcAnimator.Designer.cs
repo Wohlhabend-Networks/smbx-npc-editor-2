@@ -83,7 +83,7 @@
             // 
             // spritePreview
             // 
-            this.spritePreview.BackColor = System.Drawing.Color.Black;
+            this.spritePreview.BackColor = System.Drawing.Color.Transparent;
             this.spritePreview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.spritePreview.Location = new System.Drawing.Point(3, 16);
             this.spritePreview.Name = "spritePreview";
@@ -103,11 +103,11 @@
             this.browseButton.Text = "Browse...";
             this.toolTipHandler.SetToolTip(this.browseButton, "Load in a custom sprite file");
             this.browseButton.UseVisualStyleBackColor = true;
+            this.browseButton.Click += new System.EventHandler(this.browseButton_Click);
             // 
             // faceRightButton
             // 
             this.faceRightButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.faceRightButton.Enabled = false;
             this.faceRightButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.faceRightButton.Location = new System.Drawing.Point(209, 14);
             this.faceRightButton.Name = "faceRightButton";
@@ -116,11 +116,11 @@
             this.faceRightButton.Text = "->";
             this.toolTipHandler.SetToolTip(this.faceRightButton, "Face the NPC right");
             this.faceRightButton.UseVisualStyleBackColor = true;
+            this.faceRightButton.Click += new System.EventHandler(this.faceRightButton_Click);
             // 
             // faceLeftButton
             // 
             this.faceLeftButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)));
-            this.faceLeftButton.Enabled = false;
             this.faceLeftButton.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.faceLeftButton.Location = new System.Drawing.Point(159, 14);
             this.faceLeftButton.Name = "faceLeftButton";
@@ -129,6 +129,7 @@
             this.faceLeftButton.Text = "<-";
             this.toolTipHandler.SetToolTip(this.faceLeftButton, "Face the NPC Left");
             this.faceLeftButton.UseVisualStyleBackColor = true;
+            this.faceLeftButton.Click += new System.EventHandler(this.faceLeftButton_Click);
             // 
             // button1
             // 
@@ -168,8 +169,7 @@
             // 
             // NpcAnimator
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.Controls.Add(this.splitContainer1);
             this.Name = "NpcAnimator";
             this.Size = new System.Drawing.Size(380, 302);

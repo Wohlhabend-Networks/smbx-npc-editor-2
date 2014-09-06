@@ -59,6 +59,7 @@ namespace smbx_npc_editor.IO
         public TextEditor(string[] keyArray, string fileName, bool hasChanges, MainUI parentWindow)
         {
             _parentWindow = parentWindow;
+            InitializeComponent();
             for (int i = 0; i < keyArray.Length; i++)
             {
                 richTextEditor.AppendText(keyArray[i].ToString() + "\n");
@@ -78,7 +79,6 @@ namespace smbx_npc_editor.IO
                 hasSaved = false;
             }
             hasSaved = false;
-            InitializeComponent();
         }
         public TextEditor(string[] keyArray, MainUI parentWindow)
         {
