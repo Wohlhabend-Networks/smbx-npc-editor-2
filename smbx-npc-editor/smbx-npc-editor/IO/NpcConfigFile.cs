@@ -12,6 +12,7 @@ namespace smbx_npc_editor.IO
     {
         List<KeyValuePair<string, string>> npcvalues = new List<KeyValuePair<string, string>>();
         bool _output = true;
+        bool _isOpen = false;
 
         /// <summary>
         /// Main constructor for the NPC Config File class
@@ -21,6 +22,15 @@ namespace smbx_npc_editor.IO
         {
             Console.WriteLine("Initiating new NpcConfigFile");
             _output = output;
+        }
+
+        public bool isOpening
+        {
+            get { return _isOpen; }
+            set
+            {
+                _isOpen = value;
+            }
         }
 
         public string[] ExportToStringArray()
@@ -38,6 +48,22 @@ namespace smbx_npc_editor.IO
             {
                 Console.WriteLine("Unhandled exception in 'ExportToStringArray' method: {0}", ex.Message);
                 return null;
+            }
+        }
+
+        public void StringArrayToKeyValuePair(string[] toConvert)
+        {
+            Clear();
+            for (int i = 0; i < toConvert.Length; i++ )
+            {
+                if (toConvert[i].Contains('='))
+                {
+                    var split = toConvert[i].Split(new char[] { '=' }, 2);
+                    AddValue(split[0], split[1]);
+                }
+                else
+                    if (_output)
+                        Console.WriteLine("Skipped line: {0}", toConvert[i]);
             }
         }
 
@@ -111,20 +137,23 @@ namespace smbx_npc_editor.IO
         public void AddValue(string key, string value)
         {
             bool replaced = false;
-            foreach (var lol in npcvalues)
+            if (!_isOpen)
             {
-                if (String.Equals(lol.Key, key))
+                foreach (var lol in npcvalues)
                 {
-                    npcvalues.Remove(lol);
-                    npcvalues.Add(new KeyValuePair<string, string>(key, value));
-                    replaced = true;
-                    break;
+                    if (String.Equals(lol.Key, key))
+                    {
+                        npcvalues.Remove(lol);
+                        npcvalues.Add(new KeyValuePair<string, string>(key, value));
+                        replaced = true;
+                        break;
+                    }
                 }
+                if (!replaced)
+                    npcvalues.Add(new KeyValuePair<string, string>(key, value));
+                if (_output)
+                    Console.WriteLine("Adding key {0} with value {1}", key, value);
             }
-            if (!replaced)
-                npcvalues.Add(new KeyValuePair<string, string>(key, value));
-            if (_output)
-                Console.WriteLine("Adding key {0} with value {1}", key, value);
         }
 
         /// <summary>

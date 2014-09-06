@@ -23,11 +23,12 @@ namespace smbx_npc_editor
         bool showAnimationPane;
         bool runPortable = false;
         bool hasChanges = false;
-        string curFile;
+        bool hasDoneASaveAs = false;
+        string curFile = null;
         //
         int animatorWidth;
         //
-        NpcConfigFile npcfile = new NpcConfigFile(true);
+        public NpcConfigFile npcfile = new NpcConfigFile(true);
         string curNpcId = "blank";
         //
         public MainUI()
@@ -435,6 +436,7 @@ namespace smbx_npc_editor
                 {
                     case(DialogResult.Yes):
                         //blah blah blah save crap
+                        ///TODO
                         saveSettings();
                         break;
                     case(DialogResult.No):
@@ -544,25 +546,132 @@ namespace smbx_npc_editor
             Application.Exit();
         }
 
+        public void loadInValues(Control.ControlCollection controls)
+        {
+            npcfile.isOpening = true;
+            foreach (Control c in controls)
+            {
+                if (c is UserControl)
+                {
+                    if (c is SpinnerControlValue)
+                    {
+                        SpinnerControlValue svc = (SpinnerControlValue)c;
+                        if (npcfile.GetKeyValue(svc.ValueTag) != null)
+                        {
+                            svc.CurrentValue = int.Parse(npcfile.GetKeyValue(svc.ValueTag));
+                            svc.enabledCheckBox.Checked = true;
+                        }
+                    }
+                    else if (c is ComboBoxControlValue)
+                    {
+                        ComboBoxControlValue cbcv = (ComboBoxControlValue)c;
+                        if (npcfile.GetKeyValue(cbcv.ValueTag) != null)
+                        {
+                            cbcv.SetSelectedIndex(int.Parse(npcfile.GetKeyValue(cbcv.ValueTag)));
+                            cbcv.enabledCheckBox.Checked = true;
+                        }
+                    }
+                    else if (c is CheckBoxValue)
+                    {
+                        CheckBoxValue cbv = (CheckBoxValue)c;
+                        if(npcfile.GetKeyValue(cbv.ValueTag) != null)
+                        {
+                            switch(int.Parse(npcfile.GetKeyValue(cbv.ValueTag)))
+                            {
+                                case(1):
+                                    cbv.ValueChecked = true;
+                                    cbv.enabledCheckBox.Checked = true;
+                                    break;
+                                case(0):
+                                    cbv.ValueChecked = false;
+                                    cbv.enabledCheckBox.Checked = true;
+                                    break;
+                            }
+                        }
+                    }
+                }
+                if (c.Controls.Count > 0)
+                    loadInValues(c.Controls);
+            }
+            if (npcfile.GetKeyValue("name") != null)
+            {
+                string value = npcfile.GetKeyValue("name");
+                if (value.Contains('\"'))
+                {
+                    nameControl.Text = value.Replace("\"", "");
+                }
+            }
+            npcfile.isOpening = false;
+        }
+
         private void menuItem10_Click(object sender, EventArgs e)
         {
             smbx_npc_editor.IO.TextEditor textEdit = null;
             if(curFile == null)
             {
-                textEdit = new TextEditor(npcfile.ExportToStringArray());
+                textEdit = new TextEditor(npcfile.ExportToStringArray(), this);
             }
             else if(curFile != null && hasChanges)
             {
-                textEdit = new TextEditor(npcfile.ExportToStringArray(), curFile, hasChanges);
+                textEdit = new TextEditor(npcfile.ExportToStringArray(), curFile, hasChanges, this);
             }
             else if(curFile != null && !hasChanges)
             {
-                textEdit = new TextEditor(curFile);
+                textEdit = new TextEditor(curFile, this);
             }
             if (textEdit != null)
-                textEdit.Show();
+            { textEdit.Show(); this.Hide(); }
             else
                 Console.WriteLine("Lolwut, not showing");
+        }
+
+        private void menuItem4_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog of = new OpenFileDialog();
+            of.Filter = "SMBX NPC Text Files (npc-*.txt)|npc-*.txt|Plain Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            of.Title = "Select an NPC Text File";
+            DialogResult dr = of.ShowDialog();
+            switch(dr)
+            {
+                case(DialogResult.OK):
+                    npcfile.Clear();
+                    npcfile.Load(of.FileName);
+                    curFile = of.FileName;
+                    loadInValues(this.Controls);
+                    hasDoneASaveAs = true;
+                    break;
+                case(DialogResult.Cancel):
+                    break;
+            }
+        }
+
+        private void menuItem11_Click(object sender, EventArgs e)
+        {
+            if (hasDoneASaveAs)
+                saveOnly();
+            else
+                saveAs();
+        }
+
+        void saveAs()
+        {
+            SaveFileDialog sf = new SaveFileDialog();
+            sf.Filter = "SMBX NPC Text Files (npc-*.txt)|npc-*.txt|Plain Text Files (*.txt)|*.txt|All Files (*.*)|*.*";
+            DialogResult dr = sf.ShowDialog();
+            switch (dr)
+            {
+                case (DialogResult.OK):
+                    curFile = sf.FileName;
+                    hasDoneASaveAs = true;
+                    saveOnly();
+                    break;
+                case (DialogResult.Cancel):
+                    break;
+            }
+        }
+        void saveOnly()
+        {
+            npcfile.Save(curFile, true);
         }
         //
 

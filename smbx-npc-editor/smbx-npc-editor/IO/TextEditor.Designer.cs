@@ -42,11 +42,13 @@
             this.richTextEditor.Size = new System.Drawing.Size(495, 442);
             this.richTextEditor.TabIndex = 0;
             this.richTextEditor.Text = "";
+            this.richTextEditor.TextChanged += new System.EventHandler(this.richTextEditor_TextChanged);
             // 
             // highlightTimer
             // 
             this.highlightTimer.Enabled = true;
             this.highlightTimer.Interval = 1000;
+            this.highlightTimer.Tick += new System.EventHandler(this.highlightTimer_Tick);
             // 
             // TextEditor
             // 
@@ -56,6 +58,8 @@
             this.Controls.Add(this.richTextEditor);
             this.Name = "TextEditor";
             this.Text = "TextEditor";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TextEditor_FormClosing);
+            this.Load += new System.EventHandler(this.TextEditor_Load);
             this.ResumeLayout(false);
 
         }
