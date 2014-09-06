@@ -66,6 +66,12 @@
     </Compile>
     <Compile Include="IO\ModifyRegistry.cs" />
     <Compile Include="IO\NpcConfigFile.cs" />
+    <Compile Include="IO\TextEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="IO\TextEditor.Designer.cs">
+      <DependentUpon>TextEditor.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +113,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ComboBoxControlValue.resx">
       <DependentUpon>ComboBoxControlValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="IO\TextEditor.resx">
+      <DependentUpon>TextEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainUI.resx">
       <DependentUpon>MainUI.cs</DependentUpon>

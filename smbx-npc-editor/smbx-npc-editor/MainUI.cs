@@ -23,6 +23,7 @@ namespace smbx_npc_editor
         bool showAnimationPane;
         bool runPortable = false;
         bool hasChanges = false;
+        string curFile;
         //
         int animatorWidth;
         //
@@ -458,12 +459,12 @@ namespace smbx_npc_editor
             if (showAnimationPane)
             {
                 showAnimationMenuItem.Checked = true;
-                updateAnimatorVisibility(true);
+                //updateAnimatorVisibility(true);
             }
             else
             { 
                 showAnimationMenuItem.Checked = false;
-                updateAnimatorVisibility(true);
+                //updateAnimatorVisibility(true);
             }
             try
             {
@@ -541,6 +542,27 @@ namespace smbx_npc_editor
         private void menuItem2_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void menuItem10_Click(object sender, EventArgs e)
+        {
+            smbx_npc_editor.IO.TextEditor textEdit = null;
+            if(curFile == null)
+            {
+                textEdit = new TextEditor(npcfile.ExportToStringArray());
+            }
+            else if(curFile != null && hasChanges)
+            {
+                textEdit = new TextEditor(npcfile.ExportToStringArray(), curFile, hasChanges);
+            }
+            else if(curFile != null && !hasChanges)
+            {
+                textEdit = new TextEditor(curFile);
+            }
+            if (textEdit != null)
+                textEdit.Show();
+            else
+                Console.WriteLine("Lolwut, not showing");
         }
         //
 

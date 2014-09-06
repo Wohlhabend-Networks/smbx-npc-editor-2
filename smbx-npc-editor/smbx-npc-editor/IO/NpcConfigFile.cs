@@ -23,6 +23,29 @@ namespace smbx_npc_editor.IO
             _output = output;
         }
 
+        public string[] ExportToStringArray()
+        {
+            try
+            {
+                List<string> values = new List<string>();
+                foreach (var item in npcvalues)
+                {
+                    values.Add(String.Format("{0}={1}", item.Key, item.Value));
+                }
+                return values.ToArray();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Unhandled exception in 'ExportToStringArray' method: {0}", ex.Message);
+                return null;
+            }
+        }
+
+        public int ItemCount()
+        {
+            return npcvalues.Count();
+        }
+
         public void Clear()
         {
             if (npcvalues != null)
