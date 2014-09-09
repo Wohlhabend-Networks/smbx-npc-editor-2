@@ -163,6 +163,7 @@ namespace Real_Npc_Sprite
             else
             {
                 previewBox.Image = clone;
+                
             }
         }
 
@@ -419,6 +420,23 @@ namespace Real_Npc_Sprite
                     break;
                 case(false):
                     dontAskDontTell = false;
+                    break;
+            }
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            MessageBoxManager.Retry = "OK";
+            MessageBoxManager.Cancel = "View WTFPL";
+            MessageBoxManager.Register();
+            string aboutLabel = String.Format("NPC Sprite Generator\nCopyright \u00A9 {0}\n{1}\nLicensed Under the WTFPL", Application.CompanyName, Application.ProductVersion);
+            DialogResult dr = MessageBox.Show(aboutLabel, "About", MessageBoxButtons.RetryCancel, MessageBoxIcon.Information);
+            switch(dr)
+            {
+                case(DialogResult.Retry):
+                    break;
+                case(DialogResult.Cancel):
+                    System.Diagnostics.Process.Start("http://www.wtfpl.net/");
                     break;
             }
         }

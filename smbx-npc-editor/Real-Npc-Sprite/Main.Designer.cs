@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.save = new System.Windows.Forms.Button();
             this.gfxHeight = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -43,6 +44,7 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.curDirectoryLabel = new System.Windows.Forms.ToolStripLabel();
             this.dontAsk = new System.Windows.Forms.CheckBox();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.previewBox)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
@@ -83,11 +85,14 @@
             // 
             // previewBox
             // 
-            this.previewBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.previewBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.previewBox.Location = new System.Drawing.Point(3, 16);
+            this.previewBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.previewBox.Location = new System.Drawing.Point(126, 128);
+            this.previewBox.MaximumSize = new System.Drawing.Size(32, 32);
+            this.previewBox.MinimumSize = new System.Drawing.Size(32, 32);
             this.previewBox.Name = "previewBox";
-            this.previewBox.Size = new System.Drawing.Size(272, 275);
+            this.previewBox.Size = new System.Drawing.Size(32, 32);
             this.previewBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.previewBox.TabIndex = 0;
             this.previewBox.TabStop = false;
@@ -112,6 +117,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.previewBox);
             this.groupBox1.Location = new System.Drawing.Point(249, 43);
             this.groupBox1.Name = "groupBox1";
@@ -146,6 +153,7 @@
             this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.changeDirectoryButton,
+            this.toolStripButton1,
             this.toolStripSeparator1,
             this.curDirectoryLabel});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
@@ -157,9 +165,10 @@
             // 
             // changeDirectoryButton
             // 
+            this.changeDirectoryButton.Image = ((System.Drawing.Image)(resources.GetObject("changeDirectoryButton.Image")));
             this.changeDirectoryButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.changeDirectoryButton.Name = "changeDirectoryButton";
-            this.changeDirectoryButton.Size = new System.Drawing.Size(103, 22);
+            this.changeDirectoryButton.Size = new System.Drawing.Size(119, 22);
             this.changeDirectoryButton.Text = "Change Directory";
             this.changeDirectoryButton.Click += new System.EventHandler(this.changeDirectoryButton_Click);
             // 
@@ -171,7 +180,8 @@
             // curDirectoryLabel
             // 
             this.curDirectoryLabel.Name = "curDirectoryLabel";
-            this.curDirectoryLabel.Size = new System.Drawing.Size(21, 22);
+            this.curDirectoryLabel.Overflow = System.Windows.Forms.ToolStripItemOverflow.Always;
+            this.curDirectoryLabel.Size = new System.Drawing.Size(21, 15);
             this.curDirectoryLabel.Text = "{0}";
             // 
             // dontAsk
@@ -184,6 +194,15 @@
             this.dontAsk.Text = "Don\'t Keep Asking";
             this.dontAsk.UseVisualStyleBackColor = true;
             this.dontAsk.CheckedChanged += new System.EventHandler(this.dontAsk_CheckedChanged);
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(60, 22);
+            this.toolStripButton1.Text = "About";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // Form1
             // 
@@ -202,6 +221,7 @@
             this.Controls.Add(this.currentNpc);
             this.Controls.Add(this.groupBox1);
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(555, 389);
             this.Name = "Form1";
             this.ShowIcon = false;
             this.Text = "Sprite Maker";
@@ -232,6 +252,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripLabel curDirectoryLabel;
         private System.Windows.Forms.CheckBox dontAsk;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
     }
 }
 
