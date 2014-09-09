@@ -426,6 +426,7 @@ namespace Real_Npc_Sprite
 
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            
             MessageBoxManager.Retry = "OK";
             MessageBoxManager.Cancel = "View WTFPL";
             MessageBoxManager.Register();

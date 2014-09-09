@@ -220,6 +220,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.currentNpc);
             this.Controls.Add(this.groupBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimumSize = new System.Drawing.Size(555, 389);
             this.Name = "Form1";
