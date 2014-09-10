@@ -59,5 +59,86 @@ namespace NPC_sprite_generator.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string about {
+            get {
+                return ResourceManager.GetString("about", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Directory.
+        /// </summary>
+        internal static string changeDir {
+            get {
+                return ResourceManager.GetString("changeDir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Don&apos;t Keep Asking.
+        /// </summary>
+        internal static string dontAsk {
+            get {
+                return ResourceManager.GetString("dontAsk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GFX Height.
+        /// </summary>
+        internal static string gfxHeight {
+            get {
+                return ResourceManager.GetString("gfxHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GFX Width.
+        /// </summary>
+        internal static string gfxWidth {
+            get {
+                return ResourceManager.GetString("gfxWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok, Save, Next!.
+        /// </summary>
+        internal static string okSave {
+            get {
+                return ResourceManager.GetString("okSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preview.
+        /// </summary>
+        internal static string preview {
+            get {
+                return ResourceManager.GetString("preview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Proportionally Size to 32 x 32.
+        /// </summary>
+        internal static string proportionSize {
+            get {
+                return ResourceManager.GetString("proportionSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Offset.
+        /// </summary>
+        internal static string useOffset {
+            get {
+                return ResourceManager.GetString("useOffset", resourceCulture);
+            }
+        }
     }
 }

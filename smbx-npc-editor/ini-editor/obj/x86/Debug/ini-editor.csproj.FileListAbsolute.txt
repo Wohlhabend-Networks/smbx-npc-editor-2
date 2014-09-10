@@ -1,8 +1,0 @@
-C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\ini-editor\bin\Debug\ini-editor.exe
-C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\ini-editor\bin\Debug\ini-editor.pdb
-C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\ini-editor\obj\x86\Debug\ini_editor.Form1.resources
-C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\ini-editor\obj\x86\Debug\ini_editor.Properties.Resources.resources
-C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\ini-editor\obj\x86\Debug\ini-editor.csproj.GenerateResource.Cache
-C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\ini-editor\obj\x86\Debug\ini-editor.exe
-C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\ini-editor\obj\x86\Debug\ini-editor.pdb
-C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\ini-editor\obj\x86\Debug\ini-editor.csprojResolveAssemblyReference.cache
