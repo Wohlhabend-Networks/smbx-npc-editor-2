@@ -203,3 +203,6 @@ $RECYCLE.BIN/
 *.msm
 *.msp
 
+*.exe
+packages/
+*.pdb
