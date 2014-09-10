@@ -1,6 +1,0 @@
-C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\smbx-npc-editor\bin\Release\smbx-npc-editor.exe
-C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\smbx-npc-editor\bin\Release\smbx-npc-editor.pdb
-C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\smbx-npc-editor\obj\x86\Release\smbx_npc_editor.Properties.Resources.resources
-C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\smbx-npc-editor\obj\x86\Release\smbx-npc-editor.csproj.GenerateResource.Cache
-C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\smbx-npc-editor\obj\x86\Release\smbx-npc-editor.exe
-C:\Users\Mike\Documents\GitHub\smbx-npc-editor-2\smbx-npc-editor\smbx-npc-editor\obj\x86\Release\smbx-npc-editor.pdb

@@ -7,9 +7,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "smbx-npc-editor", "smbx-npc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ini-editor", "ini-editor\ini-editor.csproj", "{6CB331B1-71F9-4845-B3C6-A28736DB6058}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPC-config-generator", "NPC-config-generator\NPC-config-generator.csproj", "{C91C307E-86B9-4A50-A922-0DDE29C13CAE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "npc-config-generator", "NPC-config-generator\npc-config-generator.csproj", "{C91C307E-86B9-4A50-A922-0DDE29C13CAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Real-Npc-Sprite", "Real-Npc-Sprite\Real-Npc-Sprite.csproj", "{8DA3F825-3FAC-4C77-8481-9E58354E7663}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "npc-sprite-generator", "Real-Npc-Sprite\npc-sprite-generator.csproj", "{8DA3F825-3FAC-4C77-8481-9E58354E7663}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NpcConfigFileTest", "NpcConfigFileTest\NpcConfigFileTest.csproj", "{C03FCD13-1A7E-42B0-AE53-12F874E445CD}"
 EndProject
