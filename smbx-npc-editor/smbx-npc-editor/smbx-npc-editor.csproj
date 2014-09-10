@@ -68,6 +68,9 @@
   <PropertyGroup>
     <SignManifests>true</SignManifests>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>GenericVSProject_9906.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Setting">
       <HintPath>..\..\..\smbx-install-util-ver2\SMBXEpisodeManager\Setting.dll</HintPath>
@@ -213,9 +216,12 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="GenericVSProject_9906.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>XCOPY "$(ProjectDir)Data" "$(TargetDir)Data" /S /Y /C</PostBuildEvent>
+    <PostBuildEvent>XCOPY "$(ProjectDir)Data" "$(TargetDir)Data" /d /i /S /Y /C</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
