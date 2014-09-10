@@ -11,6 +11,8 @@ using System.IO;
 using Setting;
 using smbx_npc_editor.SpriteHandling;
 using smbxnpceditor;
+using System.Deployment.Application;
+using System.Threading;
 
 namespace smbx_npc_editor
 {
@@ -37,11 +39,58 @@ namespace smbx_npc_editor
             Font usingg = new Font(SystemFonts.MessageBoxFont, SystemFonts.MessageBoxFont.Style);
             //Font = new Font(ff, 8, usingg.Style);
             this.Controls.Add(npcAnimator);
+            showChangelog();
             InitializeComponent();
             loadSettings();
             compileConfigs();
             npcAnimator.setParentWindow(this);
             GetUserControls(this.Controls);
+            Version myVersion = new Version(Application.ProductVersion);
+
+            if (ApplicationDeployment.IsNetworkDeployed)
+                myVersion = ApplicationDeployment.CurrentDeployment.CurrentVersion;
+            if (myVersion != null)
+                this.Text = String.Format(this.Text.ToString(), myVersion.ToString());
+            else
+                this.Text = String.Format(this.Text.ToString(), Application.ProductVersion);
+        }
+
+        public void showChangelog()
+        {
+            if (!ApplicationDeployment.IsNetworkDeployed)
+                return;
+
+            if (!ApplicationDeployment.CurrentDeployment.IsFirstRun)
+                return;
+            Form changelog = new Form();
+            Button closeButton = new Button();
+            WebBrowser browser = new WebBrowser();
+            changelog.Text = "Changelog";
+            changelog.ShowIcon = false;
+            changelog.Size = new System.Drawing.Size(450, 500);
+            changelog.TopMost = true;
+            //
+            closeButton.Text = "Close";
+            closeButton.Height = 100;
+            closeButton.Dock = DockStyle.Bottom;
+            //
+            //browser.Site = "http://mrmiketheripper.x10.mx/smbx-npc-editor/changelog.html";
+            browser.Url = new Uri("http://mrmiketheripper.x10.mx/smbx-npc-editor/changelog.html");
+            browser.Dock = DockStyle.Top;
+            browser.Height = changelog.Height - closeButton.Height;
+            //
+            changelog.Controls.Add(closeButton);
+            changelog.Controls.Add(browser);
+            closeButton.Click += closeButton_Click;
+            changelog.StartPosition = FormStartPosition.CenterScreen;
+            changelog.ShowDialog();
+        }
+
+        void closeButton_Click(object sender, EventArgs e)
+        {
+            Button sent = (Button)sender;
+            Form parent = (Form)sent.Parent;
+            parent.Close();
         }
 
         private void GetUserControls(Control.ControlCollection controls)

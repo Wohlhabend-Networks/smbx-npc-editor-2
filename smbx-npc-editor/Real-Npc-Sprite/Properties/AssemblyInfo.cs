@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("NPC Sprite Generator")]
-[assembly: AssemblyDescription("For the SMBX Episode Manager")]
+[assembly: AssemblyTitle("NPC Editor Sprite Config Generator")]
+[assembly: AssemblyDescription("For the SMBX NPC Editor")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Luigicorp")]
 [assembly: AssemblyProduct("npc-sprite-generator")]
