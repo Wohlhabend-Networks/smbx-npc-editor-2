@@ -172,7 +172,8 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
-
+<<<<<<< HEAD
+=======
 
 
 ### Windows ###
@@ -195,3 +196,4 @@ $RECYCLE.BIN/
 *.exe
 packages/
 *.pdb
+>>>>>>> 745b4a9c5e5a376bbc7a184538403c7dac41d037
