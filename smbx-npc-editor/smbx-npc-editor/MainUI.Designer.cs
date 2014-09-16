@@ -258,7 +258,7 @@
             // 
             this.nameControl.Location = new System.Drawing.Point(85, 10);
             this.nameControl.Name = "nameControl";
-            this.nameControl.Size = new System.Drawing.Size(166, 20);
+            this.nameControl.Size = new System.Drawing.Size(237, 20);
             this.nameControl.TabIndex = 15;
             this.nameControl.Tag = "name";
             this.nameControl.TextChanged += new System.EventHandler(this.nameControl_TextChanged);

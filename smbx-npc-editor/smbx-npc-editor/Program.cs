@@ -13,12 +13,13 @@ namespace smbx_npc_editor
         [STAThread]
         static void Main(string[] args)
         {
-            MainUI main = new MainUI();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            MainUI main = new MainUI();
 
-            if (System.IO.File.Exists(args[0]))
-                main.openPassedFile(args[0]);
+            if(args.Length > 0)
+                if (System.IO.File.Exists(args[0]))
+                    main.openPassedFile(args[0]);
 
             Application.Run(main);
 

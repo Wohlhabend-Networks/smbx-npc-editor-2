@@ -31,7 +31,7 @@
     <PublisherName>Luigicorp</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>0.2.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -104,6 +104,12 @@
     <Compile Include="CueTextBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DownloadConfigPack.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DownloadConfigPack.Designer.cs">
+      <DependentUpon>DownloadConfigPack.cs</DependentUpon>
+    </Compile>
     <Compile Include="IO\ModifyRegistry.cs" />
     <Compile Include="IO\NpcConfigFile.cs" />
     <Compile Include="IO\TextEditor.cs">
@@ -153,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ComboBoxControlValue.resx">
       <DependentUpon>ComboBoxControlValue.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DownloadConfigPack.resx">
+      <DependentUpon>DownloadConfigPack.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="IO\TextEditor.resx">
       <DependentUpon>TextEditor.cs</DependentUpon>
