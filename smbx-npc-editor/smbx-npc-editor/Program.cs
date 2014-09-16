@@ -11,11 +11,17 @@ namespace smbx_npc_editor
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
+            MainUI main = new MainUI();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainUI());
+
+            if (System.IO.File.Exists(args[0]))
+                main.openPassedFile(args[0]);
+
+            Application.Run(main);
+
         }
     }
 }

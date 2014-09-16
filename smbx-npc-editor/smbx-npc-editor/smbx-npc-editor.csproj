@@ -27,6 +27,8 @@
     <InstallUrl>http://mrmiketheripper.x10.mx/smbx-npc-editor/</InstallUrl>
     <SupportUrl>http://luigifan2010.prophpbb.com</SupportUrl>
     <ErrorReportUrl>http://luigifan2010.prophpbb.com</ErrorReportUrl>
+    <ProductName>SMBX NPC Editor</ProductName>
+    <PublisherName>Luigicorp</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
     <ApplicationRevision>1</ApplicationRevision>
@@ -217,7 +219,16 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GenericVSEditor_9905.ico" />
     <Content Include="GenericVSProject_9906.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <FileAssociation Include=".txt">
+      <Visible>False</Visible>
+      <Description>Plain Text Files</Description>
+      <Progid>txtfile</Progid>
+      <DefaultIcon>GenericVSEditor_9905.ico</DefaultIcon>
+    </FileAssociation>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
