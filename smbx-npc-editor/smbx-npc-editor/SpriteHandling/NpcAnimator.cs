@@ -477,69 +477,67 @@ namespace smbx_npc_editor.SpriteHandling
                 if (tmpS.Length == 0) tmpS = npcConfig.ReadValue(npcID, "fixture-width");
                 width = uint.Parse(tmpS);
                 //    block-npc=1		; NPC is a solid object for NPC's
-                bool block_npc;
+                block_npc = bool.Parse(npcConfig.ReadValue(npcID, "block-npc"));
                 //    block-npc-top=0		; on NPC's top can be stay other NPC's
-                bool block_npc_top;
+                block_npc_top = bool.Parse(npcConfig.ReadValue(npcID, "block-npc-top"));
                 //    block-player=0		; NPC is a solid object for player
-                bool block_player;
+                block_player = bool.Parse(npcConfig.ReadValue(npcID, "block-player"));
                 //    block-player-top=0	; on NPC's top can be stay player
-                bool block_player_top;
+                block_player_top = bool.Parse(npcConfig.ReadValue(npcID, "block-player-top"));
                 //    collision-blocks=1	; Enable collisions with blocks
-                bool collision_with_blocks;
+                collision_with_blocks = bool.Parse(npcConfig.ReadValue(npcID, "collision-blocks"));
                 //    gravity=1		; Enable gravitation for this NPC
-                bool gravity;
+                gravity = bool.Parse(npcConfig.ReadValue(npcID, "gravity"));
                 //    adhesion=0		; allows to NPC walking on wall and on celling
-                bool adhesion;
+                adhesion = bool.Parse(npcConfig.ReadValue(npcID, "adhesion"));
 
                 //    ;Events
                 //    deactivate=1		; Deactivate on state offscreen > 4 sec ago
-                bool deactivation;
+                deactivation = bool.Parse(npcConfig.ReadValue(npcID, "deactivate"));
                 //    kill-slside=1		; Kill on Slope slide
-                bool kill_slide_slope;
+                kill_slide_slope = bool.Parse(npcConfig.ReadValue(npcID, "kill-slside"));
                 //    kill-onjump=1		; Kill on jump on NPC's head
-                bool kill_on_jump;
+                kill_on_jump = bool.Parse(npcConfig.ReadValue(npcID, "kill-onjump"));
                 //    kill-bynpc=1		; Kill by contact with other NPC with hurt-npc
                 //    ; for example: moving SHELL have "HURT_NPC", and shell kiling ALL NPCs on contact
-                bool kill_by_npc;
+                kill_by_npc = bool.Parse(npcConfig.ReadValue(npcID, "kill-bynpc"));
                 //    kill-fireball=1		; kill on collision with NPC, marked as "fireball"
-                bool kill_by_fireball;
+                kill_by_fireball = bool.Parse(npcConfig.ReadValue(npcID, "kill-fireball"));
                 //    kill-iceball=1		; freeze on collision with NPC, marked as "iceball"
-                bool freeze_by_iceball;
+                freeze_by_iceball = bool.Parse(npcConfig.ReadValue(npcID, "kill-iceball"));
                 //    kill-hammer=1		; kill on collision with NPC, marked as "hammer" or "boomerang"
-                bool kill_hammer;
+                kill_hammer = bool.Parse(npcConfig.ReadValue(npcID, "kill-hammer"));
                 //    kill-tail=1		; kill on tail attack
-                bool kill_tail;
+                kill_tail = bool.Parse(npcConfig.ReadValue(npcID, "kill-tail"));
                 //    kill-spin=1		; kill on spin jump
-                bool kill_by_spinjump;
+                kill_by_spinjump = bool.Parse(npcConfig.ReadValue(npcID, "kill-spin"));
                 //    kill-statue=1		; kill on tanooki statue fall
-                bool kill_by_statue;
+                kill_by_statue = bool.Parse(npcConfig.ReadValue(npcID, "kill-statue"));
                 //    kill-with-mounted=1	; kill on jump with mounted items
-                bool kill_by_mounted_item;
+                kill_by_mounted_item = bool.Parse(npcConfig.ReadValue(npcID, "kill-with-mounted"));
                 //    kill-on-eat=1		; Kill on eat, or transform into other
-                bool kill_on_eat;
+                kill_on_eat = bool.Parse(npcConfig.ReadValue(npcID, "kill-on-eat"));
                 //    cliffturn=0		; NPC turns on cliff
-                bool turn_on_cliff_detect;
+                turn_on_cliff_detect = bool.Parse(npcConfig.ReadValue(npcID, "cliffturn"));
                 //    lava-protection=0	; NPC will not be burn in lava
-                bool lava_protect;
+                lava_protect = bool.Parse(npcConfig.ReadValue(npcID, "lava-protection"));
 
-                bool is_star; //If this marker was set, this NPC will be markered as "star"
+                is_star = bool.Parse(npcConfig.ReadValue(npcID, "is-star"));
+                //If this marker was set, this NPC will be markered as "star"
                 //Quantity placed NPC's with marker "star" will be save in LVL-file
 
                 //Editor defaults
-                bool default_friendly;
-                bool default_friendly_value;
+                //bool default_friendly;
+                //bool default_friendly_value;
 
-                bool default_nomovable;
-                bool default_nomovable_value;
+                //bool default_nomovable;
+                //bool default_nomovable_value;
 
-                bool default_boss;
-                bool default_boss_value;
+                //bool default_boss;
+                //bool default_boss_value;
 
-                bool default_special;
-                long default_special_value;
-
-
-
+                //bool default_special;
+                //long default_special_value;
                 isValid = true;
             }
     }
