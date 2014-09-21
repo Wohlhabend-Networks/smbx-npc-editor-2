@@ -8,6 +8,135 @@ using System.IO;
 
 namespace smbx_npc_editor.IO
 {
+
+    public class SMBXNpc
+    {
+        public bool ReadFileValid;
+
+        /* Using options flags BEGIN */
+        public bool en_gfxoffsetx;
+        public int gfxoffsetx;
+
+        public bool en_gfxoffsety;
+        public int gfxoffsety;
+
+        public bool en_width;
+        public uint width;
+
+        public bool en_height;
+        public uint height;
+
+        public bool en_gfxwidth;
+        public uint gfxwidth;
+
+        public bool en_gfxheight;
+        public uint gfxheight;
+
+        public bool en_score;
+        public uint score;
+
+        public bool en_playerblock;
+        public bool playerblock;
+
+        public bool en_playerblocktop;
+        public bool playerblocktop;
+
+        public bool en_npcblock;
+        public bool npcblock;
+
+        public bool en_npcblocktop;
+        public bool npcblocktop;
+
+        public bool en_grabside;
+        public bool grabside;
+
+        public bool en_grabtop;
+        public bool grabtop;
+
+        public bool en_jumphurt;
+        public bool jumphurt;
+
+        public bool en_nohurt;
+        bool nohurt;
+
+        public bool en_noblockcollision;
+        bool noblockcollision;
+
+        public bool en_cliffturn;
+        bool cliffturn;
+
+        public bool en_noyoshi;
+        bool noyoshi;
+
+        public bool en_foreground;
+        bool foreground;
+
+        public bool en_speed;
+        float speed;
+
+        public bool en_nofireball;
+        bool nofireball;
+
+        public bool en_nogravity;
+        bool nogravity;
+
+        public bool en_frames;
+        uint frames;
+
+        public bool en_framespeed;
+        uint framespeed;
+
+        public bool en_framestyle;
+        uint framestyle;
+
+        public bool en_noiceball;
+        bool noiceball;
+        
+        //Extended
+        public bool en_nohammer;
+        bool nohammer;
+
+        public bool en_noshell;
+        bool noshell;
+
+        public bool en_name;
+        string name;
+        /* Using options flags END */
+        public SMBXNpc()
+        {
+            en_gfxoffsetx=false;
+            en_gfxoffsety = false;
+            en_width = false;
+            en_height = false;
+            en_gfxwidth = false;
+            en_gfxheight = false;
+            en_score = false;
+            en_playerblock = false;
+            en_playerblocktop = false;
+            en_npcblock = false;
+            en_npcblocktop = false;
+            en_grabside = false;
+            en_grabtop = false;
+            en_jumphurt = false;
+            en_nohurt = false;
+            en_noblockcollision = false;
+            en_cliffturn = false;
+            en_noyoshi = false;
+            en_foreground = false;
+            en_speed = false;
+            en_nofireball = false;
+            en_nogravity = false;
+            en_frames = false;
+            en_framespeed = false;
+            en_framestyle = false;
+            en_noiceball = false;
+            //Extended
+            en_nohammer = false;
+            en_noshell = false;
+            en_name = false;
+        }
+    }
+
     public class NpcConfigFile
     {
         List<KeyValuePair<string, string>> npcvalues = new List<KeyValuePair<string, string>>();
