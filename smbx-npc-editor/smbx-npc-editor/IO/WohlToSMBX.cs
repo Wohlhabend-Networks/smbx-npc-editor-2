@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using smbx_npc_editor.SpriteHandling;
+
 namespace smbx_npc_editor.IO
 {
     /// <summary>
