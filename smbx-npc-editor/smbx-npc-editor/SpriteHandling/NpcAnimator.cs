@@ -557,9 +557,7 @@ namespace smbx_npc_editor.SpriteHandling
 
         List<Bitmap > frames;//- bitmaps dynamic array. Will have inside them frames.
         bool animated;
-        int CurrentFrame;// - index of frame which displaying now
-        int frameCurrent;// - calculating frame. Using by nextFrame() function
-        int frameSpeed;// - value in milliseconds, this is a timer value
+        public int frameSpeed;// - value in milliseconds, this is a timer value
         int frameStyle;// - same from config
         int direction;// - current direction (-1 or 1)
         bool aniDirect;// - Directed animation. I.e. left and right directions will define animation direction (reverse or direct)
@@ -574,7 +572,7 @@ namespace smbx_npc_editor.SpriteHandling
         int custom_frameFR;//first right
         int custom_frameER;//enf right / jump step
         bool frameSequance;
-        List<int > frames_list;
+        List<int> frames_list;
 
         int framesQ;// - total frames in sprite (calculating by dividing of sprite height to gfx height value)
         int frameSize; // size of one frame - gfx height
@@ -585,17 +583,11 @@ namespace smbx_npc_editor.SpriteHandling
         bool aniDirectL;
         bool aniDirectR;
 
-        int CurrentFrameL;
-        int CurrentFrameR;
+        int CurrentFrame;
+        int frameCurrent;
 
-        int frameCurrentL;
-        int frameCurrentR;
-
-        int frameFirstL;
-        int frameLastL;
-
-        int frameFirstR;
-        int frameLastR;
+        int frameFirst;
+        int frameLast;
 
         //////////////////Luigifan's//////////////////
         Bitmap originalImage;
@@ -604,7 +596,7 @@ namespace smbx_npc_editor.SpriteHandling
         int framesCountIndex = 0;
         int totalFrames;
         string npcID;
-        IniFile npcConfig;
+        //IniFile npcConfig;
         Timer AnimationTimer;
         int curFrame = 0;
         //int frameHeight;
@@ -612,40 +604,40 @@ namespace smbx_npc_editor.SpriteHandling
         MainUI _parentWindow; //This is needed so we can iterate through and pull the values from the controls
                               //It needs to be an already existing instance instead of a new instance.
 
-        public NpcAnimator(Bitmap imageToAnimate, string configToUse, string npcIDNumber, MainUI parentWindow)
+        public NpcAnimator(Bitmap imageToAnimate, string configFile, string npcIDNumber, MainUI parentWindow)
         {
             _parentWindow = parentWindow;
             //
+            setup = new obj_npc();
+            setup.init(configFile, npcIDNumber); //Generate config basis
+
             originalImage = imageToAnimate;
-            npcConfig = new IniFile(configToUse);
             npcID = npcIDNumber;
 
+            compileInformation();
+        }
+
+        /// <summary>
+        /// Defining configuration of NPC animator
+        /// </summary>
+        /// <param name="config">Merged configuration set</param>
+        /// <param name="direction">Current direction of NPC</param>
+        public void configureAnimator(obj_npc config, int direction)
+        {
+            mainImage = originalImage;
+            setup = config;
             ////Wohlstand's//////////////////////
-            animated = false;
-            aniBiDirect = false;
-            curDirect = -1;
-            frameStep = 1;
-            frameSize = 1;
-
-            CurrentFrameL = 0; //Real frame
-            CurrentFrameR = 0; //Real frame
-            frameCurrentL = 0; //Timer frame
-            frameCurrentR = 0; //Timer frame
-
-            frameFirstL = 0; //from first frame
-            frameLastL = -1; //to unlimited frameset
-            frameFirstR = 0; //from first frame
-            frameLastR = -1; //to unlimited frameset
-
-
             animated = true;
-            framesQ = int.Parse(npcConfig.ReadValue(npcID, "frames"));
-            frameSpeed = int.Parse(npcConfig.ReadValue(npcID, "framespeed"));
-            frameStyle = int.Parse(npcConfig.ReadValue(npcID, "framestyle"));
+            framesQ = setup.frames;
+            frameSpeed = setup.framespeed;
+            frameStyle = setup.framestyle;
+            direction = -1;
             frameStep = 1;
 
             frameSequance = false;
-            /*
+
+            frameSequance = false;
+
             aniBiDirect = setup.ani_bidir;
             customAniAlg = setup.custom_ani_alg;
 
@@ -656,22 +648,140 @@ namespace smbx_npc_editor.SpriteHandling
             custom_frameFR = setup.custom_ani_fr;//first right
             custom_frameER = setup.custom_ani_er;//enf right
 
-            //bool refreshFrames = updFrames;
+            curDirect = direction;
 
             frameSize = setup.gfx_h; // height of one frame
             frameWidth = setup.gfx_w; //width of target image
 
-            frameHeight = mainImage.height(); // Height of target image
+            frameHeight = mainImage.Height; // Height of target image
 
             //Protectors
             if (frameSize <= 0) frameSize = 1;
-            if (frameSize > mainImage.height()) frameSize = mainImage.height();
+            if (frameSize > mainImage.Height) frameSize = mainImage.Height;
 
             if (frameWidth <= 0) frameWidth = 1;
-            if (frameWidth > mainImage.width()) frameWidth = mainImage.width();
-            */
-            compileInformation();
+            if (frameWidth > mainImage.Width) frameWidth = mainImage.Width;
+            
+            int dir = direction;
+            if (direction == 0) //if direction=random
+            {
+                Random rnd = new Random();
+                dir = ((0 == rnd.Next(0,1)) ? -1 : 1); //set randomly 1 or -1
+            }
+
+            if (setup.ani_directed_direct)
+                aniDirect = (dir == -1) ^ (setup.ani_direct);
+            else
+                aniDirect = setup.ani_direct;
+
+            if (customAnimate) // User defined spriteSet (example: boss)
+            {
+                switch (dir)
+                {
+                    case -1: //left
+                        frameFirst = custom_frameFL;
+                        switch (customAniAlg)
+                        {
+                            case 2:
+                                frameSequance = true;
+                                frames_list = setup.frames_left;
+                                frameFirst = 0;
+                                frameLast = frames_list.Count - 1;
+                                break;
+                            case 1:
+                                frameStep = custom_frameEL;
+                                frameLast = -1; break;
+                            case 0:
+                            default:
+                                frameLast = custom_frameEL; break;
+                        }
+                        break;
+                    case 1: //Right
+                        frameFirst = custom_frameFR;
+                        switch (customAniAlg)
+                        {
+                            case 2:
+                                frameSequance = true;
+                                frames_list = setup.frames_right;
+                                frameFirst = 0;
+                                frameLast = frames_list.Count - 1; break;
+                            case 1:
+                                frameStep = custom_frameER;
+                                frameLast = -1; break;
+                            case 0:
+                            default:
+                                frameLast = custom_frameER; break;
+                        }
+                        break;
+                    default: break;
+                }
+            }
+            else
+            {
+                switch (frameStyle)
+                {
+                    case 2: //Left-Right-upper sprite
+                        framesQ = setup.frames * 4;
+                        switch (dir)
+                        {
+                            case -1: //left
+                                frameFirst = 0;
+                                frameLast = (int)(framesQ - (framesQ / 4) * 3) - 1;
+                                break;
+                            case 1: //Right
+                                frameFirst = (int)(framesQ - (framesQ / 4) * 3);
+                                frameLast = (int)(framesQ / 2) - 1;
+                                break;
+                            default: break;
+                        }
+                        break;
+
+                    case 1: //Left-Right sprite
+                        framesQ = setup.frames * 2;
+                        switch (dir)
+                        {
+                            case -1: //left
+                                frameFirst = 0;
+                                frameLast = (int)(framesQ / 2) - 1;
+                                break;
+                            case 1: //Right
+                                frameFirst = (int)(framesQ / 2);
+                                frameLast = framesQ - 1;
+                                break;
+                            default: break;
+                        }
+
+                        break;
+
+                    case 0: //Single sprite
+                    default:
+                        frameFirst = 0;
+                        frameLast = framesQ - 1;
+                        break;
+                }
+            }
+
+            curDirect = dir;
+            createAnimationFrames();
         }
+
+        /// <summary>
+        /// Generating frames array from source image
+        /// </summary>
+        void createAnimationFrames()
+        {
+            frames.Clear();
+            Bitmap tmp = originalImage;
+            for (int i = 0; (frameSize * i < frameHeight); i++)
+            {
+                Rectangle SR = new Rectangle(0, frameSize * i, frameWidth, frameSize);
+                Graphics g = Graphics.FromImage(tmp);
+                g.DrawImage(originalImage, new Rectangle(0, 0, frameWidth, frameHeight), SR, GraphicsUnit.Pixel);
+                tmp = new Bitmap(frameWidth, frameHeight, PixelFormat.Format32bppArgb);
+                frames.Add(tmp);
+            }
+        }
+
 
         /// <summary>
         /// This function will merge global config with local SMBX NPC.txt config and will return merged config set
@@ -680,7 +790,7 @@ namespace smbx_npc_editor.SpriteHandling
         /// <param name="local">SMBX Locak NPC config, read from NPC.txt or edited by UI</param>
         /// <param name="captured">Size of whole image sprite</param>
         /// <returns></returns>
-        obj_npc mergeConfigs(obj_npc global, SMBXNpc local, Size captured )
+        public obj_npc mergeConfigs(obj_npc global, SMBXNpc local, Size captured )
         {
             obj_npc merged = global;
             merged.name = (local.en_name)?local.name:global.name;
@@ -788,18 +898,68 @@ namespace smbx_npc_editor.SpriteHandling
             //This is where we'd want to get the values from the editor itself, and if they don't exist pull them from the WohlToSMBX class, load them in as defaults in the editor.
         }
 
+        void setFrame(int y)
+        {
+            if (frames.Count==0) return;
+            //frameCurrent = frameSize * y;
+            CurrentFrame = y;
+            //Out of range protection
+            if (CurrentFrame >= frames.Count) CurrentFrame = (frameFirst < frames.Count) ? frameFirst : 0;
+            if (CurrentFrame < frameFirst) CurrentFrame = (frameLast < 0) ? frames.Count - 1 : frameLast;
+        }
+
+
         public Bitmap AnimateNextFrame(PictureBox box, string configToUse)
         {
-            curFrame += 1;
-            if(curFrame >= totalFrames)
+            if (frames.Count == 0) return mainImage; //Protector
+
+            //curFrame += 1;
+            //if(curFrame >= totalFrames)
+            //{
+                //curFrame = 0;
+            //}
+            //Rectangle SR = new Rectangle(0, frameHeight * curFrame, frameWidth, frameHeight);
+            //Graphics g = Graphics.FromImage(currentFrame);
+            //g.DrawImage(originalImage, new Rectangle(0, 0, frameWidth, frameHeight), SR, GraphicsUnit.Pixel);
+            //currentFrame = new Bitmap(frameWidth, frameHeight, PixelFormat.Format32bppArgb);
+
+            if (!aniDirect)
             {
-                curFrame = 0;
+                frameCurrent += frameStep;
+
+                if (((frameCurrent >= frames.Count - (frameStep - 1)) && (frameLast <= -1)) ||
+                     ((frameCurrent > frameLast) && (frameLast >= 0)))
+                {
+                    if (!aniBiDirect)
+                    {
+                        frameCurrent = frameFirst;
+                    }
+                    else
+                    {
+                        frameCurrent -= frameStep * 2;
+                        aniDirect = !aniDirect;
+                    }
+                }
             }
-            Rectangle SR = new Rectangle(0, frameHeight * curFrame, frameWidth, frameHeight);
-            Graphics g = Graphics.FromImage(currentFrame);
-            g.DrawImage(originalImage, new Rectangle(0, 0, frameWidth, frameHeight), SR, GraphicsUnit.Pixel);
-            currentFrame = new Bitmap(frameWidth, frameHeight, PixelFormat.Format32bppArgb);
-            return currentFrame;
+            else
+            {
+                frameCurrent -= frameStep;
+
+                if (frameCurrent < frameFirst)
+                {
+                    if (!aniBiDirect)
+                    {
+                        frameCurrent = ((frameLast == -1) ? frames.Count - 1 : frameLast);
+                    }
+                    else
+                    {
+                        frameCurrent += frameStep * 2;
+                        aniDirect = !aniDirect;
+                    }
+                }
+            }
+            setFrame(frameSequance ? frames_list[frameCurrent] : frameCurrent);
+            return frames[CurrentFrame];
         }
 
     }
