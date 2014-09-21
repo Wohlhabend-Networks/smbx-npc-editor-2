@@ -38,6 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Setting">
+      <HintPath>..\smbx-npc-editor\Data\Setting.dll</HintPath>
       <HintPath>..\smbx-npc-editor\bin\Debug\Setting.dll</HintPath>
     </Reference>
     <Reference Include="System" />
