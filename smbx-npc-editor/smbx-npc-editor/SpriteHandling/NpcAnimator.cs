@@ -580,9 +580,6 @@ namespace smbx_npc_editor.SpriteHandling
         int frameHeight; //sprite height - height of source image
 
         //Animation alhorithm
-        bool aniDirectL;
-        bool aniDirectR;
-
         int CurrentFrame;
         int frameCurrent;
 
@@ -591,14 +588,14 @@ namespace smbx_npc_editor.SpriteHandling
 
         //////////////////Luigifan's//////////////////
         Bitmap originalImage;
-        Bitmap currentFrame;
+        //Bitmap currentFrame;
 
-        int framesCountIndex = 0;
-        int totalFrames;
+        //int framesCountIndex = 0;
+        //int totalFrames;
         string npcID;
         //IniFile npcConfig;
         Timer AnimationTimer;
-        int curFrame = 0;
+        //int curFrame = 0;
         //int frameHeight;
         //int frameWidth;
         MainUI _parentWindow; //This is needed so we can iterate through and pull the values from the controls
@@ -613,6 +610,20 @@ namespace smbx_npc_editor.SpriteHandling
 
             originalImage = imageToAnimate;
             npcID = npcIDNumber;
+            animated = false;
+            aniDirect = false;
+            aniBiDirect = false;
+            direction = -1;
+            frameStep = 1;
+            curDirect = -1;
+            frameStep = 1;
+            frameSize = 1;
+
+            CurrentFrame = 0; //Real frame
+            frameCurrent = 0; //Timer frame
+
+            frameFirst = 0; //from first frame
+            frameLast = -1; //to unlimited frameset
 
             compileInformation();
         }
@@ -622,7 +633,7 @@ namespace smbx_npc_editor.SpriteHandling
         /// </summary>
         /// <param name="config">Merged configuration set</param>
         /// <param name="direction">Current direction of NPC</param>
-        public void configureAnimator(obj_npc config, int direction)
+        public void configureAnimator(obj_npc config, int direct)
         {
             mainImage = originalImage;
             setup = config;
@@ -631,7 +642,7 @@ namespace smbx_npc_editor.SpriteHandling
             framesQ = setup.frames;
             frameSpeed = setup.framespeed;
             frameStyle = setup.framestyle;
-            direction = -1;
+            direction = direct;
             frameStep = 1;
 
             frameSequance = false;
@@ -648,8 +659,6 @@ namespace smbx_npc_editor.SpriteHandling
             custom_frameFR = setup.custom_ani_fr;//first right
             custom_frameER = setup.custom_ani_er;//enf right
 
-            curDirect = direction;
-
             frameSize = setup.gfx_h; // height of one frame
             frameWidth = setup.gfx_w; //width of target image
 
@@ -661,7 +670,7 @@ namespace smbx_npc_editor.SpriteHandling
 
             if (frameWidth <= 0) frameWidth = 1;
             if (frameWidth > mainImage.Width) frameWidth = mainImage.Width;
-            
+
             int dir = direction;
             if (direction == 0) //if direction=random
             {
