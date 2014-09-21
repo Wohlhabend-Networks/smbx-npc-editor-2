@@ -373,105 +373,109 @@ namespace smbx_npc_editor.SpriteHandling
                 //    container=0			; NPC can containing inside other NPC (need enable special option type 2)
                 container = bool.Parse(npcConfig.ReadValue(npcID, "container"));
 
-                int display_frame;
+                display_frame = int.Parse(npcConfig.ReadValue(npcID, "display-frame"));
 
-                bool no_npc_collions;
+                no_npc_collions = bool.Parse(npcConfig.ReadValue(npcID, "no-npc-collisions"));
                 //    ; this option disabling collisions in editor with other NPCs, but with NPC's of same ID collisions will be checked
 
                 //    ; Special option
                 //    have-special=0			; Special NPC's option, what can used by NPC's algorithm
-                bool special_option;
+                special_option = bool.Parse(npcConfig.ReadValue(npcID, "have-special"));
                 //    ;special-name="Cheep-cheep"	; 60
 
-                string special_name;
+                special_name = npcConfig.ReadValue(npcID, "special-name");
                 //    ;special-type=0			; 61 0 combobox, 1 - spin, 2 - npc-id
-                int special_type;
+                special_type = int.Parse(npcConfig.ReadValue(npcID, "special-type"));
                 //    ;special-combobox-size=3		; 62 quantity of options
-                List<string> special_combobox_opts;
+                //List<string> special_combobox_opts;
                 //    ;special-option-0="Swim"		; 63 set title for 0 option combobox
                 //    ;special-option-1="Jump"		; 64 set title for 1 option combobox
                 //    ;special-option-2="Projective"	; 65 set title for 2 option combobox
-                int special_spin_min;
+                //int special_spin_min;
                 //    ;special-spin-min=0		; 66 milimal value of spin
-                int special_spin_max;
+                //int special_spin_max;
                 //    ;special-spin-max=25		; 67 maximal value of spin
-                int special_spin_value_offset;
+                //int special_spin_value_offset;
 
                 //    have-special-2=0			; Special NPC's option, what can used by NPC's algorithm
-                bool special_option_2; //Second special option
+                //bool special_option_2; //Second special option
                 //    special-2-npc-spin-required
-                List<long> special_2_npc_spin_required;
+                //List<long> special_2_npc_spin_required;
                 //    special-2-npc-box-required
-                List<long> special_2_npc_box_required;
+                //List<long> special_2_npc_box_required;
 
                 //    ;special-2-name="Cheep-cheep"	; 60
-                string special_2_name;
+                //string special_2_name;
                 //    ;special-2-type=0			; 61 0 combobox, 1 - spin
-                int special_2_type;
+                //int special_2_type;
                 //    ;special-combobox-size=3		; 62 quantity of options
-                List<string> special_2_combobox_opts;
+                //List<string> special_2_combobox_opts;
                 //    ;special-option-0="Swim"		; 63 set title for 0 option combobox
                 //    ;special-option-1="Jump"		; 64 set title for 1 option combobox
                 //    ;special-option-2="Projective"	; 65 set title for 2 option combobox
-                int special_2_spin_min;
+                //int special_2_spin_min;
                 //    ;special-2-spin-min=0		; 66 milimal value of spin
-                int special_2_spin_max;
+                //int special_2_spin_max;
                 //    ;special-2-spin-max=25		; 67 maximal value of spin
-                int special_2_spin_value_offset;
+                //int special_2_spin_value_offset;
                 //special-2-spin-value-offset
 
                 //    ;game process
                 //    score=2				; Add scores to player (value 0-13)
                 //    ; 0, 10, 100, 200, 400, 800, 1000, 2000, 4000, 8000, 1up, 2up, 5up, 3up
-                int score;
+                score = int.Parse(npcConfig.ReadValue(npcID, "score"));
                 //    speed=64			; Default movement speed in px/s
-                int speed;
+                speed = int.Parse(npcConfig.ReadValue(npcID, "speed"));
                 //    moving=1			; NPC simply moving right/left
 
-                bool movement;
+                movement = bool.Parse(npcConfig.ReadValue(npcID, "moving"));
                 //    scenery=0			; NPC as block
-                bool scenery;
+                scenery = bool.Parse(npcConfig.ReadValue(npcID, "scenery"));
                 //    immortal=0			; NPC Can't be destroy
-                bool immortal;
+                immortal = bool.Parse(npcConfig.ReadValue(npcID, "immortal"));
                 //    yoshicaneat=1			; NPC can be eaten by yoshi
-                bool can_be_eaten;
+                can_be_eaten = bool.Parse(npcConfig.ReadValue(npcID, "yoshicaneat"));
                 //    takeble=0			; NPC destroyble on contact with player
-                bool takable;
+                takable = bool.Parse(npcConfig.ReadValue(npcID, "takeble"));
                 //    grab-side=0			; NPC can be grabbed on side
-                bool grab_side;
+                grab_side = bool.Parse(npcConfig.ReadValue(npcID, "grab-side"));
                 //    grab-top=0			; NPC can be grabbed on top
-                bool grab_top;
+                grab_top = bool.Parse(npcConfig.ReadValue(npcID, "grab-top"));
                 //    grab-any=0			; NPC can be grabbed on any collisions
-                bool grab_any;
+                grab_any = bool.Parse(npcConfig.ReadValue(npcID, "grab-any"));
                 //    default-health=1		; NPC's health value
-                int health;
+                health = int.Parse(npcConfig.ReadValue(npcID, "default-health"));
                 //    hurtplayer=1			; Hurt player on contact
-                bool hurt_player;
+                hurt_player = bool.Parse(npcConfig.ReadValue(npcID, "hurtplayer"));
                 //    hurtnpc=0			; Hurt other npc on contact
-                bool hurt_npc;
+                hurt_npc = bool.Parse(npcConfig.ReadValue(npcID, "hurtnpc"));
 
                 //    ;Editor featured
-                string direct_alt_title;
-                string direct_alt_left;
-                string direct_alt_right;
-                bool direct_disable_random;
+                //string direct_alt_title;
+                //string direct_alt_left;
+                //string direct_alt_right;
+                //bool direct_disable_random;
 
                 //    allow-bubble=1			; Allow packable into the bubble
-                bool allow_bubble;
+                //bool allow_bubble;
                 //    allow-egg=1			; Allow packable into the egg
-                bool allow_egg;
+                //bool allow_egg;
                 //    allow-lakitu=1			; Allow packable into the SMW Lakitu
-                bool allow_lakitu;
+                //bool allow_lakitu;
                 //    allow-burred=1			; Allow packable under the herb
-                bool allow_buried;
+                //bool allow_buried;
 
 
                 //    ; Physics
                 //    ; Size of NPC's body (Collision box)
                 //    fixture-height=32
-                uint height;
+                string tmpS = npcConfig.ReadValue(npcID, "fixture-height");
+                if (tmpS.Length == 0) tmpS = npcConfig.ReadValue(npcID, "physical-height");
+                height = uint.Parse(tmpS);
                 //    fixture-width=32
-                uint width;
+                tmpS = npcConfig.ReadValue(npcID, "fixture-height");
+                if (tmpS.Length == 0) tmpS = npcConfig.ReadValue(npcID, "fixture-width");
+                width = uint.Parse(tmpS);
                 //    block-npc=1		; NPC is a solid object for NPC's
                 bool block_npc;
                 //    block-npc-top=0		; on NPC's top can be stay other NPC's
