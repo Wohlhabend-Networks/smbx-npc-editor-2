@@ -805,7 +805,6 @@ namespace smbx_npc_editor
                 return null;
             }
         }
-
         private void menuItem12_Click(object sender, EventArgs e)
         {
             saveAs();

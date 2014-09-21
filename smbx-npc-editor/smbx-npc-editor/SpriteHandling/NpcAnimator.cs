@@ -601,9 +601,13 @@ namespace smbx_npc_editor.SpriteHandling
         int curFrame = 0;
         //int frameHeight;
         //int frameWidth;
+        MainUI _parentWindow; //This is needed so we can iterate through and pull the values from the controls
+                              //It needs to be an already existing instance instead of a new instance.
 
-        public NpcAnimator(Bitmap imageToAnimate, string configToUse, string npcIDNumber)
+        public NpcAnimator(Bitmap imageToAnimate, string configToUse, string npcIDNumber, MainUI parentWindow)
         {
+            _parentWindow = parentWindow;
+            //
             originalImage = imageToAnimate;
             npcConfig = new IniFile(configToUse);
             npcID = npcIDNumber;
@@ -668,11 +672,8 @@ namespace smbx_npc_editor.SpriteHandling
 
         void compileInformation()
         {
-            totalFrames = int.Parse(npcConfig.ReadValue(npcID, "frames"));
-            frameHeight = int.Parse(npcConfig.ReadValue(npcID, "gfx-height"));
-            frameWidth = int.Parse(npcConfig.ReadValue(npcID, "gfx-width"));
+            //This is where we'd want to get the values from the editor itself, and if they don't exist pull them from the WohlToSMBX class, load them in as defaults in the editor.
         }
-
 
         public Bitmap AnimateNextFrame(PictureBox box, string configToUse)
         {
