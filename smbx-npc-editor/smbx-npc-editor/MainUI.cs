@@ -736,6 +736,16 @@ namespace smbx_npc_editor
             }
         }
 
+        public void openPassedFile(string fileName)
+        {
+            ResetItems(this.Controls, true);
+            npcfile.Clear();
+            npcfile.Load(fileName);
+            loadInValues(this.Controls);
+            hasDoneASaveAs = true;
+            ///TODO: Add in animation checking
+        }
+
         private void menuItem11_Click(object sender, EventArgs e)
         {
             if (curFile != null)
