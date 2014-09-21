@@ -6,8 +6,10 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using System.IO;
 
+
 namespace smbx_npc_editor.IO
 {
+    using SpriteHandling;
 
     public class SMBXNpc
     {
@@ -27,13 +29,13 @@ namespace smbx_npc_editor.IO
         public uint height;
 
         public bool en_gfxwidth;
-        public uint gfxwidth;
+        public int gfxwidth;
 
         public bool en_gfxheight;
-        public uint gfxheight;
+        public int gfxheight;
 
         public bool en_score;
-        public uint score;
+        public int score;
 
         public bool en_playerblock;
         public bool playerblock;
@@ -57,50 +59,50 @@ namespace smbx_npc_editor.IO
         public bool jumphurt;
 
         public bool en_nohurt;
-        bool nohurt;
+        public bool nohurt;
 
         public bool en_noblockcollision;
-        bool noblockcollision;
+        public bool noblockcollision;
 
         public bool en_cliffturn;
-        bool cliffturn;
+        public bool cliffturn;
 
         public bool en_noyoshi;
-        bool noyoshi;
+        public bool noyoshi;
 
         public bool en_foreground;
-        bool foreground;
+        public bool foreground;
 
         public bool en_speed;
-        float speed;
+        public float speed;
 
         public bool en_nofireball;
-        bool nofireball;
+        public bool nofireball;
 
         public bool en_nogravity;
-        bool nogravity;
+        public bool nogravity;
 
         public bool en_frames;
-        uint frames;
+        public int frames;
 
         public bool en_framespeed;
-        uint framespeed;
+        public int framespeed;
 
         public bool en_framestyle;
-        uint framestyle;
+        public int framestyle;
 
         public bool en_noiceball;
-        bool noiceball;
+        public bool noiceball;
         
         //Extended
         public bool en_nohammer;
-        bool nohammer;
+        public bool nohammer;
 
         public bool en_noshell;
-        bool noshell;
+        public bool noshell;
 
         public bool en_name;
-        string name;
+        public string name;
         /* Using options flags END */
         public SMBXNpc()
         {
@@ -134,6 +136,35 @@ namespace smbx_npc_editor.IO
             en_nohammer = false;
             en_noshell = false;
             en_name = false;
+
+            gfxoffsetx = 0;
+            gfxoffsety = 0;
+            width = 0;
+            height = 0;
+            gfxwidth = 0;
+            gfxheight = 0;
+            score = 0;
+            playerblock = false;
+            playerblocktop = false;
+            npcblock = false;
+            npcblocktop = false;
+            grabside = false;
+            grabtop = false;
+            jumphurt = false;
+            nohurt = false;
+            noblockcollision = false;
+            cliffturn = false;
+            noyoshi = false;
+            foreground = false;
+            speed = 1;
+            nofireball = false;
+            nogravity = false;
+            frames = 0;
+            framespeed = 8;
+            framestyle = 0;
+            noiceball = false;
+            nohammer = false;
+            name = "";
         }
     }
 
@@ -347,5 +378,47 @@ namespace smbx_npc_editor.IO
             Console.WriteLine("Changing key value of {0} to {1}", config.Key, newValue);
         }
         //
+
+        public SMBXNpc getDefaultValues(obj_npc global)
+        {
+            SMBXNpc local = new SMBXNpc();
+
+            local.gfxoffsetx = global.gfx_offset_x;
+            local.gfxoffsety = global.gfx_offset_y;
+            local.width = global.width;
+            local.height = global.height;
+            local.gfxwidth = global.gfx_w;
+            local.gfxheight = global.gfx_h;
+            local.score = global.score;
+            local.playerblock = global.block_player;
+            local.playerblocktop = global.block_player_top;
+            local.npcblock = global.block_npc;
+            local.npcblocktop = global.block_player_top;
+            local.grabside = global.grab_side;
+            local.grabtop = global.grab_top;
+            local.jumphurt = (
+                        (global.hurt_player)
+                                          &&
+                                          (!global.kill_on_jump));
+            local.nohurt = (!global.hurt_player);
+            local.noblockcollision = (!global.collision_with_blocks);
+            local.cliffturn = global.turn_on_cliff_detect;
+            local.noyoshi = (!global.can_be_eaten);
+            local.foreground = global.foreground;
+            local.speed = 1;
+            local.nofireball = (!global.kill_by_fireball);
+            local.nogravity = (!global.gravity);
+            local.frames = global.frames;
+            local.framespeed = 8;
+            local.framestyle = global.framestyle;
+            local.noiceball = (!global.freeze_by_iceball);
+            //Extended
+            local.nohammer = (!global.kill_hammer);
+            local.noshell = (!global.kill_by_npc);
+            local.name = global.name;
+
+            return local;
+        }
+
     }
 }
