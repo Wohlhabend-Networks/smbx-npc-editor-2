@@ -166,6 +166,67 @@ namespace smbx_npc_editor.IO
             nohammer = false;
             name = "";
         }
+
+        public void ReadFromTextFile(string fileToRead)
+        {
+            int line_count = 0;
+            StreamReader sr = new StreamReader(fileToRead);
+            string line;
+            line_count++;line = sr.ReadLine();
+            while(line != null)
+            {
+                string ln = line;
+                if(line.Replace(" ", "") == "")
+                {
+                    line_count++;line = sr.ReadLine();
+                    continue;
+                } //skips empty strings
+                line = ln;
+                var Params = line.Split(new char[] { '=' }, 2);
+                if(Params[0] == "name")
+                {
+                    string noQuotes = Params[1].Replace("\"", "");
+                    this.name = noQuotes;
+                    en_name = true;
+                }
+                else if(Params[0] == "gfxoffsety")
+                {
+                    int number; //the number output by the tryparse method
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if(result)
+                    { gfxoffsety = number; en_gfxoffsety = true; }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}", Params[0], Params[1], line_count));
+                }
+                else if(Params[0] == "gfxoffsetx")
+                {
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    { gfxoffsetx = number; en_gfxoffsetx = true; }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}", Params[0], Params[1], line_count));
+                }
+                //
+            }
+        }
+
+        
+    }
+
+    public class BadNpcTextFileException : Exception
+    {
+        public BadNpcTextFileException()
+        { }
+        public BadNpcTextFileException(string message) : base(message)
+        {
+
+        }
+        public BadNpcTextFileException(string message, Exception inner)
+            : base(message, inner)
+        {
+
+        }
     }
 
     public class NpcConfigFile
