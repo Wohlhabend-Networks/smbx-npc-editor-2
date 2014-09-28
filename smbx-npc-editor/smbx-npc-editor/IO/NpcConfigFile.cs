@@ -222,6 +222,9 @@ namespace smbx_npc_editor.IO
         {
 
         }
+        public BadNpcTextFileException(string message, string actualLine)
+            : base(message)
+        { }
         public BadNpcTextFileException(string message, Exception inner)
             : base(message, inner)
         {
