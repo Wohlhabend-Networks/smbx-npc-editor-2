@@ -110,8 +110,10 @@
     <Compile Include="DownloadConfigPack.Designer.cs">
       <DependentUpon>DownloadConfigPack.cs</DependentUpon>
     </Compile>
+    <Compile Include="IO\BadNpcTextFileException.cs" />
     <Compile Include="IO\ModifyRegistry.cs" />
     <Compile Include="IO\NpcConfigFile.cs" />
+    <Compile Include="IO\SMBXNpc.cs" />
     <Compile Include="IO\TextEditor.cs">
       <SubType>Form</SubType>
     </Compile>
