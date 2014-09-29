@@ -31,6 +31,7 @@ namespace smbx_npc_editor
         int animatorWidth;
         //
         public NpcConfigFile npcfile = new NpcConfigFile(true);
+        public SMBXNpc smbxNpcFile = new SMBXNpc();
         string curNpcId = "blank";
         //
         public MainUI()
@@ -721,10 +722,12 @@ namespace smbx_npc_editor
             {
                 case(DialogResult.OK):
                     ResetItems(this.Controls, true);
-                    npcfile.Clear();
-                    npcfile.Load(of.FileName);
+                    //npcfile.Clear();
+                    //npcfile.Load(of.FileName);
+                    //loadInValues(this.Controls);
                     curFile = of.FileName;
-                    loadInValues(this.Controls);
+                    smbxNpcFile = new SMBXNpc();
+                    //
                     hasDoneASaveAs = true;
                     if(File.Exists(npcAnimator.GetSpritePath(of.FileName)))
                     {
