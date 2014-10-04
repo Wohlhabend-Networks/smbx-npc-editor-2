@@ -537,6 +537,16 @@ namespace smbx_npc_editor.IO
                     else
                         throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
                 }
+                else if (Params[0] == "npcblock")
+                {
+                    bool param = ParseInt(Params[1]);
+                    npcblock = param; en_npcblock = true;
+                }
+                else if (Params[0] == "npcblocktop")
+                {
+                    bool param = ParseInt(Params[1]);
+                    npcblocktop = param; en_npcblocktop = true;
+                }
                 //
                 line_count++; line = sr.ReadLine();
             }
