@@ -696,7 +696,7 @@ namespace smbx_npc_editor.IO
                 return 1;
             else if (toParse == false)
                 return 0;
-            else throw new Exception(String.Format("Unknown error while parsing {0}", _parse));
+            else throw new Exception(String.Format("Unknown error while parsing {0}", toParse));
         }
         //
         
