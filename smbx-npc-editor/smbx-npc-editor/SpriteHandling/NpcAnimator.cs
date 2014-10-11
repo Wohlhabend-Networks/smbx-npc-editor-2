@@ -549,11 +549,13 @@ namespace smbx_npc_editor.SpriteHandling
     }
 
 
-    public class NpcAnimator
+    public class AdvNpcAnimator
     {
         ///////////////////////////////Wohlstand's////////////////////////
         Bitmap mainImage;
         obj_npc setup; //Merged config file
+
+        bool isInitialized = false;
 
         List<Bitmap > frames;//- bitmaps dynamic array. Will have inside them frames.
         bool animated;
@@ -601,15 +603,10 @@ namespace smbx_npc_editor.SpriteHandling
         MainUI _parentWindow; //This is needed so we can iterate through and pull the values from the controls
                               //It needs to be an already existing instance instead of a new instance.
 
-        public NpcAnimator(Bitmap imageToAnimate, string configFile, string npcIDNumber, MainUI parentWindow)
+        public AdvNpcAnimator(/*Bitmap imageToAnimate, MainUI parentWindow*/)
         {
-            _parentWindow = parentWindow;
-            //
-            setup = new obj_npc();
-            setup.init(configFile, npcIDNumber); //Generate config basis
-
-            originalImage = imageToAnimate;
-            npcID = npcIDNumber;
+            //_parentWindow = parentWindow;
+            npcID = "0";
             animated = false;
             aniDirect = false;
             aniBiDirect = false;
@@ -628,6 +625,18 @@ namespace smbx_npc_editor.SpriteHandling
             compileInformation();
         }
 
+        public bool isReady()
+        {
+            return isInitialized;
+        }
+
+
+        public void storeImage(Bitmap imageToAnimate)
+        {
+            originalImage = imageToAnimate;
+            isInitialized = false;
+        }
+
         /// <summary>
         /// Defining configuration of NPC animator
         /// </summary>
@@ -638,6 +647,8 @@ namespace smbx_npc_editor.SpriteHandling
             mainImage = originalImage;
             setup = config;
             ////Wohlstand's//////////////////////
+            npcID = setup.id.ToString();
+
             animated = true;
             framesQ = setup.frames;
             frameSpeed = setup.framespeed;
@@ -772,6 +783,7 @@ namespace smbx_npc_editor.SpriteHandling
 
             curDirect = dir;
             createAnimationFrames();
+            isInitialized = true;
         }
 
         /// <summary>
@@ -897,28 +909,12 @@ namespace smbx_npc_editor.SpriteHandling
             return merged;
         }
 
-        void AnimationTimer_Tick(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         void compileInformation()
         {
             //This is where we'd want to get the values from the editor itself, and if they don't exist pull them from the WohlToSMBX class, load them in as defaults in the editor.
         }
 
-        void setFrame(int y)
-        {
-            if (frames.Count==0) return;
-            //frameCurrent = frameSize * y;
-            CurrentFrame = y;
-            //Out of range protection
-            if (CurrentFrame >= frames.Count) CurrentFrame = (frameFirst < frames.Count) ? frameFirst : 0;
-            if (CurrentFrame < frameFirst) CurrentFrame = (frameLast < 0) ? frames.Count - 1 : frameLast;
-        }
-
-
-        public Bitmap AnimateNextFrame(PictureBox box, string configToUse)
+        public Bitmap AnimateNextFrame() ///*PictureBox box, string configToUse
         {
             if (frames.Count == 0) return mainImage; //Protector
 
@@ -970,6 +966,17 @@ namespace smbx_npc_editor.SpriteHandling
             setFrame(frameSequance ? frames_list[frameCurrent] : frameCurrent);
             return frames[CurrentFrame];
         }
+
+        public void setFrame(int y)
+        {
+            if (frames.Count == 0) return;
+            //frameCurrent = frameSize * y;
+            CurrentFrame = y;
+            //Out of range protection
+            if (CurrentFrame >= frames.Count) CurrentFrame = (frameFirst < frames.Count) ? frameFirst : 0;
+            if (CurrentFrame < frameFirst) CurrentFrame = (frameLast < 0) ? frames.Count - 1 : frameLast;
+        }
+
 
     }
 }

@@ -90,7 +90,7 @@ namespace smbx_npc_editor.SpriteHandling
 
                     if (opaque)
                     {
-                        greyLevel = (greyLevel < 420/*OpacityThreshold*/) ? byte.MinValue : byte.MaxValue;
+                        greyLevel = ((int)greyLevel < 420/*OpacityThreshold*/) ? byte.MinValue : byte.MaxValue;
                     }
                     if (invertedMask)
                     {
