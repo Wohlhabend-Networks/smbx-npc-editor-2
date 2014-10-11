@@ -543,6 +543,125 @@ namespace smbx_npc_editor.IO
         }
 
         /// <summary>
+        /// Writes to an NPC Text file
+        /// </summary>
+        /// <param name="fileToWrite">The absolute path to a file to write to</param>
+        public void WriteToTextFile(string fileToWrite)
+        {
+            StreamWriter writer = new StreamWriter(fileToWrite);
+            //
+            if(en_gfxoffsetx)
+            {
+                writer.WriteLine(String.Format("gfxoffsetx=[0]", gfxoffsetx.ToString()));
+            }
+            if (en_gfxoffsety)
+            {
+                writer.WriteLine(String.Format("gfxoffsety=[0]", gfxoffsety.ToString()));
+            }
+            if (en_gfxwidth)
+            {
+                writer.WriteLine(String.Format("gfxwidth=[0]", gfxwidth.ToString()));
+            }
+            if (en_gfxheight)
+            {
+                writer.WriteLine(String.Format("gfxheight=[0]", gfxheight.ToString()));
+            }
+            if (foreground)
+            {
+                writer.WriteLine(String.Format("foreground=[0]", ParseBool(foreground).ToString()));
+            }
+            if (en_width)
+            {
+                writer.WriteLine(String.Format("width=[0]", width.ToString()));
+            }
+            if (en_height)
+            {
+                writer.WriteLine(String.Format("height=[0]", height.ToString()));
+            }
+            if (en_score)
+            {
+                writer.WriteLine(String.Format("score=[0]", score.ToString()));
+            }
+            if (en_playerblock)
+            {
+                writer.WriteLine(String.Format("gfxoffsetx=[0]", ParseBool(playerblock).ToString()));
+            }
+            if (en_playerblocktop)
+            {
+                writer.WriteLine(String.Format("playerblocktop=[0]", ParseBool(playerblocktop).ToString()));
+            }
+            if (en_npcblock)
+            {
+                writer.WriteLine(String.Format("npcblock=[0]", ParseBool(npcblock).ToString()));
+            }
+            if (en_npcblocktop)
+            {
+                writer.WriteLine(String.Format("npcblocktop=[0]", ParseBool(npcblocktop).ToString()));
+            }
+            if (en_grabside)
+            {
+                writer.WriteLine(String.Format("grabside=[0]", ParseBool(grabside).ToString()));
+            }
+            if (en_grabtop)
+            {
+                writer.WriteLine(String.Format("grabtop=[0]", ParseBool(grabtop).ToString()));
+            }
+            if (en_jumphurt)
+            {
+                writer.WriteLine(String.Format("jumphurt=[0]", ParseBool(jumphurt).ToString()));
+            }
+            if (en_nohurt)
+            {
+                writer.WriteLine(String.Format("nohurt=[0]", ParseBool(nohurt).ToString()));
+            }
+            if (en_speed)
+            {
+                writer.WriteLine(String.Format("speed=[0]", speed.ToString()));
+            }
+            if (en_noblockcollision)
+            {
+                writer.WriteLine(String.Format("noblockcollision=[0]", ParseBool(noblockcollision).ToString()));
+            }
+            if (en_cliffturn)
+            {
+                writer.WriteLine(String.Format("cliffturn=[0]", ParseBool(cliffturn).ToString()));
+            }
+            if (en_noyoshi)
+            {
+                writer.WriteLine(String.Format("noyoshi=[0]", ParseBool(noyoshi).ToString()));
+            }
+            if (en_nofireball)
+            {
+                writer.WriteLine(String.Format("nofireball=[0]", ParseBool(nofireball).ToString()));
+            }
+            if (en_nogravity)
+            {
+                writer.WriteLine(String.Format("nogravity=[0]", ParseBool(nogravity).ToString()));
+            }
+            if (en_noiceball)
+            {
+                writer.WriteLine(String.Format("noiceball=[0]", ParseBool(noiceball).ToString()));
+            }
+            if (en_frames)
+            {
+                writer.WriteLine(String.Format("frames=[0]", frames.ToString()));
+            }
+            if (en_framespeed)
+            {
+                writer.WriteLine(String.Format("framespeed=[0]", framespeed.ToString()));
+            }
+            if (en_framestyle)
+            {
+                writer.WriteLine(String.Format("framestyle=[0]", framestyle.ToString()));
+            }
+            //
+            writer.Flush();
+        }
+
+
+        //This divides main functions and parsing functions, for me only really
+
+        /// <summary>
         /// Parses an integer as a boolean
         /// </summary>
         /// <param name="parse">The int to parse</param>
@@ -568,6 +687,15 @@ namespace smbx_npc_editor.IO
                 return true;
             else if (_parse > 1)
                 throw new InvalidCastException(String.Format("Unable to parse {0} as boolean", parse));
+            else throw new Exception(String.Format("Unknown error while parsing {0}", _parse));
+        }
+        //
+        public int ParseBool(bool toParse)
+        {
+            if (toParse == true)
+                return 1;
+            else if (toParse == false)
+                return 0;
             else throw new Exception(String.Format("Unknown error while parsing {0}", _parse));
         }
         //
