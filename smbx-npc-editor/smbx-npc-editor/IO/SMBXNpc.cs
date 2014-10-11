@@ -208,7 +208,10 @@ namespace smbx_npc_editor.IO
 
             return local;
         }
-
+        /// <summary>
+        /// Reads and parses and NPC Text file, checking for any errors or invalid values along the way
+        /// </summary>
+        /// <param name="fileToRead">The absolute path to the file you want to read.</param>
         public void ReadFromTextFile(string fileToRead)
         {
             int line_count = 0;
@@ -290,23 +293,255 @@ namespace smbx_npc_editor.IO
                     int number;
                     bool result = Int32.TryParse(Params[1], out number);
                     if (result)
-                    { score = number; en_score = true; }
+                    {
+                        if (number > 13) //This is to prevent any out of index exceptions that will come later on down the road
+                            number = 13;
+                        score = number; 
+                        en_score = true; 
+                    }
                     else
                         throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
                 }
                 else if(Params[0] == "playerblock")
                 {
-                    bool param = ParseInt(Params[1]);
-                    playerblock = param; en_playerblock = true;
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    {
+                        bool param = ParseInt(number);
+                        playerblock = param;
+                        en_playerblock = true;
+                    }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
                 }
                 else if(Params[0] == "playerblocktop")
                 {
-                    bool param = ParseInt(Params[1]);
-                    playerblocktop = param; en_playerblocktop = true;
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    {
+                        bool param = ParseInt(number);
+                        playerblocktop = param;
+                        en_playerblocktop = true;
+                    }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
+                }
+                else if (Params[0] == "npcblock")
+                {
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    {
+                        bool param = ParseInt(number);
+                        npcblock = param;
+                        en_npcblock = true;
+                    }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
+                }
+                else if (Params[0] == "npcblocktop")
+                {
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    {
+                        bool param = ParseInt(number);
+                        npcblocktop = param;
+                        en_npcblocktop = true;
+                    }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
+                }
+                else if (Params[0] == "grabside")
+                {
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    {
+                        bool param = ParseInt(number);
+                        grabside = param;
+                        en_grabside = true;
+                    }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
+                }
+                else if (Params[0] == "grabtop")
+                {
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    {
+                        bool param = ParseInt(number);
+                        grabtop = param;
+                        en_grabtop = true;
+                    }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
+                }
+                else if (Params[0] == "jumphurt")
+                {
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    {
+                        bool param = ParseInt(number);
+                        jumphurt = param;
+                        en_nohurt = true;
+                    }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
+                }
+                else if (Params[0] == "nohurt")
+                {
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    {
+                        bool param = ParseInt(number);
+                        nohurt = param;
+                        en_nohurt = true;
+                    }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
+                }
+                else if (Params[0] == "noblockcollision")
+                {
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    {
+                        bool param = ParseInt(number);
+                        noblockcollision = param;
+                        en_noblockcollision = true;
+                    }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
+                }
+                else if (Params[0] == "cliffturn")
+                {
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    {
+                        bool param = ParseInt(number);
+                        cliffturn = param;
+                        en_cliffturn = true;
+                    }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
+                }
+                else if (Params[0] == "noyoshi")
+                {
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    {
+                        bool param = ParseInt(number);
+                        noyoshi = param;
+                        en_noyoshi = true;
+                    }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
+                }
+                else if (Params[0] == "foreground")
+                {
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    {
+                        bool param = ParseInt(number);
+                        foreground = param;
+                        en_foreground = true;
+                    }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
+                }
+                else if (Params[0] == "speed")
+                {
+                    Params[1] = Params[1].Replace(",", ".");
+                    float speedVal;
+                    bool result = float.TryParse(Params[1], out speedVal);
+                    if(result)
+                    {
+                        speed = speedVal;
+                        en_speed = true;
+                    }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
+                }
+                else if (Params[0] == "nofireball")
+                {
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    {
+                        bool param = ParseInt(number);
+                        nofireball = param;
+                        en_nofireball = true;
+                    }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
+                }
+                else if (Params[0] == "nogravity")
+                {
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    {
+                        bool param = ParseInt(number);
+                        nogravity = param;
+                        en_nogravity = true;
+                    }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
+                }
+                else if (Params[0] == "frames")
+                {
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    { frames = (int)number; en_frames = true; }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
+                }
+                else if (Params[0] == "framespeed")
+                {
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    { framespeed = (int)number; en_framespeed = true; }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
+                }
+                else if (Params[0] == "framestyle")
+                {
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    { framestyle = (int)number; en_framestyle = true; }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
+                }
+                else if (Params[0] == "noiceball")
+                {
+                    int number;
+                    bool result = Int32.TryParse(Params[1], out number);
+                    if (result)
+                    {
+                        bool param = ParseInt(number);
+                        noiceball = param;
+                        en_noiceball = true;
+                    }
+                    else
+                        throw new BadNpcTextFileException(String.Format("Failed to parse parameter {0} with value {1} at line {2}\n\nLine:{3}={4}", Params[0], Params[1], line_count, Params[0], Params[1]));
                 }
                 //
+                line_count++; line = sr.ReadLine();
             }
         }
+
         /// <summary>
         /// Parses an integer as a boolean
         /// </summary>
@@ -336,5 +571,6 @@ namespace smbx_npc_editor.IO
             else throw new Exception(String.Format("Unknown error while parsing {0}", _parse));
         }
         //
+        
     }
 }
