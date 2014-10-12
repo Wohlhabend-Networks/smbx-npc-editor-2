@@ -48,7 +48,6 @@
             // 
             this.highlightTimer.Enabled = true;
             this.highlightTimer.Interval = 1000;
-            this.highlightTimer.Tick += new System.EventHandler(this.highlightTimer_Tick);
             // 
             // TextEditor
             // 
@@ -59,7 +58,6 @@
             this.Name = "TextEditor";
             this.Text = "Text Editor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TextEditor_FormClosing);
-            this.Load += new System.EventHandler(this.TextEditor_Load);
             this.ResumeLayout(false);
 
         }

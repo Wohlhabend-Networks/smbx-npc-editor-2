@@ -361,9 +361,11 @@ namespace smbx_npc_editor
                         else
                             saveAs();
                         saveSettings();
+                        File.Delete(Environment.CurrentDirectory + @"\temp.npctxt");
                         break;
                     case(DialogResult.No):
                         saveSettings();
+                        File.Delete(Environment.CurrentDirectory + @"\temp.npctxt");
                         Environment.Exit(0);
                         break;
                     case(DialogResult.Cancel):
@@ -374,6 +376,7 @@ namespace smbx_npc_editor
             else
             {
                 saveSettings();
+                File.Delete(Environment.CurrentDirectory + @"\temp.npctxt");
                 Environment.Exit(0);
             }
         }
@@ -471,7 +474,6 @@ namespace smbx_npc_editor
             if (File.Exists(Environment.CurrentDirectory + @"\temp.npctxt"))
             {
                 smbxNpcFile.ReadFromTextFile(Environment.CurrentDirectory + @"\temp.npctxt");
-                File.Delete(Environment.CurrentDirectory + @"\temp.npctxt");
                 hasChanges = true;
             }
         }
@@ -479,18 +481,8 @@ namespace smbx_npc_editor
         private void menuItem10_Click(object sender, EventArgs e)
         {
             smbx_npc_editor.IO.TextEditor textEdit = null;
-            if(curFile == null)
-            {
-                textEdit = new TextEditor(npcfile.ExportToStringArray(), this);
-            }
-            else if(curFile != null && hasChanges)
-            {
-                textEdit = new TextEditor(npcfile.ExportToStringArray(), curFile, hasChanges, this);
-            }
-            else if(curFile != null && !hasChanges)
-            {
-                textEdit = new TextEditor(curFile, this);
-            }
+            smbxNpcFile.WriteToTextFile(Environment.CurrentDirectory + @"\temp.npctxt");
+            textEdit = new TextEditor(Environment.CurrentDirectory + @"\temp.npctxt", this);
             if (textEdit != null)
             { textEdit.Show(); this.Hide(); }
             else
