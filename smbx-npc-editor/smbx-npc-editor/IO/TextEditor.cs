@@ -162,16 +162,19 @@ namespace smbx_npc_editor.IO
 
         private void TextEditor_FormClosing(object sender, FormClosingEventArgs e)
         {
-            var split = richTextEditor.Text.Split(new char[] { '\n' }, richTextEditor.Lines.Length);
-            List<string> input = new List<string>();
-
-            for (int i = 0; i < split.Length; i++ )
-            {
-                input.Add(split[i].ToString());
-            }
-            _parentWindow.npcfile.StringArrayToKeyValuePair(input.ToArray());
-            _parentWindow.loadInValues(_parentWindow.Controls);
+            writeTempFile();
+            _parentWindow.loadInValuesFromTemp();
             _parentWindow.Show();
+        }
+
+        /// <summary>
+        /// This writes a temp file for the SMBXNpc class to read later, as opposed to the old method
+        /// </summary>
+        private void writeTempFile()
+        {
+            StreamWriter writer = new StreamWriter(Environment.CurrentDirectory + @"\temp.npctxt");
+            writer.Write(richTextEditor.Text);
+            writer.Flush();
         }
     }
 }

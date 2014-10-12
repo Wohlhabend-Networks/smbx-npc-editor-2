@@ -261,7 +261,6 @@
             this.nameControl.Size = new System.Drawing.Size(237, 20);
             this.nameControl.TabIndex = 15;
             this.nameControl.Tag = "name";
-            this.nameControl.TextChanged += new System.EventHandler(this.nameControl_TextChanged);
             // 
             // npcAnimator
             // 
@@ -298,6 +297,7 @@
             // 
             this.speedControl.CheckBoxEnabled = false;
             this.speedControl.CurrentValue = 1;
+            this.speedControl.DecimalPlaces = 2;
             this.speedControl.isReset = false;
             this.speedControl.LabelText = "Speed:";
             this.speedControl.Location = new System.Drawing.Point(6, 232);
@@ -405,6 +405,7 @@
             // 
             this.heightControl.CheckBoxEnabled = false;
             this.heightControl.CurrentValue = 0;
+            this.heightControl.DecimalPlaces = 0;
             this.heightControl.isReset = false;
             this.heightControl.Location = new System.Drawing.Point(8, 34);
             this.heightControl.MaximumValue = 666666;
@@ -430,6 +431,7 @@
             // 
             this.widthControl.CheckBoxEnabled = false;
             this.widthControl.CurrentValue = 0;
+            this.widthControl.DecimalPlaces = 0;
             this.widthControl.isReset = false;
             this.widthControl.LabelText = "Width:";
             this.widthControl.Location = new System.Drawing.Point(8, 67);
@@ -530,6 +532,7 @@
             this.gfxHeightControl.BackColor = System.Drawing.Color.Transparent;
             this.gfxHeightControl.CheckBoxEnabled = false;
             this.gfxHeightControl.CurrentValue = 0;
+            this.gfxHeightControl.DecimalPlaces = 0;
             this.gfxHeightControl.isReset = false;
             this.gfxHeightControl.LabelText = "GFX Height:";
             this.gfxHeightControl.Location = new System.Drawing.Point(6, 42);
@@ -547,6 +550,7 @@
             this.gfxWidthControl.BackColor = System.Drawing.Color.Transparent;
             this.gfxWidthControl.CheckBoxEnabled = false;
             this.gfxWidthControl.CurrentValue = 0;
+            this.gfxWidthControl.DecimalPlaces = 0;
             this.gfxWidthControl.isReset = false;
             this.gfxWidthControl.LabelText = "GFX Width:";
             this.gfxWidthControl.Location = new System.Drawing.Point(6, 75);
@@ -564,6 +568,7 @@
             this.xOffsetControl.BackColor = System.Drawing.Color.Transparent;
             this.xOffsetControl.CheckBoxEnabled = false;
             this.xOffsetControl.CurrentValue = 0;
+            this.xOffsetControl.DecimalPlaces = 0;
             this.xOffsetControl.isReset = false;
             this.xOffsetControl.LabelText = "X Offset:";
             this.xOffsetControl.Location = new System.Drawing.Point(6, 108);
@@ -581,6 +586,7 @@
             this.yOffsetControl.BackColor = System.Drawing.Color.Transparent;
             this.yOffsetControl.CheckBoxEnabled = false;
             this.yOffsetControl.CurrentValue = 0;
+            this.yOffsetControl.DecimalPlaces = 0;
             this.yOffsetControl.isReset = false;
             this.yOffsetControl.LabelText = "Y Offset:";
             this.yOffsetControl.Location = new System.Drawing.Point(6, 141);
@@ -598,6 +604,7 @@
             this.framesControl.BackColor = System.Drawing.Color.Transparent;
             this.framesControl.CheckBoxEnabled = false;
             this.framesControl.CurrentValue = 0;
+            this.framesControl.DecimalPlaces = 0;
             this.framesControl.isReset = false;
             this.framesControl.LabelText = "Frames:";
             this.framesControl.Location = new System.Drawing.Point(6, 174);
@@ -614,6 +621,7 @@
             this.frameSpeedControl.BackColor = System.Drawing.Color.Transparent;
             this.frameSpeedControl.CheckBoxEnabled = false;
             this.frameSpeedControl.CurrentValue = 8;
+            this.frameSpeedControl.DecimalPlaces = 0;
             this.frameSpeedControl.isReset = false;
             this.frameSpeedControl.LabelText = "Framespeed:";
             this.frameSpeedControl.Location = new System.Drawing.Point(6, 207);
@@ -630,7 +638,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(1191, 390);
+            this.ClientSize = new System.Drawing.Size(1191, 389);
             this.Controls.Add(this.nameControl);
             this.Controls.Add(this.npcAnimator);
             this.Controls.Add(this.inGameGroupBox);

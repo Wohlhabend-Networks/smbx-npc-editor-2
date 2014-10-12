@@ -42,8 +42,30 @@ namespace smbx_npc_editor
             {
                 _isReset = value;
             }
+            
         }
         #region WinForms Stuff
+        private int _decimalPlaces = 0;
+        [Description("The amount of decimals places the control has")]
+        [Category("Appearance")]
+        [DefaultValue("0")]
+        [Localizable(true)]
+        public int DecimalPlaces
+        {
+            get { return _decimalPlaces; }
+            set
+            {
+                if (value == null)
+                    value = 0;
+                _decimalPlaces = value;
+                UpdateDecimalPlaces();
+            }
+        }
+        private void UpdateDecimalPlaces()
+        {
+            valueSpinner.DecimalPlaces = _decimalPlaces;
+        }
+        
         private string _valueTag = String.Empty;
         [Description("The tag of the value, for the SMBX NPC Editor this is used to identify which code it'll be assigned to")]
         [Category("Appearance")]
@@ -89,12 +111,12 @@ namespace smbx_npc_editor
             }
         }
 
-        private int _SpinnerVal = 0;
+        private float _SpinnerVal = 0;
         [Description("Value of the spinner")]
         [Category("Appearance")]
         [DefaultValue("")]
         [Localizable(true)]
-        public int SpinnerValue
+        public float SpinnerValue
         {
             get { return _SpinnerVal; }
             set
@@ -145,12 +167,12 @@ namespace smbx_npc_editor
             }
         }
 
-        private int _defValue = 0;
+        private float _defValue = 0;
         [Description("The current value of the spinner.")]
         [Category("Appearance")]
         [DefaultValue("")]
         [Localizable(true)]
-        public int CurrentValue
+        public float CurrentValue
         {
             get { return _defValue; }
             set
@@ -186,7 +208,7 @@ namespace smbx_npc_editor
 
         private void UpdateValueSpinnerDef()
         {
-            valueSpinner.Value = _defValue;
+            valueSpinner.Value = (decimal)_defValue;
         }
 
         private void UpdateValueSpinnerMin()
@@ -210,7 +232,7 @@ namespace smbx_npc_editor
 
         private void UpdateSpinnerVal()
         {
-            valueSpinner.Value = _SpinnerVal;
+            valueSpinner.Value = (decimal)_SpinnerVal;
         }
 
         private void UpdateLabelText()
