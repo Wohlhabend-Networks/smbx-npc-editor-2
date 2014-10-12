@@ -36,16 +36,16 @@ namespace smbx_npc_editor
         //
         public MainUI()
         {
-            FontFamily ff = new FontFamily(SystemFonts.MessageBoxFont.Name);
+            /*FontFamily ff = new FontFamily(SystemFonts.MessageBoxFont.Name);
             Font usingg = new Font(SystemFonts.MessageBoxFont, SystemFonts.MessageBoxFont.Style);
-            //Font = new Font(ff, 8, usingg.Style);
+            //Font = new Font(ff, 8, usingg.Style);*/
             this.Controls.Add(npcAnimator);
             showChangelog();
             InitializeComponent();
             loadSettings();
             compileConfigs();
             npcAnimator.setParentWindow(this);
-            GetUserControls(this.Controls);
+
             Version myVersion = new Version(Application.ProductVersion);
 
             if (ApplicationDeployment.IsNetworkDeployed)
@@ -93,138 +93,6 @@ namespace smbx_npc_editor
             Form parent = (Form)sent.Parent;
             parent.Close();
         }
-
-        private void GetUserControls(Control.ControlCollection controls)
-        {
-            foreach (Control c in controls)
-            {
-                if (c is UserControl)
-                {
-                    if (c is SpinnerControlValue)
-                    {
-                        SpinnerControlValue svc = (SpinnerControlValue)c;
-                        svc.valueSpinner.ValueChanged += (sender, e) => valueSpinner_ValueChanged(sender, e, svc);
-                        svc.enabledCheckBox.CheckedChanged += (sender, e) => enabledCheckBox_CheckedChanged(sender, e, svc);
-                    }
-                    else if (c is ComboBoxControlValue)
-                    {
-                        ComboBoxControlValue cbcv = (ComboBoxControlValue)c;
-                        cbcv.ComboValue.SelectedIndexChanged += comboValue_SelectedIndexChanged;
-                        cbcv.enabledCheckBox.CheckedChanged += (sender, e) => combo_enabledCheckBox_CheckedChanged(sender, e, cbcv);
-                    }
-                    else if (c is CheckBoxValue)
-                    {
-                        CheckBoxValue cbv = (CheckBoxValue)c;
-                        cbv.checkValue.CheckedChanged += (sender, e) => checkValue_CheckedChanged(sender, e, cbv);
-                        cbv.enabledCheckBox.CheckedChanged += (sender, e) => cb_enabledCheckBox_CheckedChanged(sender, e, cbv);
-                    }
-                }
-                if (c.Controls.Count > 0)
-                    GetUserControls(c.Controls);
-            }
-        }
-        #region Control Events
-        private void nameControl_TextChanged(object sender, EventArgs e)
-        {
-            if (nameControl.Text == String.Empty)
-                npcfile.RemoveValue("name");
-            else
-                npcfile.AddValue("name", String.Format("\"{0}\"", nameControl.Text));
-        }
-
-        void enabledCheckBox_CheckedChanged(object sender, object e, SpinnerControlValue sv)
-        {
-            CheckBox check = (CheckBox)sender;
-            if(check.Checked)
-            {
-                npcfile.AddValue(sv.valueSpinner.Tag.ToString(), sv.valueSpinner.Value.ToString());
-                hasChanges = true;
-            }
-            else
-            {
-                npcfile.RemoveValue(sv.valueSpinner.Tag.ToString());
-                hasChanges = true;
-            }
-        }
-
-        void valueSpinner_ValueChanged(object sender, EventArgs e, SpinnerControlValue svc)
-        {
-            if (!svc.isReset && svc.enabledCheckBox.Checked)
-            {
-                NumericUpDown updown = (NumericUpDown)sender;
-                npcfile.AddValue(updown.Tag.ToString(), updown.Value.ToString());
-                hasChanges = true;
-            }
-        }
-        //
-        void cb_enabledCheckBox_CheckedChanged(object sender, object e, CheckBoxValue cb)
-        {
-            CheckBox check = (CheckBox)sender;
-            if(check.Checked)
-            {
-                switch(cb.checkValue.Checked)
-                {
-                    case(true):
-                        npcfile.AddValue(cb.checkValue.Tag.ToString(), "1");
-                        hasChanges = true;
-                        break;
-                    case(false):
-                        npcfile.AddValue(cb.checkValue.Tag.ToString(), "0");
-                        hasChanges = true;
-                        break;
-                }
-            }
-            else
-            {
-                npcfile.RemoveValue(cb.checkValue.Tag.ToString());
-                hasChanges = true;
-            }
-        }
-        void checkValue_CheckedChanged(object sender, EventArgs e, CheckBoxValue cb)
-        {
-            CheckBox check = (CheckBox)sender;
-            if (!cb.isReset && cb.enabledCheckBox.Checked)
-            {
-                switch (check.Checked)
-                {
-                    case (true):
-                        npcfile.AddValue(check.Tag.ToString(), "1");
-                        hasChanges = true;
-                        break;
-                    case (false):
-                        npcfile.AddValue(check.Tag.ToString(), "0");
-                        hasChanges = true;
-                        break;
-                }
-            }
-        }
-        //
-        void combo_enabledCheckBox_CheckedChanged(object sender, EventArgs e, ComboBoxControlValue cbcv)
-        {
-            CheckBox check = (CheckBox)sender;
-            switch(check.Checked)
-            {
-                case(true):
-                    if (cbcv.GetSelectedIndex().ToString() != "-1")
-                    {
-                        npcfile.AddValue(cbcv.ComboValue.Tag.ToString(), cbcv.GetSelectedIndex().ToString());
-                        hasChanges = true;
-                    }
-                    break;
-                case(false):
-                    npcfile.RemoveValue(cbcv.ComboValue.Tag.ToString());
-                    hasChanges = true;
-                    break;
-            }
-        }
-        void comboValue_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ComboBox combo = (ComboBox)sender;
-            if(combo.SelectedIndex.ToString() != "-1")
-            {npcfile.AddValue(combo.Tag.ToString(), combo.SelectedIndex.ToString());
-            hasChanges = true;}
-        }
-        #endregion
         #region crying
         void ResetItems(Control.ControlCollection controls, bool resetFile)
         {
@@ -594,103 +462,20 @@ namespace smbx_npc_editor
             Application.Exit();
         }
 
-        void loadDefaultsFromIni(Control.ControlCollection controls, List<string> dontTouchThis)
+        /// <summary>
+        /// Loads in the values from a temp file, after the TextEditor has been closed
+        /// </summary>
+        public void loadInValuesFromTemp()
         {
-            foreach(Control c in controls)
+            smbxNpcFile = new SMBXNpc();
+            if (File.Exists(Environment.CurrentDirectory + @"\temp.npctxt"))
             {
-                if(c is UserControl)
-                {
-                    if(c is SpinnerControlValue)
-                    {
-                        SpinnerControlValue svc = (SpinnerControlValue)c;
-                        foreach(var item in dontTouchThis)
-                        {
-                            if(svc.ValueTag != item)
-                            {
-                                //fill in default value
-                            }
-                        }
-                    }
-                    //
-                }
-                //
+                smbxNpcFile.ReadFromTextFile(Environment.CurrentDirectory + @"\temp.npctxt");
+                File.Delete(Environment.CurrentDirectory + @"\temp.npctxt");
+                hasChanges = true;
             }
-            //
         }
-
-        public void loadInValues(Control.ControlCollection controls)
-        {
-            npcfile.isOpening = true;
-            foreach (Control c in controls)
-            {
-                if (c is UserControl)
-                {
-                    if (c is SpinnerControlValue)
-                    {
-                        SpinnerControlValue svc = (SpinnerControlValue)c;
-                        if (npcfile.GetKeyValue(svc.ValueTag) != null)
-                        {
-                            svc.CurrentValue = int.Parse(npcfile.GetKeyValue(svc.ValueTag));
-                            svc.enabledCheckBox.Checked = true;
-                        }
-                        else
-                        {
-                            svc.CurrentValue = svc.MinimumValue;
-                            svc.enabledCheckBox.Checked = false;
-                        }
-                    }
-                    else if (c is ComboBoxControlValue)
-                    {
-                        ComboBoxControlValue cbcv = (ComboBoxControlValue)c;
-                        if (npcfile.GetKeyValue(cbcv.ValueTag) != null)
-                        {
-                            cbcv.SetSelectedIndex(int.Parse(npcfile.GetKeyValue(cbcv.ValueTag)));
-                            cbcv.enabledCheckBox.Checked = true;
-                        }
-                        else
-                        {
-                            cbcv.SetSelectedIndex(-1);
-                            cbcv.enabledCheckBox.Checked = false;
-                        }
-                    }
-                    else if (c is CheckBoxValue)
-                    {
-                        CheckBoxValue cbv = (CheckBoxValue)c;
-                        if(npcfile.GetKeyValue(cbv.ValueTag) != null)
-                        {
-                            switch(int.Parse(npcfile.GetKeyValue(cbv.ValueTag)))
-                            {
-                                case(1):
-                                    cbv.ValueChecked = true;
-                                    cbv.enabledCheckBox.Checked = true;
-                                    break;
-                                case(0):
-                                    cbv.ValueChecked = false;
-                                    cbv.enabledCheckBox.Checked = true;
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            cbv.ValueChecked = false;
-                            cbv.enabledCheckBox.Checked = false;
-                        }
-                    }
-                }
-                if (c.Controls.Count > 0)
-                    loadInValues(c.Controls);
-            }
-            if (npcfile.GetKeyValue("name") != null)
-            {
-                string value = npcfile.GetKeyValue("name");
-                if (value.Contains('\"'))
-                {
-                    nameControl.Text = value.Replace("\"", "");
-                }
-            }
-            npcfile.isOpening = false;
-        }
-
+        
         private void menuItem10_Click(object sender, EventArgs e)
         {
             smbx_npc_editor.IO.TextEditor textEdit = null;
@@ -722,17 +507,26 @@ namespace smbx_npc_editor
             {
                 case(DialogResult.OK):
                     ResetItems(this.Controls, true);
-                    //npcfile.Clear();
-                    //npcfile.Load(of.FileName);
-                    //loadInValues(this.Controls);
                     curFile = of.FileName;
                     smbxNpcFile = new SMBXNpc();
+                    try
+                    { 
+                        smbxNpcFile.ReadFromTextFile(curFile); 
+                    }
+                    catch (BadNpcTextFileException ex)
+                    {
+                        MessageBox.Show(String.Format("An error occurred while trying to process the NPC Text File\n{0}", ex.Message), 
+                            "Error Processing Text File", 
+                            MessageBoxButtons.OK, 
+                            MessageBoxIcon.Error); 
+                    }
                     //
                     hasDoneASaveAs = true;
                     if(File.Exists(npcAnimator.GetSpritePath(of.FileName)))
                     {
                         npcAnimator.setSprite(npcAnimator.GetSpritePath(of.FileName));
                     }
+                    ///TODO: Load the values into the UI
                     break;
                 case(DialogResult.Cancel):
                     break;
@@ -741,12 +535,7 @@ namespace smbx_npc_editor
 
         public void openPassedFile(string fileName)
         {
-            ResetItems(this.Controls, true);
-            npcfile.Clear();
-            npcfile.Load(fileName);
-            loadInValues(this.Controls);
-            hasDoneASaveAs = true;
-            ///TODO: Add in animation checking
+            throw new NotImplementedException();
         }
 
         private void menuItem11_Click(object sender, EventArgs e)
@@ -785,9 +574,10 @@ namespace smbx_npc_editor
         {
             try
             {
-                npcfile.Save(curFile, true);
+                smbxNpcFile.WriteToTextFile(curFile);
                 String message = String.Format("File saved to {0} successfully!", curFile);
                 MessageBox.Show(message, "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                hasChanges = false;
             }
             catch(Exception ex)
             {
@@ -813,5 +603,128 @@ namespace smbx_npc_editor
             saveAs();
         }
         //
+
+        /// <summary>
+        /// Only call this function once we're absolutely sure that the SMBXNpc was read correctly!
+        /// </summary>
+        public void loadValuesFromSmbxNpc()
+        {
+            if(smbxNpcFile.en_gfxoffsetx)
+            {
+                xOffsetControl.enabledCheckBox.Checked = true;
+                xOffsetControl.CurrentValue = smbxNpcFile.gfxoffsetx;
+            }
+            if (smbxNpcFile.en_gfxoffsety)
+            {
+                yOffsetControl.enabledCheckBox.Checked = true;
+                yOffsetControl.CurrentValue = smbxNpcFile.gfxoffsety;
+            }
+            if (smbxNpcFile.en_width)
+            {
+                widthControl.enabledCheckBox.Checked = true;
+                widthControl.CurrentValue = (int)smbxNpcFile.width;
+            }
+            if (smbxNpcFile.en_height)
+            {
+                heightControl.enabledCheckBox.Checked = true;
+                heightControl.CurrentValue = (int)smbxNpcFile.height;
+            }
+            if (smbxNpcFile.en_gfxwidth)
+            {
+                gfxWidthControl.enabledCheckBox.Checked = true;
+                gfxWidthControl.CurrentValue = smbxNpcFile.gfxwidth;
+            }
+            if (smbxNpcFile.en_gfxheight)
+            {
+                gfxHeightControl.enabledCheckBox.Checked = true;
+                gfxHeightControl.CurrentValue = smbxNpcFile.gfxheight;
+            }
+            if (smbxNpcFile.en_score)
+            {
+                scoreControl.enabledCheckBox.Checked = true;
+                scoreControl.SetSelectedIndex(smbxNpcFile.score);
+            }
+            if (smbxNpcFile.en_playerblock)
+            {
+                playerCollisionControl.enabledCheckBox.Checked = true;
+                playerCollisionControl.checkValue.Checked = smbxNpcFile.playerblock;
+            }
+            if (smbxNpcFile.en_playerblocktop)
+            {
+                playerCollisionTopControl.enabledCheckBox.Checked = true;
+                playerCollisionTopControl.checkValue.Checked = smbxNpcFile.playerblocktop;
+            }
+            if (smbxNpcFile.en_npcblock)
+            {
+                npcCollisionControl.enabledCheckBox.Checked = true;
+                npcCollisionControl.checkValue.Checked = smbxNpcFile.npcblock;
+            }
+            if (smbxNpcFile.en_npcblocktop)
+            {
+                npcCollisionTopControl.enabledCheckBox.Checked = true;
+                npcCollisionTopControl.checkValue.Checked = smbxNpcFile.npcblocktop;
+            }
+            if (smbxNpcFile.en_grabside)
+            {
+                grabSideControl.enabledCheckBox.Checked = true;
+                grabSideControl.checkValue.Checked = smbxNpcFile.grabside;
+            }
+            if (smbxNpcFile.en_grabtop)
+            {
+                grabTopControl.enabledCheckBox.Checked = true;
+                grabTopControl.checkValue.Checked = smbxNpcFile.grabtop;
+            }
+            if (smbxNpcFile.en_jumphurt)
+            {
+                jumpHurtControl.enabledCheckBox.Checked = true;
+                jumpHurtControl.checkValue.Checked = smbxNpcFile.jumphurt;
+            }
+            if (smbxNpcFile.en_nohurt)
+            {
+                dontHurtControl.enabledCheckBox.Checked = true;
+                dontHurtControl.checkValue.Checked = smbxNpcFile.nohurt;
+            }
+            if (smbxNpcFile.en_noblockcollision)
+            {
+                noBlockCollisionControl.enabledCheckBox.Checked = true;
+                noBlockCollisionControl.checkValue.Checked = smbxNpcFile.noblockcollision;
+            }
+            if (smbxNpcFile.en_cliffturn)
+            {
+                turnOnCliffControl.enabledCheckBox.Checked = true;
+                turnOnCliffControl.checkValue.Checked = smbxNpcFile.cliffturn;
+            }
+            if (smbxNpcFile.en_noyoshi)
+            {
+                cantBeEatenControl.enabledCheckBox.Checked = true;
+                cantBeEatenControl.checkValue.Checked = smbxNpcFile.noyoshi;
+            }
+            if (smbxNpcFile.en_foreground)
+            {
+                foregroundControl.enabledCheckBox.Checked = true;
+                foregroundControl.checkValue.Checked = smbxNpcFile.foreground;
+            }
+            if(smbxNpcFile.en_speed)
+            {
+                speedControl.enabledCheckBox.Checked = true;
+                speedControl.CurrentValue = smbxNpcFile.speed;
+            }
+            if (smbxNpcFile.en_nofireball)
+            {
+                noFireBallControl.enabledCheckBox.Checked = true;
+                noFireBallControl.checkValue.Checked = smbxNpcFile.nofireball;
+            }
+            if (smbxNpcFile.en_nogravity)
+            {
+                noGravityControl.enabledCheckBox.Checked = true;
+                noGravityControl.checkValue.Checked = smbxNpcFile.nogravity;
+            }
+            if(smbxNpcFile.en_frames)
+            {
+                framesControl.enabledCheckBox.Checked = true;
+                framesControl.CurrentValue = smbxNpcFile.frames;
+            }
+        }
+
     }
 }

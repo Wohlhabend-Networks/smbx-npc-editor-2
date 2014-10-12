@@ -118,7 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="play-32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\icons\play-32.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="GenericVSEditor_9905" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GenericVSEditor_9905.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="play_32" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6
+        JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAABEJAAARCQHA5aIYAAAAGXRF
+        WHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAOxJREFUWEfd1k1qwmAUheGAW6i2Kt2NC3LU
+        WXEsoiKlg7qH7KWLaauO9P3gXicef5K294KDZ/JikgNqkmoxqlPJGEnGSDJGkjGSjJFkNI94xQserP05
+        Gc0H9uYLU3ShPtuajOYTPsB9Y4Ye1DGNyWjUAFeGzPEEdezNZDSXBrgfLNGHOsdVMppbBrgNVhhAness
+        GU2TAW6LNwyhznlCRtNmgCtD3vEMde4jGc1vBrgdypAO1DX+fYAbQ13j/gekfQVpP8K0v2HajSjtVpz2
+        MAp9HKe/kJRXsjUmSHklCyFjJBkjyRhJxkgyxqmrA/0A2uE5usr0AAAAAElFTkSuQmCC
+</value>
   </data>
 </root>

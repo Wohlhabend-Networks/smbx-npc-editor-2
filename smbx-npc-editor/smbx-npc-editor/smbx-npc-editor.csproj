@@ -31,8 +31,8 @@
     <PublisherName>Luigicorp</PublisherName>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>4</ApplicationRevision>
-    <ApplicationVersion>0.2.1.%2a</ApplicationVersion>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>0.3.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <ExcludeDeploymentUrl>true</ExcludeDeploymentUrl>
@@ -71,7 +71,7 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>GenericVSProject_9906.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\GenericVSProject_9906.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Setting">
@@ -231,16 +231,43 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GenericVSEditor_9905.ico" />
     <Content Include="GenericVSProject_9906.ico" />
+    <Content Include="GenericVSEditor_9905.ico" />
+    <None Include="Resources\GenericVSEditor_9905.ico" />
+    <Content Include="Resources\GenericVSProject_9906.ico" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <FileAssociation Include=".txt">
+    <PublishFile Include="GenericVSEditor_9905.ico">
       <Visible>False</Visible>
-      <Description>Plain Text Files</Description>
-      <Progid>txtfile</Progid>
-      <DefaultIcon>GenericVSEditor_9905.ico</DefaultIcon>
-    </FileAssociation>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="GenericVSProject_9906.ico">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
+    <PublishFile Include="Resources\GenericVSProject_9906.ico">
+      <Visible>False</Visible>
+      <Group>
+      </Group>
+      <TargetPath>
+      </TargetPath>
+      <PublishState>Exclude</PublishState>
+      <IncludeHash>True</IncludeHash>
+      <FileType>File</FileType>
+    </PublishFile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
