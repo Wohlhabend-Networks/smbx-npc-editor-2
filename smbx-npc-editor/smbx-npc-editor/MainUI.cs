@@ -718,5 +718,66 @@ namespace smbx_npc_editor
             }
         }
 
+        public void returnControlFromKey(string key)
+        {
+            switch(key)
+            {
+                case("gfxoffsetx"):
+                    
+                    break;
+                case("gfxoffsety"):
+                    break;
+                case("height"):
+                    break;
+                case("width"):
+                    break;
+                case("gfxheight"):
+                    break;
+                case("gfxwidth"):
+                    break;
+                case("frames"):
+                    break;
+                case("framespeed"):
+                    break;
+                case("framestyle"):
+                    break;
+                case("foreground"):
+                    break;
+                case("playerblock"):
+                    break;
+                case("playerblocktop"):
+                    break;
+                case("npcblock"):
+                    break;
+                case("npcblocktop"):
+                    break;
+                case("noblockcollision"):
+                    break;
+                case("cliffturn"):
+                    break;
+                case("nogravity"):
+                    break;
+                case("score"):
+                    break;
+                case("grabside"):
+                    break;
+                case("grabtop"):
+                    break;
+                case("jumphurt"):
+                    break;
+                case("nohurt"):
+                    break;
+                case("noyoshi"):
+                    break;
+                case("speed"):
+                    break;
+                case("nofireball"):
+                    break;
+                case("noiceball"):
+                    break;
+                case("name"):
+                    break;
+            }
+        }
     }
 }
