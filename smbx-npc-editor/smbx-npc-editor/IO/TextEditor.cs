@@ -28,14 +28,15 @@ namespace smbx_npc_editor.IO
         public Regex stringSurrounding = new Regex("\".+\"");
         public Regex ints = new Regex(@"^\d$");
 
-        public TextEditor(string fileName, MainUI parentWindow)
+        #region old
+        /*public TextEditor(string fileName, MainUI parentWindow)
         {
             curFileName = fileName;
             if (File.Exists(curFileName))
                 hasSaved = true;
             _parentWindow = parentWindow;
             InitializeComponent();
-        }
+        }*/
         public TextEditor(string fileName, bool hasChanges, MainUI parentWindow)
         {
             _parentWindow = parentWindow;
@@ -91,15 +92,18 @@ namespace smbx_npc_editor.IO
             hasSaved = false;
             
         }
-
-        private void TextEditor_Load(object sender, EventArgs e)
+        #endregion
+        public TextEditor(string fileToLoad, MainUI parentWindow)
         {
-
-        }
-
-        private void highlightTimer_Tick(object sender, EventArgs e)
-        {
-           
+            _parentWindow = parentWindow;
+            InitializeComponent();
+            StreamReader reader = new StreamReader(Environment.CurrentDirectory + @"\temp.npctxt");
+            while(!reader.EndOfStream)
+            {
+                richTextEditor.AppendText(reader.ReadLine() + "\n");
+            }
+            hasSaved = false;
+            reader.Close();
         }
 
         private void richTextEditor_TextChanged(object sender, EventArgs e)
@@ -175,6 +179,7 @@ namespace smbx_npc_editor.IO
             StreamWriter writer = new StreamWriter(Environment.CurrentDirectory + @"\temp.npctxt");
             writer.Write(richTextEditor.Text);
             writer.Flush();
+            writer.Close();
         }
     }
 }

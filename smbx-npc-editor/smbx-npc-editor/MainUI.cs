@@ -361,9 +361,11 @@ namespace smbx_npc_editor
                         else
                             saveAs();
                         saveSettings();
+                        File.Delete(Environment.CurrentDirectory + @"\temp.npctxt");
                         break;
                     case(DialogResult.No):
                         saveSettings();
+                        File.Delete(Environment.CurrentDirectory + @"\temp.npctxt");
                         Environment.Exit(0);
                         break;
                     case(DialogResult.Cancel):
@@ -374,6 +376,7 @@ namespace smbx_npc_editor
             else
             {
                 saveSettings();
+                File.Delete(Environment.CurrentDirectory + @"\temp.npctxt");
                 Environment.Exit(0);
             }
         }
@@ -471,7 +474,6 @@ namespace smbx_npc_editor
             if (File.Exists(Environment.CurrentDirectory + @"\temp.npctxt"))
             {
                 smbxNpcFile.ReadFromTextFile(Environment.CurrentDirectory + @"\temp.npctxt");
-                File.Delete(Environment.CurrentDirectory + @"\temp.npctxt");
                 hasChanges = true;
             }
         }
@@ -479,18 +481,8 @@ namespace smbx_npc_editor
         private void menuItem10_Click(object sender, EventArgs e)
         {
             smbx_npc_editor.IO.TextEditor textEdit = null;
-            if(curFile == null)
-            {
-                textEdit = new TextEditor(npcfile.ExportToStringArray(), this);
-            }
-            else if(curFile != null && hasChanges)
-            {
-                textEdit = new TextEditor(npcfile.ExportToStringArray(), curFile, hasChanges, this);
-            }
-            else if(curFile != null && !hasChanges)
-            {
-                textEdit = new TextEditor(curFile, this);
-            }
+            smbxNpcFile.WriteToTextFile(Environment.CurrentDirectory + @"\temp.npctxt");
+            textEdit = new TextEditor(Environment.CurrentDirectory + @"\temp.npctxt", this);
             if (textEdit != null)
             { textEdit.Show(); this.Hide(); }
             else
@@ -726,5 +718,66 @@ namespace smbx_npc_editor
             }
         }
 
+        public void returnControlFromKey(string key)
+        {
+            switch(key)
+            {
+                case("gfxoffsetx"):
+                    
+                    break;
+                case("gfxoffsety"):
+                    break;
+                case("height"):
+                    break;
+                case("width"):
+                    break;
+                case("gfxheight"):
+                    break;
+                case("gfxwidth"):
+                    break;
+                case("frames"):
+                    break;
+                case("framespeed"):
+                    break;
+                case("framestyle"):
+                    break;
+                case("foreground"):
+                    break;
+                case("playerblock"):
+                    break;
+                case("playerblocktop"):
+                    break;
+                case("npcblock"):
+                    break;
+                case("npcblocktop"):
+                    break;
+                case("noblockcollision"):
+                    break;
+                case("cliffturn"):
+                    break;
+                case("nogravity"):
+                    break;
+                case("score"):
+                    break;
+                case("grabside"):
+                    break;
+                case("grabtop"):
+                    break;
+                case("jumphurt"):
+                    break;
+                case("nohurt"):
+                    break;
+                case("noyoshi"):
+                    break;
+                case("speed"):
+                    break;
+                case("nofireball"):
+                    break;
+                case("noiceball"):
+                    break;
+                case("name"):
+                    break;
+            }
+        }
     }
 }

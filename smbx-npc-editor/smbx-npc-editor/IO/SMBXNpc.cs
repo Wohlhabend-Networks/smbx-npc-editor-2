@@ -656,6 +656,7 @@ namespace smbx_npc_editor.IO
             }
             //
             writer.Flush();
+            writer.Close();
         }
 
 
