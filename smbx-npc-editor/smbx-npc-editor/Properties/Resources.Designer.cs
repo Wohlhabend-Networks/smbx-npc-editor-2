@@ -61,6 +61,16 @@ namespace smbx_npc_editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _128 {
+            get {
+                object obj = ResourceManager.GetObject("128", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
         /// </summary>
         internal static System.Drawing.Icon GenericVSEditor_9905 {
@@ -77,6 +87,24 @@ namespace smbx_npc_editor.Properties {
             get {
                 object obj = ResourceManager.GetObject("play_32", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+        ///{\*\generator Riched20 6.3.9600}\viewkind4\uc1 
+        ///\pard\sa200\sl276\slmult1\qc\ul\b\i\f0\fs32\lang9 A Special Thank You To...\ulnone\b0\i0\fs22\par
+        ///\ul Wohlstand\ulnone  - Much of the NPC animation code, and optimizing read and write, original ideas\par
+        ///\ul GhostHawk\ulnone  - The original animation code\par
+        ///\par
+        ///\ul Those Who Participated in the Icon Designing Contest\par
+        ///\ulnone Wohlstand\par
+        ///SnifitGuy\par
+        ///z [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string thankyou {
+            get {
+                return ResourceManager.GetString("thankyou", resourceCulture);
             }
         }
     }

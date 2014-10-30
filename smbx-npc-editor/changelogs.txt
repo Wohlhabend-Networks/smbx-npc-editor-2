@@ -1,0 +1,3 @@
+-Changed icons
+-Added .npctxt file assosciation
+-Added the .npctxt file

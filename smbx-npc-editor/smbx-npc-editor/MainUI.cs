@@ -779,5 +779,11 @@ namespace smbx_npc_editor
                     break;
             }
         }
+
+        private void menuItem13_Click(object sender, EventArgs e)
+        {
+            SettingDialog sd = new SettingDialog();
+            sd.ShowDialog();
+        }
     }
 }

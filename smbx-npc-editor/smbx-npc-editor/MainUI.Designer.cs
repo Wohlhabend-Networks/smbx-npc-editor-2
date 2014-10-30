@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainUI));
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
             this.menuItem1 = new System.Windows.Forms.MenuItem();
             this.menuItem9 = new System.Windows.Forms.MenuItem();
@@ -77,6 +78,7 @@
             this.yOffsetControl = new smbx_npc_editor.SpinnerControlValue();
             this.framesControl = new smbx_npc_editor.SpinnerControlValue();
             this.frameSpeedControl = new smbx_npc_editor.SpinnerControlValue();
+            this.menuItem13 = new System.Windows.Forms.MenuItem();
             this.graphicGroupBox.SuspendLayout();
             this.physicsGroupBox.SuspendLayout();
             this.inGameGroupBox.SuspendLayout();
@@ -148,7 +150,8 @@
             this.menuItem5,
             this.menuItem10,
             this.menuItem3,
-            this.selectConfigMenuItem});
+            this.selectConfigMenuItem,
+            this.menuItem13});
             this.editMenu.Text = "&Edit";
             // 
             // showAnimationMenuItem
@@ -296,7 +299,7 @@
             // speedControl
             // 
             this.speedControl.CheckBoxEnabled = false;
-            this.speedControl.CurrentValue = 1;
+            this.speedControl.CurrentValue = 1F;
             this.speedControl.DecimalPlaces = 2;
             this.speedControl.isReset = false;
             this.speedControl.LabelText = "Speed:";
@@ -305,7 +308,7 @@
             this.speedControl.MinimumValue = 0;
             this.speedControl.Name = "speedControl";
             this.speedControl.Size = new System.Drawing.Size(228, 27);
-            this.speedControl.SpinnerValue = 0;
+            this.speedControl.SpinnerValue = 0F;
             this.speedControl.TabIndex = 19;
             this.speedControl.ValueTag = "speed";
             // 
@@ -404,7 +407,7 @@
             // heightControl
             // 
             this.heightControl.CheckBoxEnabled = false;
-            this.heightControl.CurrentValue = 0;
+            this.heightControl.CurrentValue = 0F;
             this.heightControl.DecimalPlaces = 0;
             this.heightControl.isReset = false;
             this.heightControl.Location = new System.Drawing.Point(8, 34);
@@ -412,7 +415,7 @@
             this.heightControl.MinimumValue = 0;
             this.heightControl.Name = "heightControl";
             this.heightControl.Size = new System.Drawing.Size(228, 27);
-            this.heightControl.SpinnerValue = 1;
+            this.heightControl.SpinnerValue = 1F;
             this.heightControl.TabIndex = 0;
             this.heightControl.ValueTag = "height";
             // 
@@ -430,7 +433,7 @@
             // widthControl
             // 
             this.widthControl.CheckBoxEnabled = false;
-            this.widthControl.CurrentValue = 0;
+            this.widthControl.CurrentValue = 0F;
             this.widthControl.DecimalPlaces = 0;
             this.widthControl.isReset = false;
             this.widthControl.LabelText = "Width:";
@@ -439,7 +442,7 @@
             this.widthControl.MinimumValue = 0;
             this.widthControl.Name = "widthControl";
             this.widthControl.Size = new System.Drawing.Size(228, 27);
-            this.widthControl.SpinnerValue = 1;
+            this.widthControl.SpinnerValue = 1F;
             this.widthControl.TabIndex = 1;
             this.widthControl.ValueTag = "width";
             // 
@@ -531,7 +534,7 @@
             // 
             this.gfxHeightControl.BackColor = System.Drawing.Color.Transparent;
             this.gfxHeightControl.CheckBoxEnabled = false;
-            this.gfxHeightControl.CurrentValue = 0;
+            this.gfxHeightControl.CurrentValue = 0F;
             this.gfxHeightControl.DecimalPlaces = 0;
             this.gfxHeightControl.isReset = false;
             this.gfxHeightControl.LabelText = "GFX Height:";
@@ -540,7 +543,7 @@
             this.gfxHeightControl.MinimumValue = 0;
             this.gfxHeightControl.Name = "gfxHeightControl";
             this.gfxHeightControl.Size = new System.Drawing.Size(228, 27);
-            this.gfxHeightControl.SpinnerValue = 0;
+            this.gfxHeightControl.SpinnerValue = 0F;
             this.gfxHeightControl.TabIndex = 3;
             this.gfxHeightControl.Tag = "gfxheight";
             this.gfxHeightControl.ValueTag = "gfxheight";
@@ -549,7 +552,7 @@
             // 
             this.gfxWidthControl.BackColor = System.Drawing.Color.Transparent;
             this.gfxWidthControl.CheckBoxEnabled = false;
-            this.gfxWidthControl.CurrentValue = 0;
+            this.gfxWidthControl.CurrentValue = 0F;
             this.gfxWidthControl.DecimalPlaces = 0;
             this.gfxWidthControl.isReset = false;
             this.gfxWidthControl.LabelText = "GFX Width:";
@@ -558,7 +561,7 @@
             this.gfxWidthControl.MinimumValue = 0;
             this.gfxWidthControl.Name = "gfxWidthControl";
             this.gfxWidthControl.Size = new System.Drawing.Size(228, 27);
-            this.gfxWidthControl.SpinnerValue = 0;
+            this.gfxWidthControl.SpinnerValue = 0F;
             this.gfxWidthControl.TabIndex = 4;
             this.gfxWidthControl.Tag = "gfxwidth";
             this.gfxWidthControl.ValueTag = "gfxwidth";
@@ -567,7 +570,7 @@
             // 
             this.xOffsetControl.BackColor = System.Drawing.Color.Transparent;
             this.xOffsetControl.CheckBoxEnabled = false;
-            this.xOffsetControl.CurrentValue = 0;
+            this.xOffsetControl.CurrentValue = 0F;
             this.xOffsetControl.DecimalPlaces = 0;
             this.xOffsetControl.isReset = false;
             this.xOffsetControl.LabelText = "X Offset:";
@@ -576,7 +579,7 @@
             this.xOffsetControl.MinimumValue = 0;
             this.xOffsetControl.Name = "xOffsetControl";
             this.xOffsetControl.Size = new System.Drawing.Size(228, 27);
-            this.xOffsetControl.SpinnerValue = 0;
+            this.xOffsetControl.SpinnerValue = 0F;
             this.xOffsetControl.TabIndex = 5;
             this.xOffsetControl.Tag = "gfxoffsetx";
             this.xOffsetControl.ValueTag = "gfxoffsetx";
@@ -585,7 +588,7 @@
             // 
             this.yOffsetControl.BackColor = System.Drawing.Color.Transparent;
             this.yOffsetControl.CheckBoxEnabled = false;
-            this.yOffsetControl.CurrentValue = 0;
+            this.yOffsetControl.CurrentValue = 0F;
             this.yOffsetControl.DecimalPlaces = 0;
             this.yOffsetControl.isReset = false;
             this.yOffsetControl.LabelText = "Y Offset:";
@@ -594,7 +597,7 @@
             this.yOffsetControl.MinimumValue = 0;
             this.yOffsetControl.Name = "yOffsetControl";
             this.yOffsetControl.Size = new System.Drawing.Size(228, 27);
-            this.yOffsetControl.SpinnerValue = 0;
+            this.yOffsetControl.SpinnerValue = 0F;
             this.yOffsetControl.TabIndex = 6;
             this.yOffsetControl.Tag = "gfxoffsety";
             this.yOffsetControl.ValueTag = "gfxoffsety";
@@ -603,7 +606,7 @@
             // 
             this.framesControl.BackColor = System.Drawing.Color.Transparent;
             this.framesControl.CheckBoxEnabled = false;
-            this.framesControl.CurrentValue = 0;
+            this.framesControl.CurrentValue = 0F;
             this.framesControl.DecimalPlaces = 0;
             this.framesControl.isReset = false;
             this.framesControl.LabelText = "Frames:";
@@ -612,7 +615,7 @@
             this.framesControl.MinimumValue = 0;
             this.framesControl.Name = "framesControl";
             this.framesControl.Size = new System.Drawing.Size(228, 27);
-            this.framesControl.SpinnerValue = 0;
+            this.framesControl.SpinnerValue = 0F;
             this.framesControl.TabIndex = 7;
             this.framesControl.ValueTag = "frames";
             // 
@@ -620,7 +623,7 @@
             // 
             this.frameSpeedControl.BackColor = System.Drawing.Color.Transparent;
             this.frameSpeedControl.CheckBoxEnabled = false;
-            this.frameSpeedControl.CurrentValue = 8;
+            this.frameSpeedControl.CurrentValue = 8F;
             this.frameSpeedControl.DecimalPlaces = 0;
             this.frameSpeedControl.isReset = false;
             this.frameSpeedControl.LabelText = "Framespeed:";
@@ -629,9 +632,15 @@
             this.frameSpeedControl.MinimumValue = 0;
             this.frameSpeedControl.Name = "frameSpeedControl";
             this.frameSpeedControl.Size = new System.Drawing.Size(228, 27);
-            this.frameSpeedControl.SpinnerValue = 0;
+            this.frameSpeedControl.SpinnerValue = 0F;
             this.frameSpeedControl.TabIndex = 8;
             this.frameSpeedControl.ValueTag = "framespeed";
+            // 
+            // menuItem13
+            // 
+            this.menuItem13.Index = 5;
+            this.menuItem13.Text = "Settings (EXPERIMENTAL)";
+            this.menuItem13.Click += new System.EventHandler(this.menuItem13_Click);
             // 
             // MainUI
             // 
@@ -648,6 +657,7 @@
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Menu = this.mainMenu1;
             this.MinimumSize = new System.Drawing.Size(0, 449);
@@ -714,6 +724,7 @@
         private System.Windows.Forms.MenuItem menuItem3;
         private System.Windows.Forms.MenuItem menuItem11;
         private System.Windows.Forms.MenuItem menuItem12;
+        private System.Windows.Forms.MenuItem menuItem13;
 
     }
 }

@@ -71,7 +71,7 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\GenericVSProject_9906.ico</ApplicationIcon>
+    <ApplicationIcon>output.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Setting">
@@ -148,6 +148,12 @@
     <Compile Include="NumericComparer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SettingDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SettingDialog.Designer.cs">
+      <DependentUpon>SettingDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="SpinnerControlValue.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -188,6 +194,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="SettingDialog.resx">
+      <DependentUpon>SettingDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SpinnerControlValue.resx">
       <DependentUpon>SpinnerControlValue.cs</DependentUpon>
     </EmbeddedResource>
@@ -200,6 +209,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Resources\thankyou.rtf" />
     <None Include="smbx-npc-editor_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
@@ -231,12 +241,22 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="512.ico" />
     <Content Include="GenericVSProject_9906.ico" />
     <Content Include="GenericVSEditor_9905.ico" />
+    <None Include="Resources\Program Icons\Program\PNG\128.png" />
     <None Include="Resources\GenericVSEditor_9905.ico" />
+    <Content Include="output.ico" />
     <Content Include="Resources\GenericVSProject_9906.ico" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <FileAssociation Include=".npctxt">
+      <Visible>False</Visible>
+      <Description>Temporary NPC text file used by the SMBX NPC Editor</Description>
+      <Progid>NPCTXT</Progid>
+      <DefaultIcon>512.ico</DefaultIcon>
+    </FileAssociation>
+  </ItemGroup>
   <ItemGroup>
     <PublishFile Include="GenericVSEditor_9905.ico">
       <Visible>False</Visible>
