@@ -91,6 +91,26 @@ namespace smbx_npc_editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap preview_disabled {
+            get {
+                object obj = ResourceManager.GetObject("preview_disabled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap preview_enabled {
+            get {
+                object obj = ResourceManager.GetObject("preview_enabled", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
         ///{\*\generator Riched20 6.3.9600}\viewkind4\uc1 
         ///\pard\sa200\sl276\slmult1\qc\ul\b\i\f0\fs32\lang9 A Special Thank You To...\ulnone\b0\i0\fs22\par
