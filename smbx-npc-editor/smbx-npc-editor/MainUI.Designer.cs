@@ -44,6 +44,7 @@
             this.menuItem10 = new System.Windows.Forms.MenuItem();
             this.menuItem3 = new System.Windows.Forms.MenuItem();
             this.selectConfigMenuItem = new System.Windows.Forms.MenuItem();
+            this.menuItem13 = new System.Windows.Forms.MenuItem();
             this.menuItem7 = new System.Windows.Forms.MenuItem();
             this.menuItem8 = new System.Windows.Forms.MenuItem();
             this.npcNameLabel = new System.Windows.Forms.Label();
@@ -78,7 +79,6 @@
             this.yOffsetControl = new smbx_npc_editor.SpinnerControlValue();
             this.framesControl = new smbx_npc_editor.SpinnerControlValue();
             this.frameSpeedControl = new smbx_npc_editor.SpinnerControlValue();
-            this.menuItem13 = new System.Windows.Forms.MenuItem();
             this.graphicGroupBox.SuspendLayout();
             this.physicsGroupBox.SuspendLayout();
             this.inGameGroupBox.SuspendLayout();
@@ -182,6 +182,12 @@
             this.selectConfigMenuItem.Index = 4;
             this.selectConfigMenuItem.Text = "Select Configuration";
             // 
+            // menuItem13
+            // 
+            this.menuItem13.Index = 5;
+            this.menuItem13.Text = "Settings (EXPERIMENTAL)";
+            this.menuItem13.Click += new System.EventHandler(this.menuItem13_Click);
+            // 
             // menuItem7
             // 
             this.menuItem7.Index = 2;
@@ -193,6 +199,7 @@
             // 
             this.menuItem8.Index = 0;
             this.menuItem8.Text = "&About";
+            this.menuItem8.Click += new System.EventHandler(this.menuItem8_Click);
             // 
             // npcNameLabel
             // 
@@ -635,12 +642,6 @@
             this.frameSpeedControl.SpinnerValue = 0F;
             this.frameSpeedControl.TabIndex = 8;
             this.frameSpeedControl.ValueTag = "framespeed";
-            // 
-            // menuItem13
-            // 
-            this.menuItem13.Index = 5;
-            this.menuItem13.Text = "Settings (EXPERIMENTAL)";
-            this.menuItem13.Click += new System.EventHandler(this.menuItem13_Click);
             // 
             // MainUI
             // 

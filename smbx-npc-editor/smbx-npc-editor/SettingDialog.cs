@@ -26,6 +26,19 @@ namespace smbx_npc_editor
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Initialize setting dialog, going to a specific tab
+        /// </summary>
+        /// <param name="tab">0 - Main
+        /// 2 - Config
+        /// 3 - About</param>
+        public SettingDialog(int tab)
+        {
+            Font = SystemFonts.MessageBoxFont;
+            InitializeComponent();
+            tabControl1.SelectedIndex = tab;
+        }
+
         private void SettingDialog_Load(object sender, EventArgs e)
         {
             Assembly _assembly = Assembly.GetExecutingAssembly();
@@ -94,6 +107,43 @@ namespace smbx_npc_editor
             {
                 runPortable = false;
             }
+        }
+
+        //Save and exit
+        private void button1_Click(object sender, EventArgs e)
+        {
+            switch(runPortable)
+            {
+                case(true):
+                    ModifyRegistry mr = new ModifyRegistry();
+                    mr.Write("runPortable", true);
+                    break;
+                case(false):
+                    mr = new ModifyRegistry();
+                    mr.Write("runPortable", true);
+                    break;
+            }
+
+            switch(npcPreview)
+            {
+                case(true):
+                    settingsFile.WriteValue("Setttings", "showAnimation", "true");
+                    break;
+                case(false):
+                    settingsFile.WriteValue("Setttings", "showAnimation", "false");
+                    break;
+            }
+
+            if(runPortable != runPortable_original)
+            {
+                MessageBox.Show("Changes made to the run portable values will take effect on a restart of the application.", 
+                    "Warning", 
+                    MessageBoxButtons.OK, 
+                    MessageBoxIcon.Warning);
+            }
+
+            Console.WriteLine("Settings saved!");
+            this.Close();
         }
 
     }
