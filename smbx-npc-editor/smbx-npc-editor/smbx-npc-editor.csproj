@@ -244,6 +244,8 @@
     <Content Include="512.ico" />
     <Content Include="GenericVSProject_9906.ico" />
     <Content Include="GenericVSEditor_9905.ico" />
+    <None Include="Resources\icons\preview_enabled.png" />
+    <None Include="Resources\icons\preview_disabled.png" />
     <None Include="Resources\Program Icons\Program\PNG\128.png" />
     <None Include="Resources\GenericVSEditor_9905.ico" />
     <Content Include="output.ico" />

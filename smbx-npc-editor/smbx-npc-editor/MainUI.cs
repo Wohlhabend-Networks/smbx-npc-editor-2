@@ -478,6 +478,7 @@ namespace smbx_npc_editor
             }
         }
         
+
         private void menuItem10_Click(object sender, EventArgs e)
         {
             smbx_npc_editor.IO.TextEditor textEdit = null;
@@ -503,7 +504,8 @@ namespace smbx_npc_editor
                     smbxNpcFile = new SMBXNpc();
                     try
                     { 
-                        smbxNpcFile.ReadFromTextFile(curFile); 
+                        smbxNpcFile.ReadFromTextFile(curFile);
+                        loadValuesFromSmbxNpc();
                     }
                     catch (BadNpcTextFileException ex)
                     {
@@ -716,6 +718,32 @@ namespace smbx_npc_editor
                 framesControl.enabledCheckBox.Checked = true;
                 framesControl.CurrentValue = smbxNpcFile.frames;
             }
+            if(smbxNpcFile.en_framespeed)
+            {
+                frameSpeedControl.enabledCheckBox.Checked = true;
+                frameSpeedControl.CurrentValue = smbxNpcFile.framespeed;
+            }
+            if (smbxNpcFile.en_framespeed)
+            {
+                frameSpeedControl.enabledCheckBox.Checked = true;
+                frameSpeedControl.CurrentValue = smbxNpcFile.framespeed;
+            }
+            if (smbxNpcFile.en_framestyle)
+            {
+                frameStyleControl.enabledCheckBox.Checked = true;
+                frameStyleControl.SetSelectedIndex(smbxNpcFile.framestyle);
+            }///come back to this
+            if (smbxNpcFile.en_noiceball)
+            {
+                noIceControl.enabledCheckBox.Checked = true;
+                noIceControl.checkValue.Checked = smbxNpcFile.noiceball;
+            }
+            if (smbxNpcFile.en_name)
+            {
+                //frameSpeedControl.enabledCheckBox.Checked = true;
+                //frameSpeedControl.CurrentValue = smbxNpcFile.framespeed;
+                nameControl.Text = smbxNpcFile.name;
+            }
         }
 
         public void returnControlFromKey(string key)
@@ -783,6 +811,12 @@ namespace smbx_npc_editor
         private void menuItem13_Click(object sender, EventArgs e)
         {
             SettingDialog sd = new SettingDialog();
+            sd.ShowDialog();
+        }
+
+        private void menuItem8_Click(object sender, EventArgs e)
+        {
+            SettingDialog sd = new SettingDialog(2);
             sd.ShowDialog();
         }
     }
