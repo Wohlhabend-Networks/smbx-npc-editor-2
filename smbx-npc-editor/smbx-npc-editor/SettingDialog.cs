@@ -127,10 +127,10 @@ namespace smbx_npc_editor
             switch(npcPreview)
             {
                 case(true):
-                    settingsFile.WriteValue("Setttings", "showAnimation", "true");
+                    settingsFile.WriteValue("Settings", "showAnimation", "true");
                     break;
                 case(false):
-                    settingsFile.WriteValue("Setttings", "showAnimation", "false");
+                    settingsFile.WriteValue("Settings", "showAnimation", "false");
                     break;
             }
 

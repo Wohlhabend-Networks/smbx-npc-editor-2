@@ -11,6 +11,7 @@ using System.IO;
 using Setting;
 using smbx_npc_editor.SpriteHandling;
 using smbxnpceditor;
+using smbx_npc_editor;
 using System.Deployment.Application;
 using System.Threading;
 
